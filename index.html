@@ -76,16 +76,12 @@
 
     /* ── Site Header — absolute inside hero, scrolls away with the page ── */
     #site-header {
-      /* FIXED → ABSOLUTE: header stays at top of hero only, does not follow scroll */
       position: absolute;
       top: 0; left: 0; right: 0;
-      /* z-index raised to 9999 — sits above canvas (z:0), hero-center-content (z:2),
-         and any isolation context created by #home's isolation:isolate */
       z-index: 9999;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      /* REFINEMENT: Luxurious breathing room — increased from 2.25rem/3.5rem */
       padding: 2.75rem 5rem;
       pointer-events: none;
     }
@@ -97,6 +93,106 @@
     }
     @media (max-width: 480px) {
       #site-header { padding: 1.25rem 1rem; }
+    }
+
+    /* ── Mobile Menu Button ── */
+    #mobile-menu-btn {
+      pointer-events: auto !important;
+      position: relative;
+      z-index: 10000;
+      background: none;
+      border: none;
+      padding: 0;
+      font-family: 'Poppins', sans-serif;
+      font-weight: 700;
+      font-size: 0.65rem;
+      letter-spacing: 0.22em;
+      color: rgba(17,17,17,0.55);
+      text-transform: uppercase;
+      cursor: pointer !important;
+      transition: color 0.3s;
+      display: none; /* shown via Tailwind block md:hidden */
+    }
+    #mobile-menu-btn:hover { color: #FFD700; }
+
+    /* ── Mobile Full-Screen Overlay Menu ── */
+    #mobile-nav-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 99998; /* just below fs-overlay (99999) */
+      background: #ffffff;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: center;
+      padding: 6rem 2rem 3rem;
+      /* Hidden state */
+      opacity: 0;
+      pointer-events: none;
+      transform: translateY(-12px);
+      transition:
+        opacity   0.42s cubic-bezier(0.16,1,0.3,1),
+        transform 0.42s cubic-bezier(0.16,1,0.3,1);
+      will-change: opacity, transform;
+    }
+    #mobile-nav-overlay.is-open {
+      opacity: 1;
+      pointer-events: auto;
+      transform: translateY(0);
+    }
+    /* Stacked mobile nav links */
+    #mobile-nav-overlay .mob-nav-link {
+      display: block;
+      font-family: 'Poppins', sans-serif;
+      font-weight: 800;
+      font-size: clamp(2rem, 9vw, 3.2rem);
+      letter-spacing: -0.025em;
+      color: #0e0e0e;
+      text-decoration: none;
+      line-height: 1.15;
+      padding: 0.45rem 0;
+      transition: color 0.3s;
+      cursor: pointer !important;
+    }
+    #mobile-nav-overlay .mob-nav-link:hover { color: #FFD700; }
+    /* Thin divider between links */
+    #mobile-nav-overlay .mob-nav-link + .mob-nav-link {
+      border-top: 1px solid rgba(0,0,0,0.06);
+      padding-top: 0.45rem;
+    }
+    /* Close button inside overlay (top-right) */
+    #mob-overlay-close {
+      position: absolute;
+      top: 1.4rem;
+      right: 1.4rem;
+      background: none;
+      border: none;
+      font-family: 'Poppins', sans-serif;
+      font-weight: 700;
+      font-size: 0.6rem;
+      letter-spacing: 0.22em;
+      color: rgba(17,17,17,0.45);
+      text-transform: uppercase;
+      cursor: pointer !important;
+      transition: color 0.3s;
+      padding: 0.5rem;
+    }
+    #mob-overlay-close:hover { color: #FFD700; }
+    /* Footer tagline inside overlay */
+    #mobile-nav-overlay .mob-tagline {
+      margin-top: 2.5rem;
+      font-family: 'Poppins', sans-serif;
+      font-weight: 700;
+      font-size: 0.55rem;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: rgba(17,17,17,0.3);
+    }
+    /* On touch devices: restore pointer on overlay elements */
+    @media (hover: none) and (pointer: coarse) {
+      #mobile-menu-btn,
+      #mob-overlay-close,
+      #mobile-nav-overlay .mob-nav-link { cursor: auto !important; }
     }
 
     /* ── Brand Logo — Poppins 800, premium agency scale ── */
@@ -405,13 +501,15 @@
 
       <!-- ═══ HEADER — absolute inside hero, disappears on scroll ═══ -->
       <header id="site-header" aria-label="Site Header">
-        <!-- Brand: TOP-LEFT — Plus Jakarta Sans, Cuberto geometric style -->
+
+        <!-- Brand: TOP-LEFT —————————————————————————————————————————— -->
         <a href="#home" class="header-brand magnetic" id="header-brand-link" aria-label="Frameflow Studios" style="pointer-events:auto;position:relative;z-index:10000;">Frameflow</a>
-        <!-- Navigation: TOP-RIGHT — pointer-events forced auto at every level -->
+
+        <!-- Desktop Nav: TOP-RIGHT — hidden on mobile, flex on md+ ——— -->
         <nav class="header-nav" aria-label="Main Navigation" style="pointer-events:auto;position:relative;z-index:10000;">
-          <ul class="flex flex-row items-center gap-4 sm:gap-6 md:gap-8 select-none" style="pointer-events:auto;">
+          <ul class="hidden md:flex flex-row items-center gap-6 lg:gap-8 select-none" style="pointer-events:auto;">
             <li style="pointer-events:auto;">
-              <a href="#home" id="nav-home" class="nav-link active magnetic font-bold text-[10px] sm:text-xs tracking-[0.2em] interactive" style="pointer-events:auto;position:relative;z-index:10000;" aria-label="HOME">
+              <a href="#home" id="nav-home" class="nav-link active magnetic font-bold text-[10px] tracking-[0.2em] interactive" style="pointer-events:auto;position:relative;z-index:10000;" aria-label="HOME">
                 <span class="nav-link-clip">
                   <span class="nav-link-text">HOME</span>
                   <span class="nav-link-text-hover" aria-hidden="true">HOME</span>
@@ -419,7 +517,7 @@
               </a>
             </li>
             <li style="pointer-events:auto;">
-              <a href="#project" id="nav-project" class="nav-link magnetic font-bold text-[10px] sm:text-xs tracking-[0.2em] interactive" style="pointer-events:auto;position:relative;z-index:10000;" aria-label="PROJECT">
+              <a href="#project" id="nav-project" class="nav-link magnetic font-bold text-[10px] tracking-[0.2em] interactive" style="pointer-events:auto;position:relative;z-index:10000;" aria-label="PROJECT">
                 <span class="nav-link-clip">
                   <span class="nav-link-text">PROJECT</span>
                   <span class="nav-link-text-hover" aria-hidden="true">PROJECT</span>
@@ -427,7 +525,7 @@
               </a>
             </li>
             <li style="pointer-events:auto;">
-              <a href="#experience" id="nav-experience" class="nav-link magnetic font-bold text-[10px] sm:text-xs tracking-[0.2em] interactive" style="pointer-events:auto;position:relative;z-index:10000;" aria-label="EXPERIENCE">
+              <a href="#experience" id="nav-experience" class="nav-link magnetic font-bold text-[10px] tracking-[0.2em] interactive" style="pointer-events:auto;position:relative;z-index:10000;" aria-label="EXPERIENCE">
                 <span class="nav-link-clip">
                   <span class="nav-link-text">EXPERIENCE</span>
                   <span class="nav-link-text-hover" aria-hidden="true">EXPERIENCE</span>
@@ -435,7 +533,7 @@
               </a>
             </li>
             <li style="pointer-events:auto;">
-              <a href="#contact" id="nav-contact" class="nav-link magnetic font-bold text-[10px] sm:text-xs tracking-[0.2em] interactive" style="pointer-events:auto;position:relative;z-index:10000;" aria-label="CONTACT">
+              <a href="#contact" id="nav-contact" class="nav-link magnetic font-bold text-[10px] tracking-[0.2em] interactive" style="pointer-events:auto;position:relative;z-index:10000;" aria-label="CONTACT">
                 <span class="nav-link-clip">
                   <span class="nav-link-text">CONTACT</span>
                   <span class="nav-link-text-hover" aria-hidden="true">CONTACT</span>
@@ -443,7 +541,7 @@
               </a>
             </li>
             <li style="pointer-events:auto;">
-              <a href="#about" id="nav-about" class="nav-link magnetic font-bold text-[10px] sm:text-xs tracking-[0.2em] interactive" style="pointer-events:auto;position:relative;z-index:10000;" aria-label="ABOUT US">
+              <a href="#about" id="nav-about" class="nav-link magnetic font-bold text-[10px] tracking-[0.2em] interactive" style="pointer-events:auto;position:relative;z-index:10000;" aria-label="ABOUT US">
                 <span class="nav-link-clip">
                   <span class="nav-link-text">ABOUT US</span>
                   <span class="nav-link-text-hover" aria-hidden="true">ABOUT US</span>
@@ -452,7 +550,38 @@
             </li>
           </ul>
         </nav>
+
+        <!-- Mobile MENU Button — only visible below md breakpoint ————— -->
+        <button
+          id="mobile-menu-btn"
+          class="block md:hidden"
+          aria-label="Open mobile navigation"
+          aria-expanded="false"
+          aria-controls="mobile-nav-overlay"
+        >MENU</button>
+
       </header>
+
+      <!-- ══ MOBILE NAV OVERLAY — full-screen, slides in on MENU tap ══ -->
+      <div id="mobile-nav-overlay" role="dialog" aria-modal="true" aria-label="Mobile Navigation">
+
+        <!-- Close button: top-right corner of overlay -->
+        <button id="mob-overlay-close" aria-label="Close mobile navigation">✕&nbsp; CLOSE</button>
+
+        <!-- Brand mark inside overlay -->
+        <div style="font-family:'Poppins',sans-serif;font-weight:800;font-size:0.75rem;letter-spacing:0.1em;color:rgba(17,17,17,0.25);margin-bottom:2.5rem;text-transform:uppercase;">Frameflow Studios</div>
+
+        <!-- Stacked navigation links -->
+        <a href="#home"       class="mob-nav-link" data-mob-nav>HOME</a>
+        <a href="#project"    class="mob-nav-link" data-mob-nav>PROJECT</a>
+        <a href="#experience" class="mob-nav-link" data-mob-nav>EXPERIENCE</a>
+        <a href="#contact"    class="mob-nav-link" data-mob-nav>CONTACT</a>
+        <a href="#about"      class="mob-nav-link" data-mob-nav>ABOUT US</a>
+
+        <!-- Tagline -->
+        <p class="mob-tagline">Driven by flow&nbsp;&nbsp;defined by quality</p>
+
+      </div>
       <!-- ════════════════════════════════════════════════════════ -->
 
       <!-- Hero background: pure white (#ffffff) set in CSS — no canvas, no video -->
@@ -1107,6 +1236,61 @@
         });
       });
 
+    })();
+
+
+    /* ════════════════════════════════════════════════════════════════
+       7. MOBILE NAV OVERLAY — MENU / CLOSE toggle
+          Pure vanilla JS: no GSAP dependency so it works even if
+          GSAP hasn't loaded yet. Smooth open/close via CSS transition.
+    ════════════════════════════════════════════════════════════════ */
+    (function initMobileNav() {
+      var menuBtn  = document.getElementById('mobile-menu-btn');
+      var closeBtn = document.getElementById('mob-overlay-close');
+      var overlay  = document.getElementById('mobile-nav-overlay');
+      if (!menuBtn || !overlay) return;
+
+      function openMenu() {
+        overlay.classList.add('is-open');
+        menuBtn.setAttribute('aria-expanded', 'true');
+        /* Prevent body scroll while overlay is open */
+        document.body.style.overflow = 'hidden';
+        if (window._lenis) window._lenis.stop();
+        /* Move focus into overlay for accessibility */
+        if (closeBtn) closeBtn.focus();
+      }
+
+      function closeMenu() {
+        overlay.classList.remove('is-open');
+        menuBtn.setAttribute('aria-expanded', 'false');
+        document.body.style.overflow = '';
+        if (window._lenis) window._lenis.start();
+        menuBtn.focus();
+      }
+
+      menuBtn.addEventListener('click', openMenu);
+      if (closeBtn) closeBtn.addEventListener('click', closeMenu);
+
+      /* Close on any overlay link tap — also triggers smooth scroll */
+      overlay.querySelectorAll('[data-mob-nav]').forEach(function(link) {
+        link.addEventListener('click', function() {
+          closeMenu();
+        });
+      });
+
+      /* Close on Escape key */
+      document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && overlay.classList.contains('is-open')) {
+          closeMenu();
+        }
+      });
+
+      /* Collapse menu if user resizes to desktop width */
+      window.addEventListener('resize', function() {
+        if (window.innerWidth >= 768 && overlay.classList.contains('is-open')) {
+          closeMenu();
+        }
+      });
     })();
 
   </script>
