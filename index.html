@@ -1,0 +1,1089 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- SEO Meta Tags -->
+  <title>Frameflow Studios — Premium Editorial Creative Agency</title>
+  <meta name="description" content="An ultra-minimal premium digital creative agency blending Apple's spatial cleanliness with editorial visual hierarchy and cinematic minimal storytelling." />
+  <meta name="keywords" content="Frameflow Studios, creative studio, motion design, digital agency, spatial minimalism, editorial design, luxury portfolio" />
+  <meta property="og:title" content="Frameflow Studios — Premium Editorial Studio" />
+  <meta property="og:description" content="Driven by flow defined by quality. Minimalist experiences crafted with precise digital integrity." />
+  <meta property="og:type" content="website" />
+
+  <!-- Google Fonts: Poppins + Plus Jakarta Sans (brand logo / Cuberto match) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700;800&family=Plus+Jakarta+Sans:wght@700;800&display=swap" rel="stylesheet" />
+
+  <!-- Tailwind CSS via CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            poppins: ['Poppins', 'sans-serif'],
+          },
+          colors: {
+            'brand-yellow': '#FFD700',
+            'brand-dark':   '#111111',
+            'brand-light':  '#fcfcfc',
+            'brand-muted':  '#555555',
+          }
+        }
+      }
+    };
+  </script>
+
+  <style>
+    /* ── Reset & Base ──────────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html, body {
+      width: 100%; max-width: 100%;
+      background-color: #fcfcfc;
+      color: #111111;
+      font-family: 'Poppins', sans-serif;
+      overflow-x: clip;
+      /* scroll-behavior: smooth removed — Lenis owns scrolling */
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    /* ── BUG FIX: Force cursor:none globally — no browser pointer anywhere ── */
+    body, body * {
+      cursor: none !important;
+    }
+    /* Restore cursor inside the overlay's native scrollable area */
+    #fs-overlay * {
+      cursor: none !important;
+    }
+
+    /* Lenis integration classes */
+    html.lenis, html.lenis body { height: auto; }
+    .lenis.lenis-smooth          { scroll-behavior: auto !important; }
+    .lenis.lenis-stopped         { overflow: hidden; }
+
+    main { width: 100%; max-width: 100%; overflow-x: clip; }
+
+    ::-webkit-scrollbar             { width: 6px; }
+    ::-webkit-scrollbar-track       { background: #fcfcfc; }
+    ::-webkit-scrollbar-thumb       { background: rgba(255,215,0,0.4); border-radius: 3px; }
+    ::-webkit-scrollbar-thumb:hover { background: rgba(255,215,0,0.7); }
+    ::selection { background-color: rgba(255,215,0,0.2); color: #111111; }
+
+    /* ── Site Header — absolute inside hero, scrolls away with the page ── */
+    #site-header {
+      /* FIXED → ABSOLUTE: header stays at top of hero only, does not follow scroll */
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      /* z-index raised to 9999 — sits above canvas (z:0), hero-center-content (z:2),
+         and any isolation context created by #home's isolation:isolate */
+      z-index: 9999;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      /* REFINEMENT: Luxurious breathing room — increased from 2.25rem/3.5rem */
+      padding: 2.75rem 5rem;
+      pointer-events: none;
+    }
+    @media (max-width: 1024px) {
+      #site-header { padding: 2.25rem 3.5rem; }
+    }
+    @media (max-width: 768px) {
+      #site-header { padding: 1.75rem 1.75rem; }
+    }
+
+    /* ── Brand Logo — Poppins 800, premium agency scale ── */
+    .header-brand {
+      pointer-events: auto !important;
+      position: relative;
+      z-index: 10000;
+      /* FIX 3: Poppins font, increased size for premium agency presence */
+      font-family: 'Poppins', sans-serif;
+      font-weight: 800;
+      font-size: 1.15rem;
+      letter-spacing: -0.02em;
+      color: #111111;
+      text-transform: none;
+      text-decoration: none;
+      display: inline-block;
+      will-change: transform;
+      transition: color 0.35s cubic-bezier(0.16,1,0.3,1);
+      line-height: 1;
+    }
+    .header-brand:hover { color: #FFD700; }
+
+    /* ── Nav — fully clickable, above all hero layers ── */
+    .header-nav {
+      pointer-events: auto !important;
+      position: relative;
+      z-index: 10000;
+    }
+    .header-nav a,
+    .header-nav ul,
+    .header-nav li {
+      pointer-events: auto !important;
+      position: relative;
+      z-index: 10000;
+    }
+
+    /* ── Premium Custom Cursor — Cuberto-style mix-blend-mode: difference ── */
+    .cursor-dot {
+      position: fixed; width: 5px; height: 5px;
+      /* White base + difference blend → appears black on white bg,
+         inverts any dark text it passes over */
+      background-color: #ffffff;
+      mix-blend-mode: difference;
+      border-radius: 50%;
+      pointer-events: none; z-index: 100001;
+      top: 0; left: 0; will-change: transform;
+      transition: width 0.2s, height 0.2s;
+    }
+    .cursor-follower {
+      position: fixed; width: 30px; height: 30px;
+      /* White base + difference blend → seamlessly inverts typography */
+      background-color: #ffffff;
+      mix-blend-mode: difference;
+      border: none;
+      border-radius: 50%; pointer-events: none;
+      z-index: 100000; top: 0; left: 0;
+      will-change: transform;
+      display: flex; align-items: center; justify-content: center;
+      transition:
+        width  0.45s cubic-bezier(0.16,1,0.3,1),
+        height 0.45s cubic-bezier(0.16,1,0.3,1),
+        opacity 0.3s;
+    }
+    /* Cursor label — strict solid white on black background */
+    .cursor-label {
+      font-family: 'Poppins', sans-serif;
+      font-weight: 700;
+      /* Req 2: 10px bold white text, centered inside the 80px black circle */
+      font-size: 10px;
+      letter-spacing: 0.15em;
+      color: #ffffff !important;
+      text-transform: uppercase; opacity: 0;
+      transition: opacity 0.22s 0.1s;
+      pointer-events: none; white-space: nowrap;
+      text-align: center; user-select: none; line-height: 1;
+      /* Flexbox centering is inherited from .cursor-follower's display:flex */
+    }
+    /* Standard hover: ring size increase — blend mode handles visual contrast */
+    .cursor-hover {
+      width: 46px !important; height: 46px !important;
+    }
+    /* Expanded hover (80px + label) */
+    .cursor-expanded {
+      width: 80px !important; height: 80px !important;
+    }
+    .cursor-expanded .cursor-label { opacity: 1; }
+
+    /* Touch devices: hide custom cursor elements */
+    @media (hover: none) and (pointer: coarse) {
+      .cursor-dot, .cursor-follower { display: none !important; }
+      /* Restore normal cursor on touch */
+      body, body * { cursor: auto !important; }
+    }
+
+    /* ── Navigation Links — Cuberto text-rolling hover (FIX 1) ──── */
+    .nav-link {
+      position: relative;
+      display: inline-block;
+      will-change: transform;
+      text-decoration: none;
+      color: rgba(17,17,17,0.45);
+      /* FIX 1: overflow:hidden clips the second span — only 1 line visible at all times */
+      overflow: hidden;
+      /* height is defined by the .nav-link-text padding + font size */
+      vertical-align: top;
+    }
+    .nav-link::after { display: none; }
+
+    /* Clip container — exact height of one text row */
+    .nav-link-clip {
+      position: relative;
+      display: block;
+      /* height must match the visible text row exactly */
+      height: 1.4em;
+      overflow: hidden;
+    }
+
+    /* Both spans share the same space; second is offset downward */
+    .nav-link-text {
+      display: block;
+      line-height: 1.4em;
+      white-space: nowrap;
+      transition: transform 0.5s cubic-bezier(0.76, 0, 0.24, 1);
+      will-change: transform;
+    }
+    /* Second (hover) span: lives below, translated down by 100% */
+    .nav-link-text-hover {
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      line-height: 1.4em;
+      white-space: nowrap;
+      color: #FFD700;
+      transform: translateY(100%);
+      transition: transform 0.5s cubic-bezier(0.76, 0, 0.24, 1);
+      will-change: transform;
+    }
+    /* On hover: primary slides UP, secondary slides INTO view */
+    .nav-link:hover .nav-link-text {
+      transform: translateY(-100%);
+    }
+    .nav-link:hover .nav-link-text-hover {
+      transform: translateY(0%);
+    }
+
+    /* Active state: primary text becomes gold */
+    .nav-link.active .nav-link-text { color: #FFD700; }
+    .nav-link:hover,
+    .nav-link.active { color: rgba(17,17,17,0.45); }
+
+    /* ── Hero Load Animations ─────────────────────────────────────── */
+    @keyframes fadeInUpSlow {
+      0%   { opacity: 0; transform: translateY(22px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeInIndicator { 0% { opacity: 0; } 100% { opacity: 1; } }
+
+    .animate-hero-load      { animation: fadeInUpSlow    2.2s cubic-bezier(0.16,1,0.3,1) forwards; }
+    .animate-indicator-load { animation: fadeInIndicator 2.8s cubic-bezier(0.16,1,0.3,1) 1.2s forwards; }
+
+    @keyframes bounceLine {
+      0%,100% { transform: translateY(0);    opacity: 0.8; }
+      50%     { transform: translateY(10px); opacity: 0.25; }
+    }
+    .animate-bounce-line { animation: bounceLine 2.2s cubic-bezier(0.45,0,0.55,1) infinite; }
+
+    /* ── Scroll Reveal Placeholder ────────────────────────────────── */
+    .gsap-reveal { will-change: opacity, transform; }
+    .library-panel { display: none; }
+
+    /* ── Home Hero Section ────────────────────────────────────────── */
+    #home {
+      /* Req 1: pure white background — maximum contrast for dark charcoal text */
+      background-color: #ffffff;
+      color: #111111;
+      width: 100%; max-width: 100vw; min-height: 100vh;
+      overflow: hidden; isolation: isolate;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      position: relative;
+    }
+
+    #hero-scroll-indicator {
+      position: absolute; bottom: 2rem;
+      left: 50%; transform: translateX(-50%); z-index: 50;
+    }
+    @media (min-width: 640px) { #hero-scroll-indicator { bottom: 3rem; } }
+
+    #hero-center-content {
+      position: relative; z-index: 2;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      text-align: center; pointer-events: none;
+      width: 100%; padding: 0 1.5rem;
+    }
+    #hero-center-content .interactive,
+    #hero-center-content a,
+    #hero-center-content button { pointer-events: auto; }
+
+    #hero-headline-container {
+      display: block; width: 100%; max-width: 100%; text-align: center;
+    }
+
+    /* ── Hero Headline — REFINEMENT: tightened to one imposing brand mark ── */
+    .hero-headline {
+      margin: 0; padding: 0;
+      font-family: 'Poppins', sans-serif;
+      font-weight: 800;
+      font-size: clamp(3.2rem, 10vw, 7.5rem);
+      /* REFINEMENT: line-height tightened from 1.0 → 0.93 — fuses the two words */
+      line-height: 0.93;
+      /* REFINEMENT: letter-spacing tightened from -0.02em → -0.035em */
+      letter-spacing: -0.035em;
+      text-align: center;
+      color: #0e0e0e;
+      width: auto;
+      max-width: 100%;
+    }
+    .hero-headline-line {
+      display: block; text-align: center; white-space: nowrap;
+    }
+    /* REFINEMENT: removed margin-top gap — line-height alone controls spacing */
+    .hero-headline-line + .hero-headline-line { margin-top: 0; }
+
+    /* No outline on line-2 — plain solid text, avoids all -webkit-text-stroke artifacts */
+    #hero-line-2 { color: #0e0e0e; }
+    #hero-line-2 .hero-letter { color: #0e0e0e; }
+
+    .hero-letter {
+      display: inline-block;
+      color: #0e0e0e;
+      will-change: color, transform;
+      transition: none;
+    }
+    .hero-subline {
+      display: block; margin-top: 2.4rem;
+      font-family: 'Poppins', sans-serif;
+      font-weight: 700;
+      font-size: clamp(0.58rem, 1.05vw, 0.7rem);
+      /* REFINEMENT: letter-spacing increased for crisper readability */
+      letter-spacing: 0.32em;
+      text-transform: uppercase;
+      /* REFINEMENT: darkened from 0.35 opacity → solid #1a1a1a for strong contrast */
+      color: #1a1a1a;
+    }
+    /* REFINEMENT: SCROLL label darkened for strong readability */
+    .hero-scroll-label {
+      color: #1a1a1a;
+      letter-spacing: 0.42em;
+    }
+
+    /* ── Magnetic wrapper — GSAP moves this, NOT the button itself ── */
+    .magnetic-wrap {
+      display: inline-block;
+      will-change: transform;
+    }
+    /* Nav links are their own magnetic elements */
+    .magnetic { display: inline-block; will-change: transform; }
+
+    /* ── BUG FIX 3: HIRE ME button — strict self-containment ── */
+    #hire-me-btn {
+      display: inline-block;
+      position: relative !important;
+      overflow: hidden !important;
+      /* Do NOT set transform:none here — it would break GSAP on the wrapper */
+    }
+    /* Ensure the magnetic-wrap doesn't leak its own overflow */
+    #hire-me-wrap {
+      position: relative;
+      display: inline-block;
+    }
+  </style>
+</head>
+<body class="bg-brand-light text-brand-dark font-poppins selection:bg-brand-yellow/20 selection:text-brand-dark">
+
+  <!-- ══ CURSOR LAYER ══════════════════════════════════════════════ -->
+  <div class="cursor-dot" aria-hidden="true"></div>
+  <div class="cursor-follower" aria-hidden="true">
+    <span class="cursor-label"></span>
+  </div>
+
+  <!-- ══ SITE HEADER — lives inside #home, scrolls away naturally ══ -->
+  <!-- NOTE: moved inside #home section below so position:absolute is relative to #home -->
+
+  <!-- ══ MAIN CONTENT ══════════════════════════════════════════════ -->
+  <main class="relative z-10 w-full min-h-screen">
+
+    <!-- ── SECTION 1: HOME (HERO) ──────────────────────────────── -->
+    <!-- position:relative so the absolute header is correctly anchored to this section -->
+    <section id="home" class="select-none" style="position:relative;">
+
+      <!-- ═══ HEADER — absolute inside hero, disappears on scroll ═══ -->
+      <header id="site-header" aria-label="Site Header">
+        <!-- Brand: TOP-LEFT — Plus Jakarta Sans, Cuberto geometric style -->
+        <a href="#home" class="header-brand magnetic" id="header-brand-link" aria-label="Frameflow Studios" style="pointer-events:auto;position:relative;z-index:10000;">Frameflow</a>
+        <!-- Navigation: TOP-RIGHT — pointer-events forced auto at every level -->
+        <nav class="header-nav" aria-label="Main Navigation" style="pointer-events:auto;position:relative;z-index:10000;">
+          <ul class="flex flex-row items-center gap-8 select-none" style="pointer-events:auto;">
+            <li style="pointer-events:auto;">
+              <a href="#home" id="nav-home" class="nav-link active magnetic font-bold text-[10px] sm:text-xs tracking-[0.2em] interactive" style="pointer-events:auto;position:relative;z-index:10000;" aria-label="HOME">
+                <span class="nav-link-clip">
+                  <span class="nav-link-text">HOME</span>
+                  <span class="nav-link-text-hover" aria-hidden="true">HOME</span>
+                </span>
+              </a>
+            </li>
+            <li style="pointer-events:auto;">
+              <a href="#project" id="nav-project" class="nav-link magnetic font-bold text-[10px] sm:text-xs tracking-[0.2em] interactive" style="pointer-events:auto;position:relative;z-index:10000;" aria-label="PROJECT">
+                <span class="nav-link-clip">
+                  <span class="nav-link-text">PROJECT</span>
+                  <span class="nav-link-text-hover" aria-hidden="true">PROJECT</span>
+                </span>
+              </a>
+            </li>
+            <li style="pointer-events:auto;">
+              <a href="#experience" id="nav-experience" class="nav-link magnetic font-bold text-[10px] sm:text-xs tracking-[0.2em] interactive" style="pointer-events:auto;position:relative;z-index:10000;" aria-label="EXPERIENCE">
+                <span class="nav-link-clip">
+                  <span class="nav-link-text">EXPERIENCE</span>
+                  <span class="nav-link-text-hover" aria-hidden="true">EXPERIENCE</span>
+                </span>
+              </a>
+            </li>
+            <li style="pointer-events:auto;">
+              <a href="#contact" id="nav-contact" class="nav-link magnetic font-bold text-[10px] sm:text-xs tracking-[0.2em] interactive" style="pointer-events:auto;position:relative;z-index:10000;" aria-label="CONTACT">
+                <span class="nav-link-clip">
+                  <span class="nav-link-text">CONTACT</span>
+                  <span class="nav-link-text-hover" aria-hidden="true">CONTACT</span>
+                </span>
+              </a>
+            </li>
+            <li style="pointer-events:auto;">
+              <a href="#about" id="nav-about" class="nav-link magnetic font-bold text-[10px] sm:text-xs tracking-[0.2em] interactive" style="pointer-events:auto;position:relative;z-index:10000;" aria-label="ABOUT US">
+                <span class="nav-link-clip">
+                  <span class="nav-link-text">ABOUT US</span>
+                  <span class="nav-link-text-hover" aria-hidden="true">ABOUT US</span>
+                </span>
+              </a>
+            </li>
+          </ul>
+        </nav>
+      </header>
+      <!-- ════════════════════════════════════════════════════════ -->
+
+      <!-- Hero background: pure white (#ffffff) set in CSS — no canvas, no video -->
+
+      <div id="hero-center-content" class="animate-hero-load">
+        <div id="hero-headline-container" class="interactive select-none">
+          <!-- magnetic-hero-wrap: GSAP magnetic effect moves this wrapper -->
+          <div class="magnetic-hero-wrap" id="hero-headline-magnetic">
+            <h1 class="hero-headline" id="hero-headline-main" aria-label="Frameflow Studios">
+              <span class="hero-headline-line" id="hero-line-1"></span>
+              <span class="hero-headline-line" id="hero-line-2"></span>
+            </h1>
+          </div>
+        </div>
+        <span class="hero-subline">Driven by flow&nbsp;&nbsp;defined by quality</span>
+      </div>
+
+      <div id="hero-scroll-indicator" class="flex flex-col items-center gap-4 select-none opacity-0 animate-indicator-load">
+        <span class="hero-scroll-label font-bold text-[9px] sm:text-[10px] tracking-[0.4em] uppercase">SCROLL</span>
+        <div class="w-[1.5px] h-12 bg-gradient-to-b from-brand-yellow/80 to-transparent rounded-full animate-bounce-line"></div>
+      </div>
+    </section>
+
+
+    <!-- ── SECTION 2: PROJECT ───────────────────────────────────── -->
+    <section id="project" class="w-full min-h-screen flex flex-col justify-center px-6 sm:px-12 md:px-24 py-24 relative border-t border-black/5 bg-[#f5f5f5]/30">
+
+      <h2 class="gsap-reveal font-bold text-[10px] sm:text-xs text-brand-muted tracking-[0.3em] uppercase mb-16 opacity-60">
+        PORTFOLIO DIRECTORY
+      </h2>
+
+      <div class="flex flex-col gap-10 sm:gap-12 md:gap-14 max-w-4xl w-full">
+
+        <div class="category-item group flex items-baseline justify-between py-8 border-b border-black/10 cursor-pointer transition-colors duration-500 hover:border-brand-yellow/40 interactive" data-category="video-edit">
+          <div class="flex items-baseline gap-4 sm:gap-8">
+            <span class="font-bold text-xs sm:text-sm text-brand-yellow tracking-[0.2em]">01 /</span>
+            <h3 class="font-bold text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-brand-dark tracking-tight uppercase group-hover:text-brand-yellow transition-colors duration-500">VIDEO EDIT</h3>
+          </div>
+          <span class="font-bold text-[10px] sm:text-xs text-brand-dark/40 tracking-[0.2em] uppercase group-hover:text-brand-dark/70 transition-colors duration-500">EXPLORE LIBRARY [03]</span>
+        </div>
+
+        <div class="category-item group flex items-baseline justify-between py-8 border-b border-black/10 cursor-pointer transition-colors duration-500 hover:border-brand-yellow/40 interactive" data-category="web-dev">
+          <div class="flex items-baseline gap-4 sm:gap-8">
+            <span class="font-bold text-xs sm:text-sm text-brand-yellow tracking-[0.2em]">02 /</span>
+            <h3 class="font-bold text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-brand-dark tracking-tight uppercase group-hover:text-brand-yellow transition-colors duration-500">WEB DEVELOPMENT</h3>
+          </div>
+          <span class="font-bold text-[10px] sm:text-xs text-brand-dark/40 tracking-[0.2em] uppercase group-hover:text-brand-dark/70 transition-colors duration-500">EXPLORE LIBRARY [03]</span>
+        </div>
+
+        <div class="category-item group flex items-baseline justify-between py-8 border-b border-black/10 cursor-pointer transition-colors duration-500 hover:border-brand-yellow/40 interactive" data-category="shoots">
+          <div class="flex items-baseline gap-4 sm:gap-8">
+            <span class="font-bold text-xs sm:text-sm text-brand-yellow tracking-[0.2em]">03 /</span>
+            <h3 class="font-bold text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-brand-dark tracking-tight uppercase group-hover:text-brand-yellow transition-colors duration-500">SHOOTS</h3>
+          </div>
+          <span class="font-bold text-[10px] sm:text-xs text-brand-dark/40 tracking-[0.2em] uppercase group-hover:text-brand-dark/70 transition-colors duration-500">EXPLORE LIBRARY [03]</span>
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- ── SECTION 3: EXPERIENCE (TIMELINE) ────────────────────── -->
+    <section id="experience" class="w-full min-h-screen flex flex-col justify-center px-6 sm:px-12 md:px-24 py-24 relative border-t border-black/5 bg-[#f5f5f5]/30">
+
+      <h2 class="gsap-reveal font-bold text-[10px] sm:text-xs text-brand-muted tracking-[0.3em] uppercase mb-16 opacity-60">
+        PROJECT TIMELINE
+      </h2>
+
+      <div class="relative flex flex-col max-w-4xl w-full select-none">
+        <div class="absolute left-[8px] sm:left-[12px] top-4 bottom-4 w-[1px] bg-black/10" aria-hidden="true"></div>
+        <div class="flex flex-col gap-14 sm:gap-16">
+
+          <div class="timeline-item group flex gap-6 sm:gap-10 items-start cursor-pointer interactive" data-experience="aura-sensory">
+            <div class="relative flex items-center justify-center mt-1.5 z-10">
+              <div class="w-[18px] h-[18px] sm:w-[24px] sm:h-[24px] bg-[#fcfcfc] border border-black/25 rounded-full flex items-center justify-center transition-colors duration-500 group-hover:border-brand-yellow">
+                <div class="w-[6px] h-[6px] sm:w-[8px] sm:h-[8px] bg-black group-hover:bg-brand-yellow rounded-full transition-colors duration-500"></div>
+              </div>
+            </div>
+            <div class="flex flex-col gap-2">
+              <span class="font-bold text-[10px] sm:text-xs text-brand-yellow tracking-[0.2em] uppercase">2026 / MAY</span>
+              <h3 class="font-bold text-xl sm:text-3xl text-brand-dark tracking-tight uppercase group-hover:text-brand-yellow transition-colors duration-500">AURA SENSORY ENGINE</h3>
+              <p class="font-medium text-xs sm:text-sm text-brand-muted max-w-xl leading-relaxed">Immersive installation &amp; spatial rendering engine crafted for luxury brand retail launches.</p>
+            </div>
+          </div>
+
+          <div class="timeline-item group flex gap-6 sm:gap-10 items-start cursor-pointer interactive" data-experience="lumen-architectural">
+            <div class="relative flex items-center justify-center mt-1.5 z-10">
+              <div class="w-[18px] h-[18px] sm:w-[24px] sm:h-[24px] bg-[#fcfcfc] border border-black/25 rounded-full flex items-center justify-center transition-colors duration-500 group-hover:border-brand-yellow">
+                <div class="w-[6px] h-[6px] sm:w-[8px] sm:h-[8px] bg-black group-hover:bg-brand-yellow rounded-full transition-colors duration-500"></div>
+              </div>
+            </div>
+            <div class="flex flex-col gap-2">
+              <span class="font-bold text-[10px] sm:text-xs text-brand-yellow tracking-[0.2em] uppercase">2026 / FEB</span>
+              <h3 class="font-bold text-xl sm:text-3xl text-brand-dark tracking-tight uppercase group-hover:text-brand-yellow transition-colors duration-500">LUMEN ARCHITECTURAL SYSTEM</h3>
+              <p class="font-medium text-xs sm:text-sm text-brand-muted max-w-xl leading-relaxed">An editorial archive designed to showcase physical spatial designs in a high-contrast web index.</p>
+            </div>
+          </div>
+
+          <div class="timeline-item group flex gap-6 sm:gap-10 items-start cursor-pointer interactive" data-experience="nike-chronos">
+            <div class="relative flex items-center justify-center mt-1.5 z-10">
+              <div class="w-[18px] h-[18px] sm:w-[24px] sm:h-[24px] bg-[#fcfcfc] border border-black/25 rounded-full flex items-center justify-center transition-colors duration-500 group-hover:border-brand-yellow">
+                <div class="w-[6px] h-[6px] sm:w-[8px] sm:h-[8px] bg-black group-hover:bg-brand-yellow rounded-full transition-colors duration-500"></div>
+              </div>
+            </div>
+            <div class="flex flex-col gap-2">
+              <span class="font-bold text-[10px] sm:text-xs text-brand-yellow tracking-[0.2em] uppercase">2025 / NOV</span>
+              <h3 class="font-bold text-xl sm:text-3xl text-brand-dark tracking-tight uppercase group-hover:text-brand-yellow transition-colors duration-500">NIKE CHRONOS REEL</h3>
+              <p class="font-medium text-xs sm:text-sm text-brand-muted max-w-xl leading-relaxed">Visual creative direction and cinematic product campaign reveal for a futuristic luxury line.</p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ── SECTION 4: CONTACT ───────────────────────────────────── -->
+    <section id="contact" class="w-full min-h-screen flex flex-col justify-center px-6 sm:px-12 md:px-24 py-24 relative border-t border-black/5 bg-[#f5f5f5]/30">
+
+      <h2 class="gsap-reveal font-bold text-[10px] sm:text-xs text-brand-muted tracking-[0.3em] uppercase mb-12 opacity-60">
+        START A FLOW
+      </h2>
+
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 max-w-6xl w-full">
+
+        <div class="gsap-reveal flex flex-col justify-between">
+          <div>
+            <p class="font-bold text-3xl sm:text-4xl md:text-5xl text-brand-dark tracking-tight uppercase leading-tight">
+              LET'S CREATE SOMETHING <span class="text-brand-yellow block mt-1">UNFORGETTABLE.</span>
+            </p>
+            <p class="mt-6 text-brand-muted text-xs sm:text-sm md:text-base leading-relaxed max-w-md">
+              Whether you want to build a cinematic digital presence or launch a spatial design identity, let's collaborate.
+            </p>
+            <div class="mt-10 sm:mt-12 flex flex-col gap-4 text-[10px] sm:text-xs tracking-wider text-brand-dark/60">
+              <p>INQUIRIES: <a href="mailto:hello@frameflows.com" class="text-brand-dark hover:text-brand-yellow transition-colors duration-300 interactive pb-0.5 border-b border-transparent hover:border-brand-yellow font-bold">HELLO@FRAMEFLOWS.COM</a></p>
+              <p>LOCATION: <span class="text-brand-dark font-bold">LOS ANGELES / GLOBAL</span></p>
+            </div>
+          </div>
+        </div>
+
+        <div class="gsap-reveal flex items-center lg:justify-end w-full select-none">
+          <!-- magnetic-wrap: GSAP translates this outer div -->
+          <div class="magnetic-wrap" id="hire-me-wrap">
+            <a href="mailto:hello@frameflows.com"
+               id="hire-me-btn"
+               class="px-12 py-6 bg-transparent border border-black/35 text-brand-dark font-bold text-xs tracking-[0.25em] uppercase relative overflow-hidden transition-colors duration-300 ease-out group/btn interactive inline-block text-center min-w-[200px]">
+              <span class="relative z-10">HIRE ME</span>
+              <!-- Yellow fill: stays clipped inside the <a>'s overflow:hidden -->
+              <span class="absolute inset-0 bg-brand-yellow origin-left z-0"
+                    style="transform:scaleX(0);transition:transform 0.5s cubic-bezier(0.16,1,0.3,1);"
+                    id="hire-me-fill"></span>
+            </a>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- ── SECTION 5: ABOUT US ──────────────────────────────────── -->
+    <section id="about" class="w-full min-h-screen flex flex-col justify-center px-6 sm:px-12 md:px-24 py-24 relative border-t border-black/5 bg-[#f5f5f5]/30">
+
+      <h2 class="gsap-reveal font-bold text-[10px] sm:text-xs text-brand-muted tracking-[0.3em] uppercase mb-16 opacity-60">
+        PHILOSOPHY
+      </h2>
+
+      <div class="max-w-6xl mx-auto w-full">
+
+        <div class="gsap-reveal">
+          <p class="font-bold text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-brand-dark tracking-tight uppercase leading-[1.05]">
+            WE DESIGN STRATEGIES, SYSTEMS, AND STORIES THAT LAST.
+          </p>
+        </div>
+
+        <div class="gsap-reveal mt-16 grid grid-cols-1 lg:grid-cols-2 gap-12">
+          <div>
+            <p class="text-xl sm:text-2xl md:text-3xl text-brand-dark tracking-tight leading-tight">Founder‑Led. Craft‑Driven.</p>
+            <p class="mt-4 text-sm sm:text-base md:text-lg text-brand-muted leading-relaxed max-w-xl">Frameflow Studios began in January 2026 when founders <strong>Arpit Shahu</strong> and <strong>Dhiraj Ninawe</strong> set out, at the age of 19, to build meaningful creative systems for modern businesses. Today our Senior Board — <strong>Arpit Shahu</strong>, <strong>Dhiraj Ninawe</strong>, and <strong>Oom Shukla</strong> — guides work that balances craft with measurable commercial impact.</p>
+          </div>
+          <div class="pt-2">
+            <div class="text-sm text-brand-muted/80 uppercase tracking-widest font-bold">Founded</div>
+            <div class="font-bold text-lg text-brand-dark mt-2">January 2026</div>
+            <div class="mt-6 text-sm text-brand-muted/80 uppercase tracking-widest font-bold">Leadership</div>
+            <div class="mt-2 text-brand-dark font-medium">
+              <div>Founder — Arpit Shahu</div>
+              <div>Co‑Founder — Dhiraj Ninawe</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="gsap-reveal mt-16">
+          <p class="font-bold text-2xl sm:text-3xl md:text-4xl text-brand-dark tracking-tight leading-tight">A practice built around long‑term value.</p>
+          <p class="mt-4 text-sm sm:text-base md:text-lg text-brand-muted leading-relaxed max-w-3xl">We treat every engagement as a partnership: to deeply understand client problems, to build trust, and to deliver work that becomes part of the business infrastructure — not an expendable creative sprint. Our work is measured by the strength it adds to your organisation over years, not weeks.</p>
+        </div>
+
+        <div class="gsap-reveal mt-16 grid grid-cols-1 lg:grid-cols-2 gap-12">
+          <div>
+            <p class="font-bold text-lg text-brand-dark tracking-tight">Our Philosophy</p>
+            <p class="mt-4 text-sm sm:text-base text-brand-muted leading-relaxed max-w-xl">Understand the problem deeply. Build trust through clear collaboration. Deliver the best outcome that compounds value over time. That clarity of intent informs every choice we make — concept, craft, and code.</p>
+          </div>
+          <div>
+            <p class="font-bold text-lg text-brand-dark tracking-tight">Services</p>
+            <ul class="mt-4 text-sm sm:text-base text-brand-muted leading-relaxed list-none space-y-2">
+              <li>• Video Editing</li>
+              <li>• Product &amp; Brand Shoots</li>
+              <li>• Web Designing</li>
+              <li>• Web Development</li>
+              <li>• Graphics Designing</li>
+            </ul>
+            <p class="mt-6 text-sm sm:text-base text-brand-muted">Hiring Frameflow is not purchasing a deliverable — it is investing in a stronger foundation for your brand and business.</p>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ══ CDN: GSAP + ScrollTrigger + Lenis ════════════════════════ -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="https://unpkg.com/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
+
+  <!-- ══ JAVASCRIPT ════════════════════════════════════════════════ -->
+  <script>
+
+    /* ════════════════════════════════════════════════════════════════
+       0. LENIS + GSAP INIT — butter-smooth cinematic scroll
+    ════════════════════════════════════════════════════════════════ */
+    (function initLenis() {
+      if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
+        gsap.registerPlugin(ScrollTrigger);
+      }
+
+      var lenis = null;
+      if (typeof Lenis !== 'undefined') {
+        lenis = new Lenis({
+          duration:         1.8,
+          easing:           function(t) { return Math.min(1, 1.001 - Math.pow(2, -10 * t)); },
+          direction:        'vertical',
+          gestureDirection: 'vertical',
+          smooth:           true,
+          mouseMultiplier:  1.2,
+          smoothTouch:      false,
+          touchMultiplier:  2,
+          infinite:         false,
+        });
+
+        if (typeof ScrollTrigger !== 'undefined') {
+          lenis.on('scroll', ScrollTrigger.update);
+        }
+        if (typeof gsap !== 'undefined') {
+          gsap.ticker.add(function(time) { lenis.raf(time * 1000); });
+          gsap.ticker.lagSmoothing(0);
+        }
+        window._lenis = lenis;
+      }
+
+      /* Smooth anchor scrolling with header offset */
+      document.querySelectorAll('a[href^="#"]').forEach(function(anchor) {
+        anchor.addEventListener('click', function(e) {
+          var href = this.getAttribute('href');
+          if (!href || href === '#') return;
+          var target = document.querySelector(href);
+          if (!target) return;
+          e.preventDefault();
+          if (lenis) {
+            lenis.scrollTo(target, { offset: -90, duration: 1.8 });
+          } else {
+            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }
+        });
+      });
+
+      /* Header is now absolute (not fixed), so no scroll-based glass-morph needed */
+    })();
+
+
+    /* ════════════════════════════════════════════════════════════════
+       1. CUSTOM CURSOR — Upgraded: Dot + Follower + Label (EXPLORE/VIEW)
+    ════════════════════════════════════════════════════════════════ */
+    (function initCustomCursor() {
+      var dot      = document.querySelector('.cursor-dot');
+      var follower = document.querySelector('.cursor-follower');
+      var label    = document.querySelector('.cursor-label');
+      if (!dot || !follower) return;
+
+      var mouseX = -200, mouseY = -200;
+      var followerX = -200, followerY = -200;
+      var cursorState = 'default'; /* 'default' | 'hover' | 'expanded' */
+
+      window.addEventListener('mousemove', function(e) {
+        mouseX = e.clientX; mouseY = e.clientY;
+        dot.style.transform = 'translate3d(calc(' + mouseX + 'px - 50%), calc(' + mouseY + 'px - 50%), 0)';
+      });
+
+      function getHalfSize() {
+        if (cursorState === 'expanded') return 40;
+        if (cursorState === 'hover')    return 23;
+        return 15;
+      }
+
+      function tick() {
+        var ease = cursorState === 'expanded' ? 0.08 : 0.13;
+        followerX += (mouseX - followerX) * ease;
+        followerY += (mouseY - followerY) * ease;
+        var h = getHalfSize();
+        follower.style.transform = 'translate3d(calc(' + followerX + 'px - ' + h + 'px), calc(' + followerY + 'px - ' + h + 'px), 0)';
+        requestAnimationFrame(tick);
+      }
+      tick();
+
+      function setCursorState(state, labelText) {
+        cursorState = state;
+        follower.classList.remove('cursor-hover', 'cursor-expanded');
+        if (state === 'hover') {
+          follower.classList.add('cursor-hover');
+          if (label) label.textContent = '';
+        } else if (state === 'expanded') {
+          follower.classList.add('cursor-expanded');
+          if (label) label.textContent = labelText || 'VIEW';
+        } else {
+          if (label) label.textContent = '';
+        }
+      }
+
+      function bindCursor() {
+        /* Expanded: category items → EXPLORE */
+        document.querySelectorAll('.category-item').forEach(function(el) {
+          if (el.dataset.cursorBound) return;
+          el.dataset.cursorBound = '1';
+          el.addEventListener('mouseenter', function() { setCursorState('expanded', 'EXPLORE'); });
+          el.addEventListener('mouseleave', function() { setCursorState('default', ''); });
+        });
+
+        /* Expanded: timeline items → VIEW */
+        document.querySelectorAll('.timeline-item').forEach(function(el) {
+          if (el.dataset.cursorBound) return;
+          el.dataset.cursorBound = '1';
+          el.addEventListener('mouseenter', function() { setCursorState('expanded', 'VIEW'); });
+          el.addEventListener('mouseleave', function() { setCursorState('default', ''); });
+        });
+
+        /* Expanded: hire-me wrap → VIEW */
+        var hireWrap = document.getElementById('hire-me-wrap');
+        if (hireWrap && !hireWrap.dataset.cursorBound) {
+          hireWrap.dataset.cursorBound = '1';
+          hireWrap.addEventListener('mouseenter', function() { setCursorState('expanded', 'VIEW'); });
+          hireWrap.addEventListener('mouseleave', function() { setCursorState('default', ''); });
+        }
+
+        /* Standard hover for everything else */
+        var standardSel = 'a:not(.category-item),button,' +
+                          'input,textarea,.interactive:not(.category-item)';
+        document.querySelectorAll(standardSel).forEach(function(el) {
+          if (el.dataset.cursorBound) return;
+          el.dataset.cursorBound = '1';
+          el.addEventListener('mouseenter', function() { if (cursorState !== 'expanded') setCursorState('hover', ''); });
+          el.addEventListener('mouseleave', function() { if (cursorState !== 'expanded') setCursorState('default', ''); });
+        });
+      }
+      bindCursor();
+      window.refreshCursorBindings = bindCursor;
+    })();
+
+
+    /* ════════════════════════════════════════════════════════════════
+       2. HERO BACKGROUND — pure white (#ffffff), no canvas or video.
+          Background is set purely in CSS on #home. No JS needed here.
+    ════════════════════════════════════════════════════════════════ */
+
+
+    /* ════════════════════════════════════════════════════════════════
+       3. HERO TITLE — static plain text, no interactive effects
+          FIX 5: Removed per-letter yellow hover & scale animation.
+          The title is now 100% static and non-interactive.
+    ════════════════════════════════════════════════════════════════ */
+    (function initHeadlineText() {
+      var line1 = document.getElementById('hero-line-1');
+      var line2 = document.getElementById('hero-line-2');
+      if (!line1 || !line2) return;
+      /* FIX 2 + FIX 5: Updated brand name to 'Frameflow'; plain text only */
+      line1.textContent = 'Frameflow';
+      line2.textContent = 'Studios';
+    })();
+
+
+    /* ════════════════════════════════════════════════════════════════
+       4. MAGNETIC HOVER — GSAP high-end magnetic attraction
+          Applied to: brand logo, all nav links, hero headline
+          Technique: track distance from element centre → pull toward
+          cursor (scaled by strength), elastic snap-back on leave.
+    ════════════════════════════════════════════════════════════════ */
+    (function initMagnetic() {
+      if (typeof gsap === 'undefined') return;
+
+      /* ── Generic magnetic binding helper ── */
+      function bindMagnetic(el, opts) {
+        opts = opts || {};
+        var strength   = opts.strength   || 0.28;
+        var snapEase   = opts.snapEase   || 'elastic.out(1,0.4)';
+        var snapDur    = opts.snapDur    || 0.9;
+        var moveDur    = opts.moveDur    || 0.35;
+        var moveEase   = opts.moveEase   || 'power3.out';
+        /* Detection zone multiplier — element bounding box × zone.             *
+         * 1 = exact bounds only; 1.6 = 60% larger detection zone.             */
+        var zone = opts.zone || 1.5;
+
+        el.addEventListener('mousemove', function(e) {
+          var r   = el.getBoundingClientRect();
+          var cx  = r.left + r.width  * 0.5;
+          var cy  = r.top  + r.height * 0.5;
+          var dx  = e.clientX - cx;
+          var dy  = e.clientY - cy;
+          gsap.to(el, {
+            x: dx * strength,
+            y: dy * strength,
+            duration: moveDur,
+            ease: moveEase,
+            overwrite: true,
+          });
+        });
+
+        el.addEventListener('mouseleave', function() {
+          gsap.to(el, {
+            x: 0, y: 0,
+            duration: snapDur,
+            ease: snapEase,
+            overwrite: true,
+          });
+        });
+      }
+
+      /* ── 1. Brand logo (top-left) — subtle pull, Cuberto-style ── */
+      var brand = document.getElementById('header-brand-link');
+      if (brand) {
+        bindMagnetic(brand, { strength: 0.30, zone: 2.0, snapEase: 'elastic.out(1,0.5)', snapDur: 0.95 });
+      }
+
+      /* ── 2. Individual nav links (top-right) — FIX 3: magnetic REMOVED ── */
+      /* Nav links remain physically static. CSS roll animation (translateY) is preserved. */
+      /* bindMagnetic intentionally NOT called for nav links */
+
+      /* ── 3. Hero headline wrapper — FIX 5: magnetic pull REMOVED ── */
+      /* The hero title is now fully static. No GSAP binding applied. */
+
+      /* ── 4. HIRE ME button: magnetic on the wrapper, fill on the inner ── */
+      var wrap = document.getElementById('hire-me-wrap');
+      var fill = document.getElementById('hire-me-fill');
+      if (wrap) {
+        bindMagnetic(wrap, { strength: 0.40, zone: 1.8, snapEase: 'elastic.out(1,0.35)', snapDur: 0.75 });
+        /* Override mousemove to also expand the yellow fill */
+        wrap.addEventListener('mousemove', function() {
+          if (fill) fill.style.transform = 'scaleX(1)';
+        });
+        wrap.addEventListener('mouseleave', function() {
+          if (fill) fill.style.transform = 'scaleX(0)';
+        });
+      }
+    })();
+
+
+    /* ════════════════════════════════════════════════════════════════
+       5. PROJECT LIBRARY OVERLAY SYSTEM (Preserved exactly)
+    ════════════════════════════════════════════════════════════════ */
+    (function initProjectOverlay() {
+
+      var PROJECTS = {
+        'video-edit': {
+          title:'VIDEO EDIT ARCHIVE', badge:'[03 SELECTED PROJECTS]',
+          footer:'FRAMEFLOW STUDIOS — PORTFOLIO CORE · IN FLUX © 2026', type:'grid',
+          items:[
+            {img:'assets/chronos.png',name:'LUMIX CINEMATIC',  meta:'BRAND STORY / 2026'},
+            {img:'assets/lumen.png',  name:'NIKE REEL',        meta:'COMMERCIAL / 2025'},
+            {img:'assets/aura.png',   name:'AETHER NARRATIVE', meta:'VISUAL SYNTHESIS / 2026'}
+          ]
+        },
+        'web-dev': {
+          title:'WEB DEVELOPMENT ARCHIVE', badge:'[03 SELECTED PROJECTS]',
+          footer:'FRAMEFLOW STUDIOS — WEB CORE · CODE INTENT © 2026', type:'grid',
+          items:[
+            {img:'assets/lumen.png',  name:'ARCHITECT PORTFOLIO',meta:'SPATIAL GRID / 2026'},
+            {img:'assets/aura.png',   name:'BOUTIQUE COUTURE',   meta:'E-COMMERCE / 2025'},
+            {img:'assets/chronos.png',name:'KINETIC PORTAL',     meta:'EXPERIENTIAL / 2026'}
+          ]
+        },
+        'shoots': {
+          title:'SHOOTS ARCHIVE', badge:'[03 SELECTED PROJECTS]',
+          footer:'FRAMEFLOW STUDIOS — SHOOTS CORE · LIGHT FOCUS © 2026', type:'grid',
+          items:[
+            {img:'assets/lumen.png',  name:'SPATIAL SHADOWS',  meta:'STUDIO EDITORIAL / 2026'},
+            {img:'assets/aura.png',   name:'GOLDEN FLUID FORM',meta:'PRODUCT LIGHTING / 2026'},
+            {img:'assets/chronos.png',name:'CHRONOS TIMELINE', meta:'CREATIVE DIRECTION / 2025'}
+          ]
+        },
+        'aura-sensory': {
+          title:'AURA SENSORY ENGINE', badge:'[EXPERIENCE INSIGHT]',
+          footer:'FRAMEFLOW STUDIOS — EXPERIENTIAL WIRE · IN FLUX © 2026', type:'detail',
+          img:'assets/aura.png', imgAlt:'AURA Render',
+          label:'01 / BACKGROUND BRIEF', headline:'THE POETRY OF ORGANIC MOTION',
+          body:'We developed a tailored real-time sensory graphic engine for physical retail displays. The system reads kinetic changes and generates slow-flowing golden digital fluid simulations in response to customer motion, providing an engaging, high-contrast, atmospheric interaction in physical showrooms.',
+          month:'MAY 2026', role:'SENSORY SIMULATION'
+        },
+        'lumen-architectural': {
+          title:'LUMEN ARCHITECTURAL SYSTEM', badge:'[EXPERIENCE INSIGHT]',
+          footer:'FRAMEFLOW STUDIOS — SPATIAL WEB · LIGHT FOCUS © 2026', type:'detail',
+          img:'assets/lumen.png', imgAlt:'Lumen Render',
+          label:'02 / ARCHIVE CONCEPT', headline:'GRID BALANCING AND NEGATIVE SPACE',
+          body:'Constructed a high-concept web directory showcasing minimalist concrete scale architecture. The design utilizes deep grid structures and stark shadows to translate the raw geometric integrity of spatial concrete designs into an elegant editorial webpage.',
+          month:'FEBRUARY 2026', role:'ARCHITECTURAL ARCHIVE'
+        },
+        'nike-chronos': {
+          title:'NIKE CHRONOS REEL', badge:'[EXPERIENCE INSIGHT]',
+          footer:'FRAMEFLOW STUDIOS — FILM WORK · CODE INTENT © 2026', type:'detail',
+          img:'assets/chronos.png', imgAlt:'Chronos Render',
+          label:'03 / FILM METRICS', headline:'TEMPORAL SHIFTING & CADENCE',
+          body:'Directed and composed a luxurious creative timeline campaign video for Nike. Combining conceptual time renders with rapid, high-contrast, rhythmic post-production edits to reflect structured kinetic motion.',
+          month:'NOVEMBER 2025', role:'CREATIVE FILM DIRECTION'
+        }
+      };
+
+      function buildHTML(p) {
+        var closeBtn = '<button id="fs-close-btn" style="font-family:Poppins,sans-serif;font-weight:700;font-size:0.65rem;letter-spacing:0.18em;color:#888;background:none;border:none;border-bottom:1px solid transparent;padding-bottom:2px;cursor:pointer;transition:color 0.3s;" onmouseover="this.style.color=\'#FFD700\';this.style.borderBottomColor=\'#FFD700\';" onmouseout="this.style.color=\'#888\';this.style.borderBottomColor=\'transparent\';">&#8592; BACK TO DIRECTORY</button>';
+        var header  = '<div style="display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid rgba(0,0,0,0.08);padding-bottom:2rem;margin-bottom:3rem;"><div style="display:flex;align-items:baseline;gap:1.5rem;"><h2 style="font-family:Syne,Poppins,sans-serif;font-weight:700;font-size:clamp(1.1rem,2.5vw,1.75rem);letter-spacing:0.04em;color:#111;">'+p.title+'</h2><span style="font-family:Poppins,sans-serif;font-weight:700;font-size:0.65rem;letter-spacing:0.18em;color:#FFD700;">'+p.badge+'</span></div>'+closeBtn+'</div>';
+        var footer  = '<div style="border-top:1px solid rgba(0,0,0,0.05);margin-top:3rem;padding-top:1.5rem;"><span style="font-family:Poppins,sans-serif;font-size:0.6rem;letter-spacing:0.18em;color:rgba(85,85,85,0.6);text-transform:uppercase;">'+p.footer+'</span></div>';
+
+        if (p.type === 'grid') {
+          var cards = p.items.map(function(it) {
+            return '<div><div style="width:100%;height:260px;background:#f5f5f5;border-radius:8px;overflow:hidden;border:1px solid rgba(0,0,0,0.05);"><img src="'+it.img+'" alt="'+it.name+'" style="width:100%;height:100%;object-fit:cover;filter:grayscale(1);transition:filter 0.6s;" onmouseover="this.style.filter=\'grayscale(0)\';" onmouseout="this.style.filter=\'grayscale(1)\';" /></div><div style="display:flex;justify-content:space-between;align-items:baseline;margin-top:1rem;"><span style="font-family:Poppins,sans-serif;font-weight:700;font-size:0.9rem;color:#111;">'+it.name+'</span><span style="font-family:Poppins,sans-serif;font-size:0.65rem;color:#888;letter-spacing:0.1em;">'+it.meta+'</span></div></div>';
+          }).join('');
+          return '<div style="flex:1;">'+header+'<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:2.5rem;">'+cards+'</div></div>'+footer;
+        } else {
+          return '<div style="flex:1;">'+header+'<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:3rem;align-items:start;"><div style="width:100%;height:clamp(240px,35vw,420px);background:#f5f5f5;border-radius:8px;overflow:hidden;border:1px solid rgba(0,0,0,0.05);"><img src="'+p.img+'" alt="'+p.imgAlt+'" style="width:100%;height:100%;object-fit:cover;" /></div><div style="display:flex;flex-direction:column;gap:1.5rem;"><div><span style="font-family:Poppins,sans-serif;font-weight:700;font-size:0.65rem;letter-spacing:0.18em;color:#FFD700;text-transform:uppercase;">'+p.label+'</span><h3 style="font-family:Syne,Poppins,sans-serif;font-weight:700;font-size:clamp(1.1rem,2vw,1.6rem);color:#111;margin-top:0.5rem;letter-spacing:0.02em;">'+p.headline+'</h3></div><p style="font-family:Poppins,sans-serif;color:#555;font-size:0.9rem;line-height:1.8;">'+p.body+'</p><div style="display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;border-top:1px solid rgba(0,0,0,0.05);padding-top:1.5rem;"><div><p style="font-family:Poppins,sans-serif;font-weight:700;font-size:0.6rem;color:rgba(17,17,17,0.4);letter-spacing:0.15em;text-transform:uppercase;">PROJECT MONTH</p><p style="font-family:Poppins,sans-serif;font-weight:700;font-size:0.75rem;color:#111;margin-top:0.35rem;">'+p.month+'</p></div><div><p style="font-family:Poppins,sans-serif;font-weight:700;font-size:0.6rem;color:rgba(17,17,17,0.4);letter-spacing:0.15em;text-transform:uppercase;">ROLE &amp; DELIVERABLE</p><p style="font-family:Poppins,sans-serif;font-weight:700;font-size:0.75rem;color:#111;margin-top:0.35rem;">'+p.role+'</p></div></div></div></div></div>'+footer;
+        }
+      }
+
+      var overlay = document.createElement('div');
+      overlay.id = 'fs-overlay';
+      overlay.style.cssText = [
+        'position:fixed','top:0','right:0','bottom:0','left:0',
+        'z-index:99999','background:#fcfcfc','overflow-y:auto','overflow-x:hidden',
+        '-webkit-overflow-scrolling:touch','display:none','flex-direction:column',
+        'padding:4rem 1.5rem 3rem','box-sizing:border-box',
+        'opacity:0','transform:translateY(40px)',
+        'transition:opacity 0.55s cubic-bezier(0.16,1,0.3,1),transform 0.55s cubic-bezier(0.16,1,0.3,1)',
+        'will-change:opacity,transform'
+      ].join(';');
+
+      function setOverlayPad() {
+        var w=window.innerWidth;
+        overlay.style.padding = w>=1024 ? '5rem 6rem 4rem' : w>=640 ? '4.5rem 3rem 3rem' : '4rem 1.25rem 3rem';
+      }
+      setOverlayPad();
+      window.addEventListener('resize', setOverlayPad);
+      document.body.appendChild(overlay);
+
+      function openOverlay(key) {
+        var p = PROJECTS[key]; if (!p) return;
+        overlay.innerHTML = buildHTML(p);
+        overlay.style.cursor = 'none';
+        Array.prototype.slice.call(overlay.querySelectorAll('a,button,input,textarea,[role="button"]')).forEach(function(el){
+          try { el.style.cursor='none'; } catch(e){}
+        });
+        overlay.style.display='flex'; overlay.style.opacity='0'; overlay.style.transform='translateY(40px)';
+        requestAnimationFrame(function() { requestAnimationFrame(function() {
+          overlay.style.opacity='1'; overlay.style.transform='translateY(0)';
+        }); });
+        document.body.style.overflow='hidden';
+        if (window._lenis) window._lenis.stop();
+        var cb=document.getElementById('fs-close-btn');
+        if (cb) cb.addEventListener('click', closeOverlay);
+        if (window.refreshCursorBindings) window.refreshCursorBindings();
+      }
+
+      function closeOverlay() {
+        overlay.style.opacity='0'; overlay.style.transform='translateY(40px)';
+        setTimeout(function() { overlay.style.display='none'; overlay.innerHTML=''; }, 580);
+        document.body.style.overflow='';
+        if (window._lenis) window._lenis.start();
+      }
+
+      document.addEventListener('keydown', function(e) {
+        if (e.key==='Escape' && overlay.style.display==='flex') closeOverlay();
+      });
+      document.querySelectorAll('.category-item').forEach(function(el) {
+        el.addEventListener('click', function() { var k=el.getAttribute('data-category'); if(k) openOverlay(k); });
+      });
+      document.querySelectorAll('.timeline-item').forEach(function(el) {
+        el.addEventListener('click', function() { var k=el.getAttribute('data-experience'); if(k) openOverlay(k); });
+      });
+    })();
+
+
+    /* ════════════════════════════════════════════════════════════════
+       6. GSAP SCROLLTRIGGER ANIMATIONS + PARALLAX
+          Replaces all IntersectionObserver reveal logic
+    ════════════════════════════════════════════════════════════════ */
+    (function initScrollAnimations() {
+      if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') return;
+
+      /* ── Static section reveals (.gsap-reveal) ─────────────── */
+      /* BUG FIX 4: 'play none none none' — elements reveal once and STAY visible.
+         No aggressive reverse/fade-out when scrolling past them. */
+      gsap.utils.toArray('.gsap-reveal').forEach(function(el) {
+        gsap.fromTo(el,
+          { opacity:0, y:36 },
+          { opacity:1, y:0, duration:1.2, ease:'power3.out',
+            scrollTrigger:{ trigger:el, start:'top 90%', toggleActions:'play none none none' } }
+        );
+      });
+
+      /* ── Category items: fade entrance — stays visible once revealed */
+      var catItems = gsap.utils.toArray('.category-item');
+      catItems.forEach(function(el, i) {
+        gsap.fromTo(el,
+          { opacity:0 },
+          { opacity:1, duration:1.0, delay:i*0.08, ease:'power3.out',
+            scrollTrigger:{ trigger:el, start:'top 92%', toggleActions:'play none none none' } }
+        );
+      });
+
+      /* ── Category items: subtle parallax y (scrub, staggered rates) ── */
+      catItems.forEach(function(el, i) {
+        gsap.fromTo(el,
+          { y: 8 + i * 5 },
+          { y: -(16 + i * 10), ease:'none',
+            scrollTrigger:{ trigger:'#project', start:'top bottom', end:'bottom top', scrub:2.0 } }
+        );
+      });
+
+      /* ── Timeline items: slide from left — stays visible once revealed */
+      var timeItems = gsap.utils.toArray('.timeline-item');
+      timeItems.forEach(function(el, i) {
+        gsap.fromTo(el,
+          { opacity:0, x:-28 },
+          { opacity:1, x:0, duration:1.1, delay:i*0.1, ease:'power3.out',
+            scrollTrigger:{ trigger:el, start:'top 90%', toggleActions:'play none none none' } }
+        );
+      });
+
+      /* ── Timeline items: parallax y */
+      timeItems.forEach(function(el, i) {
+        gsap.to(el, {
+          y: -(12 + i * 7), ease:'none',
+          scrollTrigger:{ trigger:'#experience', start:'top bottom', end:'bottom top', scrub:2.2 }
+        });
+      });
+
+    })();
+
+  </script>
+</body>
+</html>
