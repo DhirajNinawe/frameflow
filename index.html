@@ -99,19 +99,22 @@
     #mobile-menu-btn {
       pointer-events: auto !important;
       position: relative;
-      z-index: 10000;
+      /* Explicit z-index: beats site-header (9999) and cursor (100001) context */
+      z-index: 100000;
       background: none;
       border: none;
-      padding: 0;
+      padding: 0.25rem 0.125rem;
       font-family: 'Poppins', sans-serif;
       font-weight: 700;
       font-size: 0.65rem;
       letter-spacing: 0.22em;
-      color: rgba(17,17,17,0.55);
+      /* Solid #111111 — no opacity — visible on white hero */
+      color: #111111;
       text-transform: uppercase;
-      cursor: pointer !important;
+      /* cursor:pointer is overridden by body's cursor:none, so we let body rule apply;
+         on touch devices the @media rule restores auto — both cases work correctly */
       transition: color 0.3s;
-      display: none; /* shown via Tailwind block md:hidden */
+      /* NO display:none — Tailwind `block md:hidden` controls visibility */
     }
     #mobile-menu-btn:hover { color: #FFD700; }
 
@@ -483,6 +486,9 @@
 </head>
 <body class="bg-brand-light text-brand-dark font-poppins selection:bg-brand-yellow/20 selection:text-brand-dark">
 
+  <!-- ══ GEOMETRIC REPULSION CANVAS — fixed, behind everything ══════ -->
+  <canvas id="geo-canvas" class="fixed inset-0 w-full h-full pointer-events-auto" style="z-index:0;opacity:0.55;" aria-hidden="true"></canvas>
+
   <!-- ══ CURSOR LAYER ══════════════════════════════════════════════ -->
   <div class="cursor-dot" aria-hidden="true"></div>
   <div class="cursor-follower" aria-hidden="true">
@@ -705,36 +711,34 @@
 
 
     <!-- ── SECTION 4: CONTACT ───────────────────────────────────── -->
-    <section id="contact" class="w-full min-h-screen flex flex-col justify-center px-6 sm:px-12 md:px-24 py-24 relative border-t border-black/5 bg-[#f5f5f5]/30">
+    <section id="contact" class="w-full min-h-screen flex flex-col items-center justify-center px-6 sm:px-12 md:px-24 py-24 relative border-t border-black/5 bg-[#f5f5f5]/30">
 
-      <h2 class="gsap-reveal font-bold text-[10px] sm:text-xs text-brand-muted tracking-[0.3em] uppercase mb-12 opacity-60">
+      <h2 class="gsap-reveal font-bold text-[10px] sm:text-xs text-brand-muted tracking-[0.3em] uppercase mb-12 opacity-60 w-full text-center">
         START A FLOW
       </h2>
 
-      <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 max-w-6xl w-full">
+      <div class="flex flex-col items-center justify-center text-center w-full max-w-3xl gap-10">
 
-        <div class="gsap-reveal flex flex-col justify-between">
-          <div>
-            <p class="font-bold text-3xl sm:text-4xl md:text-5xl text-brand-dark tracking-tight uppercase leading-tight">
-              LET'S CREATE SOMETHING <span class="text-brand-yellow block mt-1">UNFORGETTABLE.</span>
-            </p>
-            <p class="mt-6 text-brand-muted text-xs sm:text-sm md:text-base leading-relaxed max-w-md">
-              Whether you want to build a cinematic digital presence or launch a spatial design identity, let's collaborate.
-            </p>
-            <div class="mt-10 sm:mt-12 flex flex-col gap-4 text-[10px] sm:text-xs tracking-wider text-brand-dark/60">
-              <p>INQUIRIES: <a href="mailto:hello@frameflows.com" class="text-brand-dark hover:text-brand-yellow transition-colors duration-300 interactive pb-0.5 border-b border-transparent hover:border-brand-yellow font-bold">HELLO@FRAMEFLOWS.COM</a></p>
-              <p>LOCATION: <span class="text-brand-dark font-bold">LOS ANGELES / GLOBAL</span></p>
-            </div>
+        <div class="gsap-reveal flex flex-col items-center gap-6">
+          <p class="font-bold text-3xl sm:text-4xl md:text-5xl text-brand-dark tracking-tight uppercase leading-tight">
+            LET'S CREATE SOMETHING <span class="text-brand-yellow block mt-1">UNFORGETTABLE.</span>
+          </p>
+          <p class="text-brand-muted text-xs sm:text-sm md:text-base leading-relaxed max-w-md">
+            Whether you want to build a cinematic digital presence or launch a spatial design identity, let's collaborate.
+          </p>
+          <div class="flex flex-col items-center gap-3 text-[10px] sm:text-xs tracking-wider text-brand-dark/60">
+            <p>INQUIRIES: <a href="mailto:frameflows11@gmail.com" class="text-brand-dark hover:text-brand-yellow transition-colors duration-300 interactive pb-0.5 border-b border-transparent hover:border-brand-yellow font-bold">FRAMEFLOWS11@GMAIL.COM</a></p>
+            <p>LOCATION: <span class="text-brand-dark font-bold">LOS ANGELES / GLOBAL</span></p>
           </div>
         </div>
 
-        <div class="gsap-reveal flex items-center lg:justify-end w-full select-none">
-          <!-- magnetic-wrap: GSAP translates this outer div -->
-          <div class="magnetic-wrap" id="hire-me-wrap">
-            <a href="mailto:hello@frameflows.com"
+        <!-- HIRE button — centered with mx-auto on the magnetic-wrap -->
+        <div class="gsap-reveal flex justify-center w-full select-none">
+          <div class="magnetic-wrap mx-auto" id="hire-me-wrap">
+            <a href="mailto:frameflows11@gmail.com"
                id="hire-me-btn"
-               class="px-12 py-6 bg-transparent border border-black/35 text-brand-dark font-bold text-xs tracking-[0.25em] uppercase relative overflow-hidden transition-colors duration-300 ease-out group/btn interactive inline-block text-center min-w-[200px]">
-              <span class="relative z-10">HIRE ME</span>
+               class="px-14 py-6 bg-transparent border border-black/35 text-brand-dark font-bold text-xs tracking-[0.3em] uppercase relative overflow-hidden transition-colors duration-300 ease-out group/btn interactive inline-block text-center min-w-[220px]">
+              <span class="relative z-10">HIRE</span>
               <!-- Yellow fill: stays clipped inside the <a>'s overflow:hidden -->
               <span class="absolute inset-0 bg-brand-yellow origin-left z-0"
                     style="transform:scaleX(0);transition:transform 0.5s cubic-bezier(0.16,1,0.3,1);"
@@ -1291,6 +1295,163 @@
           closeMenu();
         }
       });
+    })();
+
+
+    /* ════════════════════════════════════════════════════════════════
+       8. GEO-CANVAS — Subtle geometric particle field with repulsion
+          Shapes: circles, triangles, thin crosses. Very low opacity.
+          Mouse/touch proximity → smooth push-away force.
+          requestAnimationFrame loop — one canvas, zero dependencies.
+    ════════════════════════════════════════════════════════════════ */
+    (function initGeoCanvas() {
+      var canvas = document.getElementById('geo-canvas');
+      if (!canvas) return;
+      var ctx = canvas.getContext('2d');
+
+      /* ── Config ── */
+      var COUNT      = 55;       /* total particles */
+      var REPEL_R    = 120;      /* px — repulsion radius */
+      var REPEL_STR  = 2800;     /* repulsion force scalar */
+      var FRICTION   = 0.88;     /* velocity damping per frame */
+      var RETURN_SPD = 0.032;    /* spring-back toward home */
+      var BASE_ALPHA = 0.10;     /* shape stroke opacity */
+      var SPEED_MAX  = 0.45;     /* max drift speed */
+      var SIZE_MIN   = 5;        /* min shape radius/size */
+      var SIZE_MAX   = 18;       /* max shape radius/size */
+
+      /* ── State ── */
+      var W = 0, H = 0;
+      var mouse = { x: -9999, y: -9999 };
+      var particles = [];
+
+      /* Shape types */
+      var SHAPES = ['circle', 'triangle', 'cross'];
+
+      function resize() {
+        W = canvas.width  = window.innerWidth;
+        H = canvas.height = window.innerHeight;
+      }
+      resize();
+      window.addEventListener('resize', resize);
+
+      /* Track mouse */
+      window.addEventListener('mousemove', function(e) {
+        mouse.x = e.clientX; mouse.y = e.clientY;
+      });
+      /* Track touch */
+      window.addEventListener('touchmove', function(e) {
+        if (e.touches.length > 0) {
+          mouse.x = e.touches[0].clientX;
+          mouse.y = e.touches[0].clientY;
+        }
+      }, { passive: true });
+      window.addEventListener('touchend', function() {
+        /* Gently fade mouse away so particles drift back */
+        setTimeout(function() { mouse.x = -9999; mouse.y = -9999; }, 400);
+      });
+
+      /* ── Particle factory ── */
+      function makeParticle() {
+        var size = SIZE_MIN + Math.random() * (SIZE_MAX - SIZE_MIN);
+        var x    = size + Math.random() * (W - size * 2);
+        var y    = size + Math.random() * (H - size * 2);
+        var angle = Math.random() * Math.PI * 2;
+        var spd   = 0.1 + Math.random() * SPEED_MAX;
+        return {
+          hx: x, hy: y,    /* home position */
+          x:  x, y:  y,    /* current position */
+          vx: Math.cos(angle) * spd,
+          vy: Math.sin(angle) * spd,
+          size: size,
+          shape: SHAPES[Math.floor(Math.random() * SHAPES.length)],
+          rot: Math.random() * Math.PI * 2,
+          rotSpd: (Math.random() - 0.5) * 0.008,
+          alpha: 0.05 + Math.random() * 0.07,  /* per-particle subtle variance */
+        };
+      }
+
+      for (var i = 0; i < COUNT; i++) particles.push(makeParticle());
+
+      /* ── Draw helpers ── */
+      function drawCircle(p) {
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+        ctx.stroke();
+      }
+
+      function drawTriangle(p) {
+        var s = p.size * 1.6;
+        ctx.save();
+        ctx.translate(p.x, p.y);
+        ctx.rotate(p.rot);
+        ctx.beginPath();
+        ctx.moveTo(0, -s);
+        ctx.lineTo( s * 0.866,  s * 0.5);
+        ctx.lineTo(-s * 0.866,  s * 0.5);
+        ctx.closePath();
+        ctx.stroke();
+        ctx.restore();
+      }
+
+      function drawCross(p) {
+        var arm = p.size * 1.2;
+        ctx.save();
+        ctx.translate(p.x, p.y);
+        ctx.rotate(p.rot);
+        ctx.beginPath();
+        ctx.moveTo(-arm, 0); ctx.lineTo(arm, 0);
+        ctx.moveTo(0, -arm); ctx.lineTo(0,  arm);
+        ctx.stroke();
+        ctx.restore();
+      }
+
+      /* ── Main loop ── */
+      function tick() {
+        ctx.clearRect(0, 0, W, H);
+
+        for (var j = 0; j < particles.length; j++) {
+          var p  = particles[j];
+          var dx = p.x - mouse.x;
+          var dy = p.y - mouse.y;
+          var distSq = dx * dx + dy * dy;
+
+          /* Repulsion force — inverse square, clamped to radius */
+          if (distSq < REPEL_R * REPEL_R && distSq > 0.01) {
+            var dist  = Math.sqrt(distSq);
+            var force = REPEL_STR / (dist * dist);
+            p.vx += (dx / dist) * force * 0.016;  /* ~60fps timestep */
+            p.vy += (dy / dist) * force * 0.016;
+          }
+
+          /* Spring return toward home */
+          p.vx += (p.hx - p.x) * RETURN_SPD;
+          p.vy += (p.hy - p.y) * RETURN_SPD;
+
+          /* Friction / damping */
+          p.vx *= FRICTION;
+          p.vy *= FRICTION;
+
+          /* Integrate */
+          p.x  += p.vx;
+          p.y  += p.vy;
+          p.rot += p.rotSpd;
+
+          /* Soft boundary wrap for home position on resize */
+          if (p.hx > W) p.hx = W - p.size;
+          if (p.hy > H) p.hy = H - p.size;
+
+          /* Draw */
+          ctx.strokeStyle = 'rgba(0,0,0,' + p.alpha + ')';
+          ctx.lineWidth   = 1;
+          if      (p.shape === 'circle')   drawCircle(p);
+          else if (p.shape === 'triangle') drawTriangle(p);
+          else                             drawCross(p);
+        }
+
+        requestAnimationFrame(tick);
+      }
+      tick();
     })();
 
   </script>
