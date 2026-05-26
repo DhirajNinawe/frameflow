@@ -93,7 +93,10 @@
       #site-header { padding: 2.25rem 3.5rem; }
     }
     @media (max-width: 768px) {
-      #site-header { padding: 1.75rem 1.75rem; }
+      #site-header { padding: 1.5rem 1.25rem; }
+    }
+    @media (max-width: 480px) {
+      #site-header { padding: 1.25rem 1rem; }
     }
 
     /* ── Brand Logo — Poppins 800, premium agency scale ── */
@@ -181,10 +184,11 @@
     }
     .cursor-expanded .cursor-label { opacity: 1; }
 
-    /* Touch devices: hide custom cursor elements */
+    /* ── CRITICAL: Touch devices — hide custom cursor, restore native pointer ── */
     @media (hover: none) and (pointer: coarse) {
-      .cursor-dot, .cursor-follower { display: none !important; }
-      /* Restore normal cursor on touch */
+      .cursor-dot     { display: none !important; }
+      .cursor-follower { display: none !important; }
+      /* Restore normal OS cursor for all elements on touch screens */
       body, body * { cursor: auto !important; }
     }
 
@@ -296,23 +300,28 @@
       display: block; width: 100%; max-width: 100%; text-align: center;
     }
 
-    /* ── Hero Headline — REFINEMENT: tightened to one imposing brand mark ── */
+    /* ── Hero Headline — mobile-safe fluid typography ── */
     .hero-headline {
       margin: 0; padding: 0;
       font-family: 'Poppins', sans-serif;
       font-weight: 800;
-      font-size: clamp(3.2rem, 10vw, 7.5rem);
-      /* REFINEMENT: line-height tightened from 1.0 → 0.93 — fuses the two words */
+      /* clamp: 2.6rem min on tiny phones → 10vw fluid → 7.5rem cap on desktop */
+      font-size: clamp(2.6rem, 12vw, 7.5rem);
       line-height: 0.93;
-      /* REFINEMENT: letter-spacing tightened from -0.02em → -0.035em */
       letter-spacing: -0.035em;
       text-align: center;
       color: #0e0e0e;
-      width: auto;
+      width: 100%;
       max-width: 100%;
     }
     .hero-headline-line {
-      display: block; text-align: center; white-space: nowrap;
+      /* Allow wrapping on very small screens to avoid horizontal overflow */
+      display: block; text-align: center;
+      white-space: normal;
+      word-break: break-word;
+    }
+    @media (min-width: 480px) {
+      .hero-headline-line { white-space: nowrap; }
     }
     /* REFINEMENT: removed margin-top gap — line-height alone controls spacing */
     .hero-headline-line + .hero-headline-line { margin-top: 0; }
@@ -328,15 +337,25 @@
       transition: none;
     }
     .hero-subline {
-      display: block; margin-top: 2.4rem;
+      display: block;
+      margin-top: 2.4rem;
+      /* On mobile reduce the gap so it doesn't push into scroll indicator area */
       font-family: 'Poppins', sans-serif;
       font-weight: 700;
-      font-size: clamp(0.58rem, 1.05vw, 0.7rem);
-      /* REFINEMENT: letter-spacing increased for crisper readability */
+      /* Fluid: slightly larger on mobile (1.4vw) for readability, caps at 0.7rem */
+      font-size: clamp(0.58rem, 1.4vw, 0.7rem);
       letter-spacing: 0.32em;
       text-transform: uppercase;
-      /* REFINEMENT: darkened from 0.35 opacity → solid #1a1a1a for strong contrast */
       color: #1a1a1a;
+      /* Prevent letter-spacing from causing right-edge overflow */
+      padding-right: 0.32em;
+    }
+    @media (max-width: 480px) {
+      .hero-subline {
+        margin-top: 1.6rem;
+        letter-spacing: 0.2em;
+        padding-right: 0.2em;
+      }
     }
     /* REFINEMENT: SCROLL label darkened for strong readability */
     .hero-scroll-label {
@@ -390,7 +409,7 @@
         <a href="#home" class="header-brand magnetic" id="header-brand-link" aria-label="Frameflow Studios" style="pointer-events:auto;position:relative;z-index:10000;">Frameflow</a>
         <!-- Navigation: TOP-RIGHT — pointer-events forced auto at every level -->
         <nav class="header-nav" aria-label="Main Navigation" style="pointer-events:auto;position:relative;z-index:10000;">
-          <ul class="flex flex-row items-center gap-8 select-none" style="pointer-events:auto;">
+          <ul class="flex flex-row items-center gap-4 sm:gap-6 md:gap-8 select-none" style="pointer-events:auto;">
             <li style="pointer-events:auto;">
               <a href="#home" id="nav-home" class="nav-link active magnetic font-bold text-[10px] sm:text-xs tracking-[0.2em] interactive" style="pointer-events:auto;position:relative;z-index:10000;" aria-label="HOME">
                 <span class="nav-link-clip">
@@ -467,28 +486,34 @@
 
       <div class="flex flex-col gap-10 sm:gap-12 md:gap-14 max-w-4xl w-full">
 
-        <div class="category-item group flex items-baseline justify-between py-8 border-b border-black/10 cursor-pointer transition-colors duration-500 hover:border-brand-yellow/40 interactive" data-category="video-edit">
-          <div class="flex items-baseline gap-4 sm:gap-8">
-            <span class="font-bold text-xs sm:text-sm text-brand-yellow tracking-[0.2em]">01 /</span>
-            <h3 class="font-bold text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-brand-dark tracking-tight uppercase group-hover:text-brand-yellow transition-colors duration-500">VIDEO EDIT</h3>
+        <div class="category-item group py-6 sm:py-8 border-b border-black/10 cursor-pointer transition-colors duration-500 hover:border-brand-yellow/40 interactive" data-category="video-edit">
+          <div class="flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-2 sm:gap-0">
+            <div class="flex items-baseline gap-4 sm:gap-8">
+              <span class="font-bold text-xs sm:text-sm text-brand-yellow tracking-[0.2em]">01 /</span>
+              <h3 class="font-bold text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-brand-dark tracking-tight uppercase group-hover:text-brand-yellow transition-colors duration-500">VIDEO EDIT</h3>
+            </div>
+            <span class="font-bold text-[10px] sm:text-xs text-brand-dark/40 tracking-[0.2em] uppercase group-hover:text-brand-dark/70 transition-colors duration-500 pl-9 sm:pl-0">EXPLORE LIBRARY [03]</span>
           </div>
-          <span class="font-bold text-[10px] sm:text-xs text-brand-dark/40 tracking-[0.2em] uppercase group-hover:text-brand-dark/70 transition-colors duration-500">EXPLORE LIBRARY [03]</span>
         </div>
 
-        <div class="category-item group flex items-baseline justify-between py-8 border-b border-black/10 cursor-pointer transition-colors duration-500 hover:border-brand-yellow/40 interactive" data-category="web-dev">
-          <div class="flex items-baseline gap-4 sm:gap-8">
-            <span class="font-bold text-xs sm:text-sm text-brand-yellow tracking-[0.2em]">02 /</span>
-            <h3 class="font-bold text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-brand-dark tracking-tight uppercase group-hover:text-brand-yellow transition-colors duration-500">WEB DEVELOPMENT</h3>
+        <div class="category-item group py-6 sm:py-8 border-b border-black/10 cursor-pointer transition-colors duration-500 hover:border-brand-yellow/40 interactive" data-category="web-dev">
+          <div class="flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-2 sm:gap-0">
+            <div class="flex items-baseline gap-4 sm:gap-8">
+              <span class="font-bold text-xs sm:text-sm text-brand-yellow tracking-[0.2em]">02 /</span>
+              <h3 class="font-bold text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-brand-dark tracking-tight uppercase group-hover:text-brand-yellow transition-colors duration-500">WEB DEVELOPMENT</h3>
+            </div>
+            <span class="font-bold text-[10px] sm:text-xs text-brand-dark/40 tracking-[0.2em] uppercase group-hover:text-brand-dark/70 transition-colors duration-500 pl-9 sm:pl-0">EXPLORE LIBRARY [03]</span>
           </div>
-          <span class="font-bold text-[10px] sm:text-xs text-brand-dark/40 tracking-[0.2em] uppercase group-hover:text-brand-dark/70 transition-colors duration-500">EXPLORE LIBRARY [03]</span>
         </div>
 
-        <div class="category-item group flex items-baseline justify-between py-8 border-b border-black/10 cursor-pointer transition-colors duration-500 hover:border-brand-yellow/40 interactive" data-category="shoots">
-          <div class="flex items-baseline gap-4 sm:gap-8">
-            <span class="font-bold text-xs sm:text-sm text-brand-yellow tracking-[0.2em]">03 /</span>
-            <h3 class="font-bold text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-brand-dark tracking-tight uppercase group-hover:text-brand-yellow transition-colors duration-500">SHOOTS</h3>
+        <div class="category-item group py-6 sm:py-8 border-b border-black/10 cursor-pointer transition-colors duration-500 hover:border-brand-yellow/40 interactive" data-category="shoots">
+          <div class="flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-2 sm:gap-0">
+            <div class="flex items-baseline gap-4 sm:gap-8">
+              <span class="font-bold text-xs sm:text-sm text-brand-yellow tracking-[0.2em]">03 /</span>
+              <h3 class="font-bold text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-brand-dark tracking-tight uppercase group-hover:text-brand-yellow transition-colors duration-500">SHOOTS</h3>
+            </div>
+            <span class="font-bold text-[10px] sm:text-xs text-brand-dark/40 tracking-[0.2em] uppercase group-hover:text-brand-dark/70 transition-colors duration-500 pl-9 sm:pl-0">EXPLORE LIBRARY [03]</span>
           </div>
-          <span class="font-bold text-[10px] sm:text-xs text-brand-dark/40 tracking-[0.2em] uppercase group-hover:text-brand-dark/70 transition-colors duration-500">EXPLORE LIBRARY [03]</span>
         </div>
 
       </div>
@@ -962,11 +987,11 @@
 
         if (p.type === 'grid') {
           var cards = p.items.map(function(it) {
-            return '<div><div style="width:100%;height:260px;background:#f5f5f5;border-radius:8px;overflow:hidden;border:1px solid rgba(0,0,0,0.05);"><img src="'+it.img+'" alt="'+it.name+'" style="width:100%;height:100%;object-fit:cover;filter:grayscale(1);transition:filter 0.6s;" onmouseover="this.style.filter=\'grayscale(0)\';" onmouseout="this.style.filter=\'grayscale(1)\';" /></div><div style="display:flex;justify-content:space-between;align-items:baseline;margin-top:1rem;"><span style="font-family:Poppins,sans-serif;font-weight:700;font-size:0.9rem;color:#111;">'+it.name+'</span><span style="font-family:Poppins,sans-serif;font-size:0.65rem;color:#888;letter-spacing:0.1em;">'+it.meta+'</span></div></div>';
+            return '<div><div style="width:100%;height:clamp(180px,40vw,260px);background:#f5f5f5;border-radius:8px;overflow:hidden;border:1px solid rgba(0,0,0,0.05);"><img src="'+it.img+'" alt="'+it.name+'" style="width:100%;height:100%;object-fit:cover;filter:grayscale(1);transition:filter 0.6s;" onmouseover="this.style.filter=\'grayscale(0)\';" onmouseout="this.style.filter=\'grayscale(1)\';" /></div><div style="display:flex;justify-content:space-between;align-items:baseline;margin-top:1rem;"><span style="font-family:Poppins,sans-serif;font-weight:700;font-size:0.9rem;color:#111;">'+it.name+'</span><span style="font-family:Poppins,sans-serif;font-size:0.65rem;color:#888;letter-spacing:0.1em;">'+it.meta+'</span></div></div>';
           }).join('');
-          return '<div style="flex:1;">'+header+'<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:2.5rem;">'+cards+'</div></div>'+footer;
+          return '<div style="flex:1;">'+header+'<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,240px),1fr));gap:2.5rem;">'+cards+'</div></div>'+footer;
         } else {
-          return '<div style="flex:1;">'+header+'<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:3rem;align-items:start;"><div style="width:100%;height:clamp(240px,35vw,420px);background:#f5f5f5;border-radius:8px;overflow:hidden;border:1px solid rgba(0,0,0,0.05);"><img src="'+p.img+'" alt="'+p.imgAlt+'" style="width:100%;height:100%;object-fit:cover;" /></div><div style="display:flex;flex-direction:column;gap:1.5rem;"><div><span style="font-family:Poppins,sans-serif;font-weight:700;font-size:0.65rem;letter-spacing:0.18em;color:#FFD700;text-transform:uppercase;">'+p.label+'</span><h3 style="font-family:Syne,Poppins,sans-serif;font-weight:700;font-size:clamp(1.1rem,2vw,1.6rem);color:#111;margin-top:0.5rem;letter-spacing:0.02em;">'+p.headline+'</h3></div><p style="font-family:Poppins,sans-serif;color:#555;font-size:0.9rem;line-height:1.8;">'+p.body+'</p><div style="display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;border-top:1px solid rgba(0,0,0,0.05);padding-top:1.5rem;"><div><p style="font-family:Poppins,sans-serif;font-weight:700;font-size:0.6rem;color:rgba(17,17,17,0.4);letter-spacing:0.15em;text-transform:uppercase;">PROJECT MONTH</p><p style="font-family:Poppins,sans-serif;font-weight:700;font-size:0.75rem;color:#111;margin-top:0.35rem;">'+p.month+'</p></div><div><p style="font-family:Poppins,sans-serif;font-weight:700;font-size:0.6rem;color:rgba(17,17,17,0.4);letter-spacing:0.15em;text-transform:uppercase;">ROLE &amp; DELIVERABLE</p><p style="font-family:Poppins,sans-serif;font-weight:700;font-size:0.75rem;color:#111;margin-top:0.35rem;">'+p.role+'</p></div></div></div></div></div>'+footer;
+          return '<div style="flex:1;">'+header+'<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr));gap:3rem;align-items:start;"><div style="width:100%;height:clamp(240px,35vw,420px);background:#f5f5f5;border-radius:8px;overflow:hidden;border:1px solid rgba(0,0,0,0.05);"><img src="'+p.img+'" alt="'+p.imgAlt+'" style="width:100%;height:100%;object-fit:cover;" /></div><div style="display:flex;flex-direction:column;gap:1.5rem;"><div><span style="font-family:Poppins,sans-serif;font-weight:700;font-size:0.65rem;letter-spacing:0.18em;color:#FFD700;text-transform:uppercase;">'+p.label+'</span><h3 style="font-family:Syne,Poppins,sans-serif;font-weight:700;font-size:clamp(1.1rem,2vw,1.6rem);color:#111;margin-top:0.5rem;letter-spacing:0.02em;">'+p.headline+'</h3></div><p style="font-family:Poppins,sans-serif;color:#555;font-size:0.9rem;line-height:1.8;">'+p.body+'</p><div style="display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;border-top:1px solid rgba(0,0,0,0.05);padding-top:1.5rem;"><div><p style="font-family:Poppins,sans-serif;font-weight:700;font-size:0.6rem;color:rgba(17,17,17,0.4);letter-spacing:0.15em;text-transform:uppercase;">PROJECT MONTH</p><p style="font-family:Poppins,sans-serif;font-weight:700;font-size:0.75rem;color:#111;margin-top:0.35rem;">'+p.month+'</p></div><div><p style="font-family:Poppins,sans-serif;font-weight:700;font-size:0.6rem;color:rgba(17,17,17,0.4);letter-spacing:0.15em;text-transform:uppercase;">ROLE &amp; DELIVERABLE</p><p style="font-family:Poppins,sans-serif;font-weight:700;font-size:0.75rem;color:#111;margin-top:0.35rem;">'+p.role+'</p></div></div></div></div></div>'+footer;
         }
       }
 
