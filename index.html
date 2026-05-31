@@ -151,58 +151,68 @@
       }
     }
 
-    /* ── Mobile Menu Button ── */
+    /* ══ MOBILE MENU BUTTON — fixed, above EVERYTHING including cursor layer ══ */
     #mobile-menu-btn {
-      pointer-events: auto !important;
-      position: relative;
-      /* Explicit z-index: beats site-header (9999) and cursor (100001) context */
-      z-index: 100000;
+      display: none; /* hidden by default; shown below md via media query */
+      position: fixed;
+      top: 1.5rem;
+      right: 1.5rem;
+      z-index: 100002; /* above cursor-dot (100001) and cursor-follower (100000) */
       background: none;
       border: none;
-      padding: 0.25rem 0.125rem;
+      padding: 0.5rem 0.25rem;
       font-family: 'Poppins', sans-serif;
       font-weight: 700;
       font-size: 0.65rem;
       letter-spacing: 0.22em;
-      /* Solid #111111 — no opacity — visible on white hero */
       color: #111111;
       text-transform: uppercase;
-      /* cursor:pointer is overridden by body's cursor:none, so we let body rule apply;
-         on touch devices the @media rule restores auto — both cases work correctly */
+      pointer-events: auto !important;
+      touch-action: manipulation;
+      -webkit-tap-highlight-color: transparent;
+      cursor: pointer !important;
+      user-select: none;
+      -webkit-user-select: none;
       transition: color 0.3s;
-      /* NO display:none — Tailwind `block md:hidden` controls visibility */
     }
 
-    #mobile-menu-btn:hover {
+    @media (max-width: 767px) {
+      #mobile-menu-btn {
+        display: block;
+      }
+    }
+
+    #mobile-menu-btn:hover,
+    #mobile-menu-btn:active {
       color: #FFD700;
     }
 
-    /* ── Mobile Full-Screen Overlay Menu ── */
+    /* ══ MOBILE NAV OVERLAY — fixed, above cursor layer ══ */
     #mobile-nav-overlay {
       position: fixed;
       inset: 0;
-      z-index: 99998;
-      /* just below fs-overlay (99999) */
+      z-index: 100003; /* above everything */
       background: #ffffff;
       display: flex;
       flex-direction: column;
       align-items: flex-start;
       justify-content: center;
-      padding: 6rem 2rem 3rem;
-      /* Hidden state */
+      padding: 6rem 2.5rem 3rem;
       opacity: 0;
-      pointer-events: none;
-      transform: translateY(-12px);
+      pointer-events: none !important;
+      transform: translateY(-16px);
       transition:
-        opacity 0.42s cubic-bezier(0.16, 1, 0.3, 1),
-        transform 0.42s cubic-bezier(0.16, 1, 0.3, 1);
+        opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+        transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
       will-change: opacity, transform;
+      overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
     }
 
     #mobile-nav-overlay.is-open {
-      opacity: 1;
-      pointer-events: auto;
-      transform: translateY(0);
+      opacity: 1 !important;
+      pointer-events: auto !important;
+      transform: translateY(0) !important;
     }
 
     /* Stacked mobile nav links */
@@ -215,22 +225,28 @@
       color: #0e0e0e;
       text-decoration: none;
       line-height: 1.15;
-      padding: 0.45rem 0;
-      transition: color 0.3s;
+      padding: 0.55rem 0;
+      pointer-events: auto !important;
+      touch-action: manipulation;
+      -webkit-tap-highlight-color: transparent;
       cursor: pointer !important;
+      user-select: none;
+      -webkit-user-select: none;
+      transition: color 0.25s;
     }
 
-    #mobile-nav-overlay .mob-nav-link:hover {
+    #mobile-nav-overlay .mob-nav-link:hover,
+    #mobile-nav-overlay .mob-nav-link:active {
       color: #FFD700;
     }
 
     /* Thin divider between links */
-    #mobile-nav-overlay .mob-nav-link+.mob-nav-link {
+    #mobile-nav-overlay .mob-nav-link + .mob-nav-link {
       border-top: 1px solid rgba(0, 0, 0, 0.06);
-      padding-top: 0.45rem;
+      padding-top: 0.55rem;
     }
 
-    /* Close button inside overlay (top-right) */
+    /* Close button inside overlay — top-right */
     #mob-overlay-close {
       position: absolute;
       top: 1.4rem;
@@ -243,12 +259,23 @@
       letter-spacing: 0.22em;
       color: rgba(17, 17, 17, 0.45);
       text-transform: uppercase;
+      pointer-events: auto !important;
+      touch-action: manipulation;
+      -webkit-tap-highlight-color: transparent;
       cursor: pointer !important;
-      transition: color 0.3s;
-      padding: 0.5rem;
+      user-select: none;
+      -webkit-user-select: none;
+      transition: color 0.25s;
+      padding: 0.75rem;
+      min-width: 44px;
+      min-height: 44px;
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
     }
 
-    #mob-overlay-close:hover {
+    #mob-overlay-close:hover,
+    #mob-overlay-close:active {
       color: #FFD700;
     }
 
@@ -261,33 +288,7 @@
       letter-spacing: 0.28em;
       text-transform: uppercase;
       color: rgba(17, 17, 17, 0.3);
-    }
-
-    /* On touch devices: restore pointer on overlay elements */
-    @media (hover: none) and (pointer: coarse) {
-
-      #mobile-menu-btn,
-      #mob-overlay-close,
-      #mobile-nav-overlay .mob-nav-link {
-        cursor: auto !important;
-      }
-    }
-
-    /* ── Mobile nav: guaranteed touch-interactivity ── */
-    #mobile-menu-btn,
-    #mob-overlay-close,
-    #mobile-nav-overlay .mob-nav-link {
-      pointer-events: auto !important;
-      touch-action: manipulation;
-      -webkit-tap-highlight-color: transparent;
-      cursor: pointer !important;
-      user-select: none;
-      -webkit-user-select: none;
-    }
-
-    /* Ensure overlay itself receives pointer events when open */
-    #mobile-nav-overlay.is-open {
-      pointer-events: auto !important;
+      pointer-events: none;
     }
 
     /* ── Brand Logo — Poppins 800, premium agency scale ── */
@@ -928,6 +929,36 @@
   <canvas id="geo-canvas" class="fixed inset-0 w-full h-full pointer-events-auto" style="z-index:0;opacity:0.55;"
     aria-hidden="true"></canvas>
 
+  <!-- ══ MOBILE MENU BUTTON — fixed, above cursor layer (z-index 100002) ══ -->
+  <button id="mobile-menu-btn" aria-label="Open mobile navigation" aria-expanded="false"
+    aria-controls="mobile-nav-overlay">MENU</button>
+
+  <!-- ══ MOBILE NAV OVERLAY — fixed, above cursor layer (z-index 100003) ══ -->
+  <div id="mobile-nav-overlay" role="dialog" aria-modal="true" aria-label="Mobile Navigation">
+
+    <!-- Close button: top-right corner of overlay -->
+    <button id="mob-overlay-close" aria-label="Close mobile navigation">✕&nbsp; CLOSE</button>
+
+    <!-- Logo inside overlay -->
+    <div style="margin-bottom:2.5rem;">
+      <img src="https://i.ibb.co/23FG39PL/frameflow-logo-black.png" alt="Frameflow Studios"
+        style="height:32px;width:auto;display:block;object-fit:contain;opacity:0.45;" />
+    </div>
+
+    <!-- Stacked navigation links -->
+    <a href="#home" class="mob-nav-link" data-mob-nav>HOME</a>
+    <a href="#project" class="mob-nav-link" data-mob-nav>PROJECT</a>
+    <a href="#experience" class="mob-nav-link" data-mob-nav>EXPERIENCE</a>
+    <a href="#contact" class="mob-nav-link" data-mob-nav>CONTACT</a>
+    <a href="#about" class="mob-nav-link" data-mob-nav>ABOUT US</a>
+
+    <!-- Tagline -->
+    <p class="mob-tagline">Driven by flow&nbsp;&nbsp;defined by quality</p>
+
+  </div>
+  <!-- ════════════════════════════════════════════════════════ -->
+
+
   <!-- ══ CURSOR LAYER ══════════════════════════════════════════════ -->
   <div class="cursor-dot" aria-hidden="true"></div>
   <div class="cursor-follower" aria-hidden="true">
@@ -1010,35 +1041,12 @@
           </ul>
         </nav>
 
-        <!-- Mobile MENU Button — only visible below md breakpoint ————— -->
-        <button id="mobile-menu-btn" class="block md:hidden" aria-label="Open mobile navigation" aria-expanded="false"
-          aria-controls="mobile-nav-overlay">MENU</button>
+        <!-- Mobile MENU Button removed from header — now a standalone fixed element injected by JS -->
 
       </header>
 
-      <!-- ══ MOBILE NAV OVERLAY — full-screen, slides in on MENU tap ══ -->
-      <div id="mobile-nav-overlay" role="dialog" aria-modal="true" aria-label="Mobile Navigation">
 
-        <!-- Close button: top-right corner of overlay -->
-        <button id="mob-overlay-close" aria-label="Close mobile navigation">✕&nbsp; CLOSE</button>
 
-        <!-- Brand mark inside overlay -->
-        <div style="margin-bottom:2.5rem;">
-          <img src="https://i.ibb.co/23FG39PL/frameflow-logo-black.png" alt="Frameflow Studios" style="height:32px;width:auto;display:block;object-fit:contain;opacity:0.45;" />
-        </div>
-
-        <!-- Stacked navigation links -->
-        <a href="#home" class="mob-nav-link" data-mob-nav>HOME</a>
-        <a href="#project" class="mob-nav-link" data-mob-nav>PROJECT</a>
-        <a href="#experience" class="mob-nav-link" data-mob-nav>EXPERIENCE</a>
-        <a href="#contact" class="mob-nav-link" data-mob-nav>CONTACT</a>
-        <a href="#about" class="mob-nav-link" data-mob-nav>ABOUT US</a>
-
-        <!-- Tagline -->
-        <p class="mob-tagline">Driven by flow&nbsp;&nbsp;defined by quality</p>
-
-      </div>
-      <!-- ════════════════════════════════════════════════════════ -->
 
       <!-- Hero background: pure white (#ffffff) set in CSS — no canvas, no video -->
 
@@ -1957,57 +1965,91 @@
 
 
     /* ════════════════════════════════════════════════════════════════
-       7. MOBILE NAV OVERLAY — MENU / CLOSE toggle
-          Pure vanilla JS: no GSAP dependency so it works even if
-          GSAP hasn't loaded yet. Smooth open/close via CSS transition.
+       7. MOBILE NAV — completely rebuilt
+          - MENU button is fixed above cursor layer (z-index 100002)
+          - Overlay is fixed above cursor layer (z-index 100003)
+          - Uses both touchstart + click for max mobile compatibility
+          - Lenis scroll lock/unlock handled cleanly
     ════════════════════════════════════════════════════════════════ */
     (function initMobileNav() {
-      var menuBtn = document.getElementById('mobile-menu-btn');
+
+      var menuBtn  = document.getElementById('mobile-menu-btn');
+      var overlay  = document.getElementById('mobile-nav-overlay');
       var closeBtn = document.getElementById('mob-overlay-close');
-      var overlay = document.getElementById('mobile-nav-overlay');
+
       if (!menuBtn || !overlay) return;
 
+      var isOpen = false;
+
+      /* ── helpers ── */
+      function addTap(el, fn) {
+        if (!el) return;
+        var touched = false;
+        el.addEventListener('touchstart', function(e) {
+          touched = true;
+          fn(e);
+        }, { passive: true });
+        el.addEventListener('click', function(e) {
+          if (touched) { touched = false; return; } /* already handled by touchstart */
+          fn(e);
+        });
+      }
+
       function openMenu() {
+        if (isOpen) return;
+        isOpen = true;
         overlay.classList.add('is-open');
         menuBtn.setAttribute('aria-expanded', 'true');
-        /* Prevent body scroll while overlay is open */
         document.body.style.overflow = 'hidden';
+        document.body.style.position = 'fixed';
+        document.body.style.width = '100%';
         if (window._lenis) window._lenis.stop();
-        /* Move focus into overlay for accessibility */
-        if (closeBtn) closeBtn.focus();
       }
 
       function closeMenu() {
+        if (!isOpen) return;
+        isOpen = false;
         overlay.classList.remove('is-open');
         menuBtn.setAttribute('aria-expanded', 'false');
         document.body.style.overflow = '';
+        document.body.style.position = '';
+        document.body.style.width = '';
         if (window._lenis) window._lenis.start();
-        menuBtn.focus();
       }
 
-      menuBtn.addEventListener('click', openMenu);
-      if (closeBtn) closeBtn.addEventListener('click', closeMenu);
+      /* Open on MENU tap */
+      addTap(menuBtn, openMenu);
 
-      /* Close on any overlay link tap — also triggers smooth scroll */
-      overlay.querySelectorAll('[data-mob-nav]').forEach(function (link) {
-        link.addEventListener('click', function () {
+      /* Close on CLOSE tap */
+      addTap(closeBtn, closeMenu);
+
+      /* Close on each nav link tap — then scroll to section */
+      overlay.querySelectorAll('[data-mob-nav]').forEach(function(link) {
+        addTap(link, function() {
           closeMenu();
+          /* Let the href anchor fire naturally after close */
+          var href = link.getAttribute('href');
+          if (href && href.startsWith('#')) {
+            setTimeout(function() {
+              var target = document.querySelector(href);
+              if (target) {
+                target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+              }
+            }, 420); /* wait for overlay transition */
+          }
         });
       });
 
-      /* Close on Escape key */
-      document.addEventListener('keydown', function (e) {
-        if (e.key === 'Escape' && overlay.classList.contains('is-open')) {
-          closeMenu();
-        }
+      /* Close on Escape */
+      document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && isOpen) closeMenu();
       });
 
-      /* Collapse menu if user resizes to desktop width */
-      window.addEventListener('resize', function () {
-        if (window.innerWidth >= 768 && overlay.classList.contains('is-open')) {
-          closeMenu();
-        }
+      /* Collapse on resize to desktop */
+      window.addEventListener('resize', function() {
+        if (window.innerWidth >= 768 && isOpen) closeMenu();
       });
+
     })();
 
 
