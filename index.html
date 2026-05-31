@@ -1,21 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
   <!-- SEO Meta Tags -->
   <title>Frameflow Studios — Premium Editorial Creative Agency</title>
-  <meta name="description" content="An ultra-minimal premium digital creative agency blending Apple's spatial cleanliness with editorial visual hierarchy and cinematic minimal storytelling." />
-  <meta name="keywords" content="Frameflow Studios, creative studio, motion design, digital agency, spatial minimalism, editorial design, luxury portfolio" />
+  <meta name="description"
+    content="An ultra-minimal premium digital creative agency blending Apple's spatial cleanliness with editorial visual hierarchy and cinematic minimal storytelling." />
+  <meta name="keywords"
+    content="Frameflow Studios, creative studio, motion design, digital agency, spatial minimalism, editorial design, luxury portfolio" />
   <meta property="og:title" content="Frameflow Studios — Premium Editorial Studio" />
-  <meta property="og:description" content="Driven by flow defined by quality. Minimalist experiences crafted with precise digital integrity." />
+  <meta property="og:description"
+    content="Driven by flow defined by quality. Minimalist experiences crafted with precise digital integrity." />
   <meta property="og:type" content="website" />
 
   <!-- Google Fonts: Poppins + Plus Jakarta Sans (brand logo / Cuberto match) -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700;800&family=Plus+Jakarta+Sans:wght@700;800&display=swap" rel="stylesheet" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700;800&family=Plus+Jakarta+Sans:wght@700;800&display=swap"
+    rel="stylesheet" />
 
   <!-- Tailwind CSS via CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
@@ -28,9 +34,9 @@
           },
           colors: {
             'brand-yellow': '#FFD700',
-            'brand-dark':   '#111111',
-            'brand-light':  '#fcfcfc',
-            'brand-muted':  '#555555',
+            'brand-dark': '#111111',
+            'brand-light': '#fcfcfc',
+            'brand-muted': '#555555',
           }
         }
       }
@@ -39,10 +45,18 @@
 
   <style>
     /* ── Reset & Base ──────────────────────────────────────────────── */
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
-    html, body {
-      width: 100%; max-width: 100%;
+    html,
+    body {
+      width: 100%;
+      max-width: 100%;
       background-color: #fcfcfc;
       color: #111111;
       font-family: 'Poppins', sans-serif;
@@ -53,31 +67,64 @@
     }
 
     /* ── BUG FIX: Force cursor:none globally — no browser pointer anywhere ── */
-    body, body * {
+    body,
+    body * {
       cursor: none !important;
     }
+
     /* Restore cursor inside the overlay's native scrollable area */
     #fs-overlay * {
       cursor: none !important;
     }
 
     /* Lenis integration classes */
-    html.lenis, html.lenis body { height: auto; }
-    .lenis.lenis-smooth          { scroll-behavior: auto !important; }
-    .lenis.lenis-stopped         { overflow: hidden; }
+    html.lenis,
+    html.lenis body {
+      height: auto;
+    }
 
-    main { width: 100%; max-width: 100%; overflow-x: clip; }
+    .lenis.lenis-smooth {
+      scroll-behavior: auto !important;
+    }
 
-    ::-webkit-scrollbar             { width: 6px; }
-    ::-webkit-scrollbar-track       { background: #fcfcfc; }
-    ::-webkit-scrollbar-thumb       { background: rgba(255,215,0,0.4); border-radius: 3px; }
-    ::-webkit-scrollbar-thumb:hover { background: rgba(255,215,0,0.7); }
-    ::selection { background-color: rgba(255,215,0,0.2); color: #111111; }
+    .lenis.lenis-stopped {
+      overflow: hidden;
+    }
+
+    main {
+      width: 100%;
+      max-width: 100%;
+      overflow-x: clip;
+    }
+
+    ::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: #fcfcfc;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: rgba(255, 215, 0, 0.4);
+      border-radius: 3px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background: rgba(255, 215, 0, 0.7);
+    }
+
+    ::selection {
+      background-color: rgba(255, 215, 0, 0.2);
+      color: #111111;
+    }
 
     /* ── Site Header — absolute inside hero, scrolls away with the page ── */
     #site-header {
       position: absolute;
-      top: 0; left: 0; right: 0;
+      top: 0;
+      left: 0;
+      right: 0;
       z-index: 9999;
       display: flex;
       align-items: center;
@@ -85,14 +132,23 @@
       padding: 2.75rem 5rem;
       pointer-events: none;
     }
+
     @media (max-width: 1024px) {
-      #site-header { padding: 2.25rem 3.5rem; }
+      #site-header {
+        padding: 2.25rem 3.5rem;
+      }
     }
+
     @media (max-width: 768px) {
-      #site-header { padding: 1.5rem 1.25rem; }
+      #site-header {
+        padding: 1.5rem 1.25rem;
+      }
     }
+
     @media (max-width: 480px) {
-      #site-header { padding: 1.25rem 1rem; }
+      #site-header {
+        padding: 1.25rem 1rem;
+      }
     }
 
     /* ── Mobile Menu Button ── */
@@ -116,13 +172,17 @@
       transition: color 0.3s;
       /* NO display:none — Tailwind `block md:hidden` controls visibility */
     }
-    #mobile-menu-btn:hover { color: #FFD700; }
+
+    #mobile-menu-btn:hover {
+      color: #FFD700;
+    }
 
     /* ── Mobile Full-Screen Overlay Menu ── */
     #mobile-nav-overlay {
       position: fixed;
       inset: 0;
-      z-index: 99998; /* just below fs-overlay (99999) */
+      z-index: 99998;
+      /* just below fs-overlay (99999) */
       background: #ffffff;
       display: flex;
       flex-direction: column;
@@ -134,15 +194,17 @@
       pointer-events: none;
       transform: translateY(-12px);
       transition:
-        opacity   0.42s cubic-bezier(0.16,1,0.3,1),
-        transform 0.42s cubic-bezier(0.16,1,0.3,1);
+        opacity 0.42s cubic-bezier(0.16, 1, 0.3, 1),
+        transform 0.42s cubic-bezier(0.16, 1, 0.3, 1);
       will-change: opacity, transform;
     }
+
     #mobile-nav-overlay.is-open {
       opacity: 1;
       pointer-events: auto;
       transform: translateY(0);
     }
+
     /* Stacked mobile nav links */
     #mobile-nav-overlay .mob-nav-link {
       display: block;
@@ -157,12 +219,17 @@
       transition: color 0.3s;
       cursor: pointer !important;
     }
-    #mobile-nav-overlay .mob-nav-link:hover { color: #FFD700; }
+
+    #mobile-nav-overlay .mob-nav-link:hover {
+      color: #FFD700;
+    }
+
     /* Thin divider between links */
-    #mobile-nav-overlay .mob-nav-link + .mob-nav-link {
-      border-top: 1px solid rgba(0,0,0,0.06);
+    #mobile-nav-overlay .mob-nav-link+.mob-nav-link {
+      border-top: 1px solid rgba(0, 0, 0, 0.06);
       padding-top: 0.45rem;
     }
+
     /* Close button inside overlay (top-right) */
     #mob-overlay-close {
       position: absolute;
@@ -174,13 +241,17 @@
       font-weight: 700;
       font-size: 0.6rem;
       letter-spacing: 0.22em;
-      color: rgba(17,17,17,0.45);
+      color: rgba(17, 17, 17, 0.45);
       text-transform: uppercase;
       cursor: pointer !important;
       transition: color 0.3s;
       padding: 0.5rem;
     }
-    #mob-overlay-close:hover { color: #FFD700; }
+
+    #mob-overlay-close:hover {
+      color: #FFD700;
+    }
+
     /* Footer tagline inside overlay */
     #mobile-nav-overlay .mob-tagline {
       margin-top: 2.5rem;
@@ -189,13 +260,17 @@
       font-size: 0.55rem;
       letter-spacing: 0.28em;
       text-transform: uppercase;
-      color: rgba(17,17,17,0.3);
+      color: rgba(17, 17, 17, 0.3);
     }
+
     /* On touch devices: restore pointer on overlay elements */
     @media (hover: none) and (pointer: coarse) {
+
       #mobile-menu-btn,
       #mob-overlay-close,
-      #mobile-nav-overlay .mob-nav-link { cursor: auto !important; }
+      #mobile-nav-overlay .mob-nav-link {
+        cursor: auto !important;
+      }
     }
 
     /* ── Brand Logo — Poppins 800, premium agency scale ── */
@@ -213,10 +288,13 @@
       text-decoration: none;
       display: inline-block;
       will-change: transform;
-      transition: color 0.35s cubic-bezier(0.16,1,0.3,1);
+      transition: color 0.35s cubic-bezier(0.16, 1, 0.3, 1);
       line-height: 1;
     }
-    .header-brand:hover { color: #FFD700; }
+
+    .header-brand:hover {
+      color: #FFD700;
+    }
 
     /* ── Nav — fully clickable, above all hero layers ── */
     .header-nav {
@@ -224,6 +302,7 @@
       position: relative;
       z-index: 10000;
     }
+
     .header-nav a,
     .header-nav ul,
     .header-nav li {
@@ -234,31 +313,45 @@
 
     /* ── Premium Custom Cursor — Cuberto-style mix-blend-mode: difference ── */
     .cursor-dot {
-      position: fixed; width: 5px; height: 5px;
+      position: fixed;
+      width: 5px;
+      height: 5px;
       /* White base + difference blend → appears black on white bg,
          inverts any dark text it passes over */
       background-color: #ffffff;
       mix-blend-mode: difference;
       border-radius: 50%;
-      pointer-events: none; z-index: 100001;
-      top: 0; left: 0; will-change: transform;
+      pointer-events: none;
+      z-index: 100001;
+      top: 0;
+      left: 0;
+      will-change: transform;
       transition: width 0.2s, height 0.2s;
     }
+
     .cursor-follower {
-      position: fixed; width: 30px; height: 30px;
+      position: fixed;
+      width: 30px;
+      height: 30px;
       /* White base + difference blend → seamlessly inverts typography */
       background-color: #ffffff;
       mix-blend-mode: difference;
       border: none;
-      border-radius: 50%; pointer-events: none;
-      z-index: 100000; top: 0; left: 0;
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 100000;
+      top: 0;
+      left: 0;
       will-change: transform;
-      display: flex; align-items: center; justify-content: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       transition:
-        width  0.45s cubic-bezier(0.16,1,0.3,1),
-        height 0.45s cubic-bezier(0.16,1,0.3,1),
+        width 0.45s cubic-bezier(0.16, 1, 0.3, 1),
+        height 0.45s cubic-bezier(0.16, 1, 0.3, 1),
         opacity 0.3s;
     }
+
     /* Cursor label — strict solid white on black background */
     .cursor-label {
       font-family: 'Poppins', sans-serif;
@@ -267,28 +360,48 @@
       font-size: 10px;
       letter-spacing: 0.15em;
       color: #ffffff !important;
-      text-transform: uppercase; opacity: 0;
+      text-transform: uppercase;
+      opacity: 0;
       transition: opacity 0.22s 0.1s;
-      pointer-events: none; white-space: nowrap;
-      text-align: center; user-select: none; line-height: 1;
+      pointer-events: none;
+      white-space: nowrap;
+      text-align: center;
+      user-select: none;
+      line-height: 1;
       /* Flexbox centering is inherited from .cursor-follower's display:flex */
     }
+
     /* Standard hover: ring size increase — blend mode handles visual contrast */
     .cursor-hover {
-      width: 46px !important; height: 46px !important;
+      width: 46px !important;
+      height: 46px !important;
     }
+
     /* Expanded hover (80px + label) */
     .cursor-expanded {
-      width: 80px !important; height: 80px !important;
+      width: 80px !important;
+      height: 80px !important;
     }
-    .cursor-expanded .cursor-label { opacity: 1; }
+
+    .cursor-expanded .cursor-label {
+      opacity: 1;
+    }
 
     /* ── CRITICAL: Touch devices — hide custom cursor, restore native pointer ── */
     @media (hover: none) and (pointer: coarse) {
-      .cursor-dot     { display: none !important; }
-      .cursor-follower { display: none !important; }
+      .cursor-dot {
+        display: none !important;
+      }
+
+      .cursor-follower {
+        display: none !important;
+      }
+
       /* Restore normal OS cursor for all elements on touch screens */
-      body, body * { cursor: auto !important; }
+      body,
+      body * {
+        cursor: auto !important;
+      }
     }
 
     /* ── Navigation Links — Cuberto text-rolling hover (FIX 1) ──── */
@@ -297,13 +410,16 @@
       display: inline-block;
       will-change: transform;
       text-decoration: none;
-      color: rgba(17,17,17,0.45);
+      color: rgba(17, 17, 17, 0.45);
       /* FIX 1: overflow:hidden clips the second span — only 1 line visible at all times */
       overflow: hidden;
       /* height is defined by the .nav-link-text padding + font size */
       vertical-align: top;
     }
-    .nav-link::after { display: none; }
+
+    .nav-link::after {
+      display: none;
+    }
 
     /* Clip container — exact height of one text row */
     .nav-link-clip {
@@ -322,10 +438,13 @@
       transition: transform 0.5s cubic-bezier(0.76, 0, 0.24, 1);
       will-change: transform;
     }
+
     /* Second (hover) span: lives below, translated down by 100% */
     .nav-link-text-hover {
       position: absolute;
-      top: 0; left: 0; right: 0;
+      top: 0;
+      left: 0;
+      right: 0;
       line-height: 1.4em;
       white-space: nowrap;
       color: #FFD700;
@@ -333,75 +452,145 @@
       transition: transform 0.5s cubic-bezier(0.76, 0, 0.24, 1);
       will-change: transform;
     }
+
     /* On hover: primary slides UP, secondary slides INTO view */
     .nav-link:hover .nav-link-text {
       transform: translateY(-100%);
     }
+
     .nav-link:hover .nav-link-text-hover {
       transform: translateY(0%);
     }
 
     /* Active state: primary text becomes gold */
-    .nav-link.active .nav-link-text { color: #FFD700; }
+    .nav-link.active .nav-link-text {
+      color: #FFD700;
+    }
+
     .nav-link:hover,
-    .nav-link.active { color: rgba(17,17,17,0.45); }
+    .nav-link.active {
+      color: rgba(17, 17, 17, 0.45);
+    }
 
     /* ── Hero Load Animations ─────────────────────────────────────── */
     @keyframes fadeInUpSlow {
-      0%   { opacity: 0; transform: translateY(22px); }
-      100% { opacity: 1; transform: translateY(0); }
-    }
-    @keyframes fadeInIndicator { 0% { opacity: 0; } 100% { opacity: 1; } }
+      0% {
+        opacity: 0;
+        transform: translateY(22px);
+      }
 
-    .animate-hero-load      { animation: fadeInUpSlow    2.2s cubic-bezier(0.16,1,0.3,1) forwards; }
-    .animate-indicator-load { animation: fadeInIndicator 2.8s cubic-bezier(0.16,1,0.3,1) 1.2s forwards; }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes fadeInIndicator {
+      0% {
+        opacity: 0;
+      }
+
+      100% {
+        opacity: 1;
+      }
+    }
+
+    .animate-hero-load {
+      animation: fadeInUpSlow 2.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+
+    .animate-indicator-load {
+      animation: fadeInIndicator 2.8s cubic-bezier(0.16, 1, 0.3, 1) 1.2s forwards;
+    }
 
     @keyframes bounceLine {
-      0%,100% { transform: translateY(0);    opacity: 0.8; }
-      50%     { transform: translateY(10px); opacity: 0.25; }
+
+      0%,
+      100% {
+        transform: translateY(0);
+        opacity: 0.8;
+      }
+
+      50% {
+        transform: translateY(10px);
+        opacity: 0.25;
+      }
     }
-    .animate-bounce-line { animation: bounceLine 2.2s cubic-bezier(0.45,0,0.55,1) infinite; }
+
+    .animate-bounce-line {
+      animation: bounceLine 2.2s cubic-bezier(0.45, 0, 0.55, 1) infinite;
+    }
 
     /* ── Scroll Reveal Placeholder ────────────────────────────────── */
-    .gsap-reveal { will-change: opacity, transform; }
-    .library-panel { display: none; }
+    .gsap-reveal {
+      will-change: opacity, transform;
+    }
+
+    .library-panel {
+      display: none;
+    }
 
     /* ── Home Hero Section ────────────────────────────────────────── */
     #home {
       /* Req 1: pure white background — maximum contrast for dark charcoal text */
       background-color: #ffffff;
       color: #111111;
-      width: 100%; max-width: 100vw; min-height: 100vh;
-      overflow: hidden; isolation: isolate;
-      display: flex; flex-direction: column;
-      align-items: center; justify-content: center;
+      width: 100%;
+      max-width: 100vw;
+      min-height: 100vh;
+      overflow: hidden;
+      isolation: isolate;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
       position: relative;
     }
 
     #hero-scroll-indicator {
-      position: absolute; bottom: 2rem;
-      left: 50%; transform: translateX(-50%); z-index: 50;
+      position: absolute;
+      bottom: 2rem;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 50;
     }
-    @media (min-width: 640px) { #hero-scroll-indicator { bottom: 3rem; } }
+
+    @media (min-width: 640px) {
+      #hero-scroll-indicator {
+        bottom: 3rem;
+      }
+    }
 
     #hero-center-content {
-      position: relative; z-index: 2;
-      display: flex; flex-direction: column;
-      align-items: center; justify-content: center;
-      text-align: center; pointer-events: none;
-      width: 100%; padding: 0 1.5rem;
+      position: relative;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      pointer-events: none;
+      width: 100%;
+      padding: 0 1.5rem;
     }
+
     #hero-center-content .interactive,
     #hero-center-content a,
-    #hero-center-content button { pointer-events: auto; }
+    #hero-center-content button {
+      pointer-events: auto;
+    }
 
     #hero-headline-container {
-      display: block; width: 100%; max-width: 100%; text-align: center;
+      display: block;
+      width: 100%;
+      max-width: 100%;
+      text-align: center;
     }
 
     /* ── Hero Headline — mobile-safe fluid typography ── */
     .hero-headline {
-      margin: 0; padding: 0;
+      margin: 0;
+      padding: 0;
       font-family: 'Poppins', sans-serif;
       font-weight: 800;
       /* clamp: 2.6rem min on tiny phones → 10vw fluid → 7.5rem cap on desktop */
@@ -413,21 +602,34 @@
       width: 100%;
       max-width: 100%;
     }
+
     .hero-headline-line {
       /* Allow wrapping on very small screens to avoid horizontal overflow */
-      display: block; text-align: center;
+      display: block;
+      text-align: center;
       white-space: normal;
       word-break: break-word;
     }
+
     @media (min-width: 480px) {
-      .hero-headline-line { white-space: nowrap; }
+      .hero-headline-line {
+        white-space: nowrap;
+      }
     }
+
     /* REFINEMENT: removed margin-top gap — line-height alone controls spacing */
-    .hero-headline-line + .hero-headline-line { margin-top: 0; }
+    .hero-headline-line+.hero-headline-line {
+      margin-top: 0;
+    }
 
     /* No outline on line-2 — plain solid text, avoids all -webkit-text-stroke artifacts */
-    #hero-line-2 { color: #0e0e0e; }
-    #hero-line-2 .hero-letter { color: #0e0e0e; }
+    #hero-line-2 {
+      color: #0e0e0e;
+    }
+
+    #hero-line-2 .hero-letter {
+      color: #0e0e0e;
+    }
 
     .hero-letter {
       display: inline-block;
@@ -435,6 +637,7 @@
       will-change: color, transform;
       transition: none;
     }
+
     .hero-subline {
       display: block;
       margin-top: 2.4rem;
@@ -449,6 +652,7 @@
       /* Prevent letter-spacing from causing right-edge overflow */
       padding-right: 0.32em;
     }
+
     @media (max-width: 480px) {
       .hero-subline {
         margin-top: 1.6rem;
@@ -456,6 +660,7 @@
         padding-right: 0.2em;
       }
     }
+
     /* REFINEMENT: SCROLL label darkened for strong readability */
     .hero-scroll-label {
       color: #1a1a1a;
@@ -467,8 +672,12 @@
       display: inline-block;
       will-change: transform;
     }
+
     /* Nav links are their own magnetic elements */
-    .magnetic { display: inline-block; will-change: transform; }
+    .magnetic {
+      display: inline-block;
+      will-change: transform;
+    }
 
     /* ── BUG FIX 3: HIRE ME button — strict self-containment ── */
     #hire-me-btn {
@@ -477,6 +686,7 @@
       overflow: hidden !important;
       /* Do NOT set transform:none here — it would break GSAP on the wrapper */
     }
+
     /* Ensure the magnetic-wrap doesn't leak its own overflow */
     #hire-me-wrap {
       position: relative;
@@ -492,15 +702,21 @@
       align-items: center;
       justify-content: center;
       padding: 7rem 2rem;
-      border-top: 1px solid rgba(0,0,0,0.05);
+      border-top: 1px solid rgba(0, 0, 0, 0.05);
       position: relative;
       overflow: hidden;
     }
+
     @media (max-width: 768px) {
-      #showreel { padding: 4.5rem 1.25rem; }
+      #showreel {
+        padding: 4.5rem 1.25rem;
+      }
     }
+
     @media (max-width: 480px) {
-      #showreel { padding: 3rem 1rem; }
+      #showreel {
+        padding: 3rem 1rem;
+      }
     }
 
     /* Section label above showreel */
@@ -510,7 +726,7 @@
       font-size: 0.6rem;
       letter-spacing: 0.32em;
       text-transform: uppercase;
-      color: rgba(17,17,17,0.4);
+      color: rgba(17, 17, 17, 0.4);
       margin-bottom: 2.5rem;
     }
 
@@ -525,18 +741,19 @@
       border-radius: 16px;
       overflow: hidden;
       box-shadow:
-        0 40px 100px rgba(0,0,0,0.18),
-        0 8px 30px rgba(0,0,0,0.10);
+        0 40px 100px rgba(0, 0, 0, 0.18),
+        0 8px 30px rgba(0, 0, 0, 0.10);
       /* Subtle border */
-      border: 1px solid rgba(0,0,0,0.08);
+      border: 1px solid rgba(0, 0, 0, 0.08);
       cursor: none !important;
-      transition: box-shadow 0.5s cubic-bezier(0.16,1,0.3,1),
-                  transform 0.5s cubic-bezier(0.16,1,0.3,1);
+      transition: box-shadow 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+        transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
     }
+
     .showreel-container:hover {
       box-shadow:
-        0 60px 140px rgba(0,0,0,0.22),
-        0 12px 40px rgba(0,0,0,0.14);
+        0 60px 140px rgba(0, 0, 0, 0.22),
+        0 12px 40px rgba(0, 0, 0, 0.14);
       transform: translateY(-4px) scale(1.008);
     }
 
@@ -553,13 +770,11 @@
     .showreel-overlay {
       position: absolute;
       inset: 0;
-      background: linear-gradient(
-        to bottom,
-        rgba(0,0,0,0.10) 0%,
-        transparent 30%,
-        transparent 70%,
-        rgba(0,0,0,0.18) 100%
-      );
+      background: linear-gradient(to bottom,
+          rgba(0, 0, 0, 0.10) 0%,
+          transparent 30%,
+          transparent 70%,
+          rgba(0, 0, 0, 0.18) 100%);
       pointer-events: none;
       border-radius: inherit;
     }
@@ -572,7 +787,7 @@
       font-size: 0.58rem;
       letter-spacing: 0.28em;
       text-transform: uppercase;
-      color: rgba(17,17,17,0.35);
+      color: rgba(17, 17, 17, 0.35);
       text-align: center;
     }
 
@@ -581,7 +796,7 @@
       position: fixed;
       inset: 0;
       z-index: 99999;
-      background: rgba(0,0,0,0.96);
+      background: rgba(0, 0, 0, 0.96);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -589,11 +804,12 @@
       opacity: 0;
       pointer-events: none;
       transition:
-        opacity   0.5s cubic-bezier(0.16,1,0.3,1),
+        opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1),
         backdrop-filter 0.5s;
       backdrop-filter: blur(0px);
       will-change: opacity;
     }
+
     #showreel-modal.is-open {
       opacity: 1;
       pointer-events: auto;
@@ -605,16 +821,17 @@
       position: relative;
       /* On desktop: use viewport height to size the portrait video */
       height: min(92vh, 100vw * 16 / 9);
-      width:  min(calc(92vh * 9 / 16), 92vw);
+      width: min(calc(92vh * 9 / 16), 92vw);
       background: #000;
       border-radius: 12px;
       overflow: hidden;
-      box-shadow: 0 0 120px rgba(0,0,0,0.8);
+      box-shadow: 0 0 120px rgba(0, 0, 0, 0.8);
       /* Entrance animation */
       transform: scale(0.92);
-      transition: transform 0.55s cubic-bezier(0.16,1,0.3,1);
+      transition: transform 0.55s cubic-bezier(0.16, 1, 0.3, 1);
       will-change: transform;
     }
+
     #showreel-modal.is-open #showreel-modal-inner {
       transform: scale(1);
     }
@@ -632,12 +849,15 @@
       font-size: 0.6rem;
       letter-spacing: 0.28em;
       text-transform: uppercase;
-      color: rgba(255,255,255,0.5);
+      color: rgba(255, 255, 255, 0.5);
       cursor: pointer !important;
       padding: 0.5rem 0.25rem;
       transition: color 0.3s;
     }
-    #showreel-modal-close:hover { color: #ffffff; }
+
+    #showreel-modal-close:hover {
+      color: #ffffff;
+    }
 
     /* Mute indicator badge — bottom-left of modal */
     #showreel-modal-badge {
@@ -650,21 +870,24 @@
       font-size: 0.52rem;
       letter-spacing: 0.24em;
       text-transform: uppercase;
-      color: rgba(255,255,255,0.35);
+      color: rgba(255, 255, 255, 0.35);
       pointer-events: none;
     }
 
-    /* The <video> inside the modal — fills its container */
+    /* The iframe inside the modal — fills its container exactly */
     #showreel-modal-video {
       width: 100%;
       height: 100%;
-      object-fit: cover;
       display: block;
+      border: none;
+      background: #000;
     }
 
     /* On touch devices: restore pointer for close button */
     @media (hover: none) and (pointer: coarse) {
-      #showreel-modal-close { cursor: auto !important; }
+      #showreel-modal-close {
+        cursor: auto !important;
+      }
     }
 
     /* ── Cursor VIDEO state: solid black, no mix-blend-mode ── */
@@ -674,16 +897,19 @@
       width: 100px !important;
       height: 100px !important;
     }
+
     .cursor-video-mode .cursor-label {
       color: #ffffff !important;
       opacity: 1 !important;
     }
   </style>
 </head>
+
 <body class="bg-brand-light text-brand-dark font-poppins selection:bg-brand-yellow/20 selection:text-brand-dark">
 
   <!-- ══ GEOMETRIC REPULSION CANVAS — fixed, behind everything ══════ -->
-  <canvas id="geo-canvas" class="fixed inset-0 w-full h-full pointer-events-auto" style="z-index:0;opacity:0.55;" aria-hidden="true"></canvas>
+  <canvas id="geo-canvas" class="fixed inset-0 w-full h-full pointer-events-auto" style="z-index:0;opacity:0.55;"
+    aria-hidden="true"></canvas>
 
   <!-- ══ CURSOR LAYER ══════════════════════════════════════════════ -->
   <div class="cursor-dot" aria-hidden="true"></div>
@@ -705,13 +931,17 @@
       <header id="site-header" aria-label="Site Header">
 
         <!-- Brand: TOP-LEFT —————————————————————————————————————————— -->
-        <a href="#home" class="header-brand magnetic" id="header-brand-link" aria-label="Frameflow Studios" style="pointer-events:auto;position:relative;z-index:10000;">Frameflow</a>
+        <a href="#home" class="header-brand magnetic" id="header-brand-link" aria-label="Frameflow Studios"
+          style="pointer-events:auto;position:relative;z-index:10000;">Frameflow</a>
 
         <!-- Desktop Nav: TOP-RIGHT — hidden on mobile, flex on md+ ——— -->
-        <nav class="header-nav" aria-label="Main Navigation" style="pointer-events:auto;position:relative;z-index:10000;">
+        <nav class="header-nav" aria-label="Main Navigation"
+          style="pointer-events:auto;position:relative;z-index:10000;">
           <ul class="hidden md:flex flex-row items-center gap-6 lg:gap-8 select-none" style="pointer-events:auto;">
             <li style="pointer-events:auto;">
-              <a href="#home" id="nav-home" class="nav-link active magnetic font-bold text-[10px] tracking-[0.2em] interactive" style="pointer-events:auto;position:relative;z-index:10000;" aria-label="HOME">
+              <a href="#home" id="nav-home"
+                class="nav-link active magnetic font-bold text-[10px] tracking-[0.2em] interactive"
+                style="pointer-events:auto;position:relative;z-index:10000;" aria-label="HOME">
                 <span class="nav-link-clip">
                   <span class="nav-link-text">HOME</span>
                   <span class="nav-link-text-hover" aria-hidden="true">HOME</span>
@@ -719,7 +949,9 @@
               </a>
             </li>
             <li style="pointer-events:auto;">
-              <a href="#project" id="nav-project" class="nav-link magnetic font-bold text-[10px] tracking-[0.2em] interactive" style="pointer-events:auto;position:relative;z-index:10000;" aria-label="PROJECT">
+              <a href="#project" id="nav-project"
+                class="nav-link magnetic font-bold text-[10px] tracking-[0.2em] interactive"
+                style="pointer-events:auto;position:relative;z-index:10000;" aria-label="PROJECT">
                 <span class="nav-link-clip">
                   <span class="nav-link-text">PROJECT</span>
                   <span class="nav-link-text-hover" aria-hidden="true">PROJECT</span>
@@ -727,7 +959,9 @@
               </a>
             </li>
             <li style="pointer-events:auto;">
-              <a href="#experience" id="nav-experience" class="nav-link magnetic font-bold text-[10px] tracking-[0.2em] interactive" style="pointer-events:auto;position:relative;z-index:10000;" aria-label="EXPERIENCE">
+              <a href="#experience" id="nav-experience"
+                class="nav-link magnetic font-bold text-[10px] tracking-[0.2em] interactive"
+                style="pointer-events:auto;position:relative;z-index:10000;" aria-label="EXPERIENCE">
                 <span class="nav-link-clip">
                   <span class="nav-link-text">EXPERIENCE</span>
                   <span class="nav-link-text-hover" aria-hidden="true">EXPERIENCE</span>
@@ -735,7 +969,9 @@
               </a>
             </li>
             <li style="pointer-events:auto;">
-              <a href="#contact" id="nav-contact" class="nav-link magnetic font-bold text-[10px] tracking-[0.2em] interactive" style="pointer-events:auto;position:relative;z-index:10000;" aria-label="CONTACT">
+              <a href="#contact" id="nav-contact"
+                class="nav-link magnetic font-bold text-[10px] tracking-[0.2em] interactive"
+                style="pointer-events:auto;position:relative;z-index:10000;" aria-label="CONTACT">
                 <span class="nav-link-clip">
                   <span class="nav-link-text">CONTACT</span>
                   <span class="nav-link-text-hover" aria-hidden="true">CONTACT</span>
@@ -743,7 +979,9 @@
               </a>
             </li>
             <li style="pointer-events:auto;">
-              <a href="#about" id="nav-about" class="nav-link magnetic font-bold text-[10px] tracking-[0.2em] interactive" style="pointer-events:auto;position:relative;z-index:10000;" aria-label="ABOUT US">
+              <a href="#about" id="nav-about"
+                class="nav-link magnetic font-bold text-[10px] tracking-[0.2em] interactive"
+                style="pointer-events:auto;position:relative;z-index:10000;" aria-label="ABOUT US">
                 <span class="nav-link-clip">
                   <span class="nav-link-text">ABOUT US</span>
                   <span class="nav-link-text-hover" aria-hidden="true">ABOUT US</span>
@@ -754,13 +992,8 @@
         </nav>
 
         <!-- Mobile MENU Button — only visible below md breakpoint ————— -->
-        <button
-          id="mobile-menu-btn"
-          class="block md:hidden"
-          aria-label="Open mobile navigation"
-          aria-expanded="false"
-          aria-controls="mobile-nav-overlay"
-        >MENU</button>
+        <button id="mobile-menu-btn" class="block md:hidden" aria-label="Open mobile navigation" aria-expanded="false"
+          aria-controls="mobile-nav-overlay">MENU</button>
 
       </header>
 
@@ -771,14 +1004,16 @@
         <button id="mob-overlay-close" aria-label="Close mobile navigation">✕&nbsp; CLOSE</button>
 
         <!-- Brand mark inside overlay -->
-        <div style="font-family:'Poppins',sans-serif;font-weight:800;font-size:0.75rem;letter-spacing:0.1em;color:rgba(17,17,17,0.25);margin-bottom:2.5rem;text-transform:uppercase;">Frameflow Studios</div>
+        <div
+          style="font-family:'Poppins',sans-serif;font-weight:800;font-size:0.75rem;letter-spacing:0.1em;color:rgba(17,17,17,0.25);margin-bottom:2.5rem;text-transform:uppercase;">
+          Frameflow Studios</div>
 
         <!-- Stacked navigation links -->
-        <a href="#home"       class="mob-nav-link" data-mob-nav>HOME</a>
-        <a href="#project"    class="mob-nav-link" data-mob-nav>PROJECT</a>
+        <a href="#home" class="mob-nav-link" data-mob-nav>HOME</a>
+        <a href="#project" class="mob-nav-link" data-mob-nav>PROJECT</a>
         <a href="#experience" class="mob-nav-link" data-mob-nav>EXPERIENCE</a>
-        <a href="#contact"    class="mob-nav-link" data-mob-nav>CONTACT</a>
-        <a href="#about"      class="mob-nav-link" data-mob-nav>ABOUT US</a>
+        <a href="#contact" class="mob-nav-link" data-mob-nav>CONTACT</a>
+        <a href="#about" class="mob-nav-link" data-mob-nav>ABOUT US</a>
 
         <!-- Tagline -->
         <p class="mob-tagline">Driven by flow&nbsp;&nbsp;defined by quality</p>
@@ -799,84 +1034,85 @@
           </div>
         </div>
         <span class="hero-subline">Driven by flow&nbsp;&nbsp;defined by quality</span>
+
+        <!-- WATCH SHOWREEL magnetic button — triggers fullscreen modal -->
+        <div class="magnetic-wrap mt-12 sm:mt-16" id="hero-showreel-wrap">
+          <button id="hero-showreel-btn"
+            class="px-12 py-5 bg-transparent border border-black/35 text-brand-dark font-bold text-[10px] sm:text-xs tracking-[0.3em] uppercase relative overflow-hidden transition-colors duration-300 ease-out interactive inline-block text-center min-w-[220px]">
+            <span class="relative z-10">WATCH SHOWREEL</span>
+            <span class="absolute inset-0 bg-brand-yellow origin-left z-0"
+              style="transform:scaleX(0);transition:transform 0.5s cubic-bezier(0.16,1,0.3,1);"
+              id="hero-showreel-fill"></span>
+          </button>
+        </div>
       </div>
 
-      <div id="hero-scroll-indicator" class="flex flex-col items-center gap-4 select-none opacity-0 animate-indicator-load">
+      <div id="hero-scroll-indicator"
+        class="flex flex-col items-center gap-4 select-none opacity-0 animate-indicator-load">
         <span class="hero-scroll-label font-bold text-[9px] sm:text-[10px] tracking-[0.4em] uppercase">SCROLL</span>
-        <div class="w-[1.5px] h-12 bg-gradient-to-b from-brand-yellow/80 to-transparent rounded-full animate-bounce-line"></div>
+        <div
+          class="w-[1.5px] h-12 bg-gradient-to-b from-brand-yellow/80 to-transparent rounded-full animate-bounce-line">
+        </div>
       </div>
     </section>
-
-
-    <!-- ══ SECTION 1.5: SHOWREEL ════════════════════════════════════ -->
-    <section id="showreel" aria-label="Showreel">
-
-      <p class="showreel-label gsap-reveal">Frameflow Studios — Showreel 2026</p>
-
-      <!-- 9:16 video container — data-cursor-video triggers special cursor mode -->
-      <div class="showreel-container gsap-reveal" data-cursor-video="true" id="showreel-video-wrap">
-
-        <video
-          id="showreel-video"
-          class="showreel-video"
-          autoplay
-          muted
-          loop
-          playsinline
-          preload="auto"
-          aria-label="Frameflow Studios Showreel 2026"
-        >
-          <source src="./assets/showreel.mp4" type="video/mp4" />
-          Your browser does not support HTML5 video.
-        </video>
-
-        <!-- Decorative gradient overlay -->
-        <div class="showreel-overlay" aria-hidden="true"></div>
-
-      </div>
-
-      <p class="showreel-caption gsap-reveal">Click to expand &amp; hear sound &nbsp;·&nbsp; Frameflow © 2026</p>
-
-    </section>
-    <!-- ═══════════════════════════════════════════════════════════ -->
 
 
     <!-- ── SECTION 2: PROJECT ───────────────────────────────────── -->
-    <section id="project" class="w-full min-h-screen flex flex-col justify-center px-6 sm:px-12 md:px-24 py-24 relative border-t border-black/5 bg-[#f5f5f5]/30">
+    <section id="project"
+      class="w-full min-h-screen flex flex-col justify-center px-6 sm:px-12 md:px-24 py-24 relative border-t border-black/5 bg-[#f5f5f5]/30">
 
-      <h2 class="gsap-reveal font-bold text-[10px] sm:text-xs text-brand-muted tracking-[0.3em] uppercase mb-16 opacity-60">
+      <h2
+        class="gsap-reveal font-bold text-[10px] sm:text-xs text-brand-muted tracking-[0.3em] uppercase mb-16 opacity-60">
         PORTFOLIO DIRECTORY
       </h2>
 
       <div class="flex flex-col gap-10 sm:gap-12 md:gap-14 max-w-4xl w-full">
 
-        <div class="category-item group py-6 sm:py-8 border-b border-black/10 cursor-pointer transition-colors duration-500 hover:border-brand-yellow/40 interactive" data-category="video-edit">
+        <div
+          class="category-item group py-6 sm:py-8 border-b border-black/10 cursor-pointer transition-colors duration-500 hover:border-brand-yellow/40 interactive"
+          data-category="video-edit">
           <div class="flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-2 sm:gap-0">
             <div class="flex items-baseline gap-4 sm:gap-8">
               <span class="font-bold text-xs sm:text-sm text-brand-yellow tracking-[0.2em]">01 /</span>
-              <h3 class="font-bold text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-brand-dark tracking-tight uppercase group-hover:text-brand-yellow transition-colors duration-500">VIDEO EDIT</h3>
+              <h3
+                class="font-bold text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-brand-dark tracking-tight uppercase group-hover:text-brand-yellow transition-colors duration-500">
+                VIDEO EDIT</h3>
             </div>
-            <span class="font-bold text-[10px] sm:text-xs text-brand-dark/40 tracking-[0.2em] uppercase group-hover:text-brand-dark/70 transition-colors duration-500 pl-9 sm:pl-0">EXPLORE LIBRARY [03]</span>
+            <span
+              class="font-bold text-[10px] sm:text-xs text-brand-dark/40 tracking-[0.2em] uppercase group-hover:text-brand-dark/70 transition-colors duration-500 pl-9 sm:pl-0">EXPLORE
+              LIBRARY [03]</span>
           </div>
         </div>
 
-        <div class="category-item group py-6 sm:py-8 border-b border-black/10 cursor-pointer transition-colors duration-500 hover:border-brand-yellow/40 interactive" data-category="web-dev">
+        <div
+          class="category-item group py-6 sm:py-8 border-b border-black/10 cursor-pointer transition-colors duration-500 hover:border-brand-yellow/40 interactive"
+          data-category="web-dev">
           <div class="flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-2 sm:gap-0">
             <div class="flex items-baseline gap-4 sm:gap-8">
               <span class="font-bold text-xs sm:text-sm text-brand-yellow tracking-[0.2em]">02 /</span>
-              <h3 class="font-bold text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-brand-dark tracking-tight uppercase group-hover:text-brand-yellow transition-colors duration-500">WEB DEVELOPMENT</h3>
+              <h3
+                class="font-bold text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-brand-dark tracking-tight uppercase group-hover:text-brand-yellow transition-colors duration-500">
+                WEB DEVELOPMENT</h3>
             </div>
-            <span class="font-bold text-[10px] sm:text-xs text-brand-dark/40 tracking-[0.2em] uppercase group-hover:text-brand-dark/70 transition-colors duration-500 pl-9 sm:pl-0">EXPLORE LIBRARY [03]</span>
+            <span
+              class="font-bold text-[10px] sm:text-xs text-brand-dark/40 tracking-[0.2em] uppercase group-hover:text-brand-dark/70 transition-colors duration-500 pl-9 sm:pl-0">EXPLORE
+              LIBRARY [03]</span>
           </div>
         </div>
 
-        <div class="category-item group py-6 sm:py-8 border-b border-black/10 cursor-pointer transition-colors duration-500 hover:border-brand-yellow/40 interactive" data-category="shoots">
+        <div
+          class="category-item group py-6 sm:py-8 border-b border-black/10 cursor-pointer transition-colors duration-500 hover:border-brand-yellow/40 interactive"
+          data-category="shoots">
           <div class="flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-2 sm:gap-0">
             <div class="flex items-baseline gap-4 sm:gap-8">
               <span class="font-bold text-xs sm:text-sm text-brand-yellow tracking-[0.2em]">03 /</span>
-              <h3 class="font-bold text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-brand-dark tracking-tight uppercase group-hover:text-brand-yellow transition-colors duration-500">SHOOTS</h3>
+              <h3
+                class="font-bold text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-brand-dark tracking-tight uppercase group-hover:text-brand-yellow transition-colors duration-500">
+                SHOOTS</h3>
             </div>
-            <span class="font-bold text-[10px] sm:text-xs text-brand-dark/40 tracking-[0.2em] uppercase group-hover:text-brand-dark/70 transition-colors duration-500 pl-9 sm:pl-0">EXPLORE LIBRARY [03]</span>
+            <span
+              class="font-bold text-[10px] sm:text-xs text-brand-dark/40 tracking-[0.2em] uppercase group-hover:text-brand-dark/70 transition-colors duration-500 pl-9 sm:pl-0">EXPLORE
+              LIBRARY [03]</span>
           </div>
         </div>
 
@@ -885,9 +1121,11 @@
 
 
     <!-- ── SECTION 3: EXPERIENCE (TIMELINE) ────────────────────── -->
-    <section id="experience" class="w-full min-h-screen flex flex-col justify-center px-6 sm:px-12 md:px-24 py-24 relative border-t border-black/5 bg-[#f5f5f5]/30">
+    <section id="experience"
+      class="w-full min-h-screen flex flex-col justify-center px-6 sm:px-12 md:px-24 py-24 relative border-t border-black/5 bg-[#f5f5f5]/30">
 
-      <h2 class="gsap-reveal font-bold text-[10px] sm:text-xs text-brand-muted tracking-[0.3em] uppercase mb-16 opacity-60">
+      <h2
+        class="gsap-reveal font-bold text-[10px] sm:text-xs text-brand-muted tracking-[0.3em] uppercase mb-16 opacity-60">
         PROJECT TIMELINE
       </h2>
 
@@ -895,42 +1133,66 @@
         <div class="absolute left-[8px] sm:left-[12px] top-4 bottom-4 w-[1px] bg-black/10" aria-hidden="true"></div>
         <div class="flex flex-col gap-14 sm:gap-16">
 
-          <div class="timeline-item group flex gap-6 sm:gap-10 items-start cursor-pointer interactive" data-experience="aura-sensory">
+          <div class="timeline-item group flex gap-6 sm:gap-10 items-start cursor-pointer interactive"
+            data-experience="aura-sensory">
             <div class="relative flex items-center justify-center mt-1.5 z-10">
-              <div class="w-[18px] h-[18px] sm:w-[24px] sm:h-[24px] bg-[#fcfcfc] border border-black/25 rounded-full flex items-center justify-center transition-colors duration-500 group-hover:border-brand-yellow">
-                <div class="w-[6px] h-[6px] sm:w-[8px] sm:h-[8px] bg-black group-hover:bg-brand-yellow rounded-full transition-colors duration-500"></div>
+              <div
+                class="w-[18px] h-[18px] sm:w-[24px] sm:h-[24px] bg-[#fcfcfc] border border-black/25 rounded-full flex items-center justify-center transition-colors duration-500 group-hover:border-brand-yellow">
+                <div
+                  class="w-[6px] h-[6px] sm:w-[8px] sm:h-[8px] bg-black group-hover:bg-brand-yellow rounded-full transition-colors duration-500">
+                </div>
               </div>
             </div>
             <div class="flex flex-col gap-2">
-              <span class="font-bold text-[10px] sm:text-xs text-brand-yellow tracking-[0.2em] uppercase">2026 / MAY</span>
-              <h3 class="font-bold text-xl sm:text-3xl text-brand-dark tracking-tight uppercase group-hover:text-brand-yellow transition-colors duration-500">AURA SENSORY ENGINE</h3>
-              <p class="font-medium text-xs sm:text-sm text-brand-muted max-w-xl leading-relaxed">Immersive installation &amp; spatial rendering engine crafted for luxury brand retail launches.</p>
+              <span class="font-bold text-[10px] sm:text-xs text-brand-yellow tracking-[0.2em] uppercase">2026 /
+                MAY</span>
+              <h3
+                class="font-bold text-xl sm:text-3xl text-brand-dark tracking-tight uppercase group-hover:text-brand-yellow transition-colors duration-500">
+                AURA SENSORY ENGINE</h3>
+              <p class="font-medium text-xs sm:text-sm text-brand-muted max-w-xl leading-relaxed">Immersive installation
+                &amp; spatial rendering engine crafted for luxury brand retail launches.</p>
             </div>
           </div>
 
-          <div class="timeline-item group flex gap-6 sm:gap-10 items-start cursor-pointer interactive" data-experience="lumen-architectural">
+          <div class="timeline-item group flex gap-6 sm:gap-10 items-start cursor-pointer interactive"
+            data-experience="lumen-architectural">
             <div class="relative flex items-center justify-center mt-1.5 z-10">
-              <div class="w-[18px] h-[18px] sm:w-[24px] sm:h-[24px] bg-[#fcfcfc] border border-black/25 rounded-full flex items-center justify-center transition-colors duration-500 group-hover:border-brand-yellow">
-                <div class="w-[6px] h-[6px] sm:w-[8px] sm:h-[8px] bg-black group-hover:bg-brand-yellow rounded-full transition-colors duration-500"></div>
+              <div
+                class="w-[18px] h-[18px] sm:w-[24px] sm:h-[24px] bg-[#fcfcfc] border border-black/25 rounded-full flex items-center justify-center transition-colors duration-500 group-hover:border-brand-yellow">
+                <div
+                  class="w-[6px] h-[6px] sm:w-[8px] sm:h-[8px] bg-black group-hover:bg-brand-yellow rounded-full transition-colors duration-500">
+                </div>
               </div>
             </div>
             <div class="flex flex-col gap-2">
-              <span class="font-bold text-[10px] sm:text-xs text-brand-yellow tracking-[0.2em] uppercase">2026 / FEB</span>
-              <h3 class="font-bold text-xl sm:text-3xl text-brand-dark tracking-tight uppercase group-hover:text-brand-yellow transition-colors duration-500">LUMEN ARCHITECTURAL SYSTEM</h3>
-              <p class="font-medium text-xs sm:text-sm text-brand-muted max-w-xl leading-relaxed">An editorial archive designed to showcase physical spatial designs in a high-contrast web index.</p>
+              <span class="font-bold text-[10px] sm:text-xs text-brand-yellow tracking-[0.2em] uppercase">2026 /
+                FEB</span>
+              <h3
+                class="font-bold text-xl sm:text-3xl text-brand-dark tracking-tight uppercase group-hover:text-brand-yellow transition-colors duration-500">
+                LUMEN ARCHITECTURAL SYSTEM</h3>
+              <p class="font-medium text-xs sm:text-sm text-brand-muted max-w-xl leading-relaxed">An editorial archive
+                designed to showcase physical spatial designs in a high-contrast web index.</p>
             </div>
           </div>
 
-          <div class="timeline-item group flex gap-6 sm:gap-10 items-start cursor-pointer interactive" data-experience="nike-chronos">
+          <div class="timeline-item group flex gap-6 sm:gap-10 items-start cursor-pointer interactive"
+            data-experience="nike-chronos">
             <div class="relative flex items-center justify-center mt-1.5 z-10">
-              <div class="w-[18px] h-[18px] sm:w-[24px] sm:h-[24px] bg-[#fcfcfc] border border-black/25 rounded-full flex items-center justify-center transition-colors duration-500 group-hover:border-brand-yellow">
-                <div class="w-[6px] h-[6px] sm:w-[8px] sm:h-[8px] bg-black group-hover:bg-brand-yellow rounded-full transition-colors duration-500"></div>
+              <div
+                class="w-[18px] h-[18px] sm:w-[24px] sm:h-[24px] bg-[#fcfcfc] border border-black/25 rounded-full flex items-center justify-center transition-colors duration-500 group-hover:border-brand-yellow">
+                <div
+                  class="w-[6px] h-[6px] sm:w-[8px] sm:h-[8px] bg-black group-hover:bg-brand-yellow rounded-full transition-colors duration-500">
+                </div>
               </div>
             </div>
             <div class="flex flex-col gap-2">
-              <span class="font-bold text-[10px] sm:text-xs text-brand-yellow tracking-[0.2em] uppercase">2025 / NOV</span>
-              <h3 class="font-bold text-xl sm:text-3xl text-brand-dark tracking-tight uppercase group-hover:text-brand-yellow transition-colors duration-500">NIKE CHRONOS REEL</h3>
-              <p class="font-medium text-xs sm:text-sm text-brand-muted max-w-xl leading-relaxed">Visual creative direction and cinematic product campaign reveal for a futuristic luxury line.</p>
+              <span class="font-bold text-[10px] sm:text-xs text-brand-yellow tracking-[0.2em] uppercase">2025 /
+                NOV</span>
+              <h3
+                class="font-bold text-xl sm:text-3xl text-brand-dark tracking-tight uppercase group-hover:text-brand-yellow transition-colors duration-500">
+                NIKE CHRONOS REEL</h3>
+              <p class="font-medium text-xs sm:text-sm text-brand-muted max-w-xl leading-relaxed">Visual creative
+                direction and cinematic product campaign reveal for a futuristic luxury line.</p>
             </div>
           </div>
 
@@ -940,9 +1202,11 @@
 
 
     <!-- ── SECTION 4: CONTACT ───────────────────────────────────── -->
-    <section id="contact" class="w-full min-h-screen flex flex-col items-center justify-center px-6 sm:px-12 md:px-24 py-24 relative border-t border-black/5 bg-[#f5f5f5]/30">
+    <section id="contact"
+      class="w-full min-h-screen flex flex-col items-center justify-center px-6 sm:px-12 md:px-24 py-24 relative border-t border-black/5 bg-[#f5f5f5]/30">
 
-      <h2 class="gsap-reveal font-bold text-[10px] sm:text-xs text-brand-muted tracking-[0.3em] uppercase mb-12 opacity-60 w-full text-center">
+      <h2
+        class="gsap-reveal font-bold text-[10px] sm:text-xs text-brand-muted tracking-[0.3em] uppercase mb-12 opacity-60 w-full text-center">
         START A FLOW
       </h2>
 
@@ -953,27 +1217,46 @@
             LET'S CREATE SOMETHING <span class="text-brand-yellow block mt-1">UNFORGETTABLE.</span>
           </p>
           <p class="text-brand-muted text-xs sm:text-sm md:text-base leading-relaxed max-w-md">
-            Whether you want to build a cinematic digital presence or launch a spatial design identity, let's collaborate.
+            Whether you want to build a cinematic digital presence or launch a spatial design identity, let's
+            collaborate.
           </p>
           <div class="flex flex-col items-center gap-3 text-[10px] sm:text-xs tracking-wider text-brand-dark/60">
-            <p>INQUIRIES: <a href="mailto:frameflows11@gmail.com" class="text-brand-dark hover:text-brand-yellow transition-colors duration-300 interactive pb-0.5 border-b border-transparent hover:border-brand-yellow font-bold">FRAMEFLOWS11@GMAIL.COM</a></p>
-            <p>LOCATION: <span class="text-brand-dark font-bold">LOS ANGELES / GLOBAL</span></p>
+            <p>INQUIRIES: <a href="mailto:frameflows11@gmail.com"
+                class="text-brand-dark hover:text-brand-yellow transition-colors duration-300 interactive pb-0.5 border-b border-transparent hover:border-brand-yellow font-bold">FRAMEFLOWS11@GMAIL.COM</a>
+            </p>
+            <p>LOCATION: <span class="text-brand-dark font-bold">NAGPUR, MAHARASHTRA</span></p>
           </div>
         </div>
 
-        <!-- HIRE button — centered with mx-auto on the magnetic-wrap -->
-        <div class="gsap-reveal flex justify-center w-full select-none">
-          <div class="magnetic-wrap mx-auto" id="hire-me-wrap">
-            <a href="mailto:frameflows11@gmail.com"
-               id="hire-me-btn"
-               class="px-14 py-6 bg-transparent border border-black/35 text-brand-dark font-bold text-xs tracking-[0.3em] uppercase relative overflow-hidden transition-colors duration-300 ease-out group/btn interactive inline-block text-center min-w-[220px]">
-              <span class="relative z-10">HIRE</span>
+        <!-- Dual CTA buttons — BOOK A FREE AUDIT + CHAT ON WHATSAPP -->
+        <div
+          class="gsap-reveal flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center items-center w-full mt-4 select-none">
+
+          <!-- Button 1: BOOK A FREE AUDIT (original yellow expanding hover effect) -->
+          <div class="magnetic-wrap" id="hire-me-wrap">
+            <a href="mailto:frameflows11@gmail.com" id="hire-me-btn"
+              class="px-14 py-6 bg-transparent border border-black/35 text-brand-dark font-bold text-xs tracking-[0.3em] uppercase relative overflow-hidden transition-colors duration-300 ease-out group/btn interactive inline-block text-center min-w-[220px]">
+              <span class="relative z-10">BOOK A FREE AUDIT</span>
               <!-- Yellow fill: stays clipped inside the <a>'s overflow:hidden -->
               <span class="absolute inset-0 bg-brand-yellow origin-left z-0"
-                    style="transform:scaleX(0);transition:transform 0.5s cubic-bezier(0.16,1,0.3,1);"
-                    id="hire-me-fill"></span>
+                style="transform:scaleX(0);transition:transform 0.5s cubic-bezier(0.16,1,0.3,1);"
+                id="hire-me-fill"></span>
             </a>
           </div>
+
+          <!-- Button 2: CHAT ON WHATSAPP (green hover effect) -->
+          <div class="magnetic-wrap" id="whatsapp-btn-wrap">
+            <a href="https://wa.me/918087891860?text=Hi%20Frameflow%20Studios,%20I%20would%20like%20to%20book%20a%20free%20audit!"
+              id="whatsapp-btn" target="_blank" rel="noopener noreferrer"
+              class="px-14 py-6 bg-transparent border border-black/35 text-brand-dark font-bold text-xs tracking-[0.3em] uppercase relative overflow-hidden transition-colors duration-300 ease-out group/btn interactive inline-block text-center min-w-[220px]">
+              <span class="relative z-10">CHAT ON WHATSAPP</span>
+              <!-- Green fill: stays clipped inside the <a>'s overflow:hidden -->
+              <span class="absolute inset-0 bg-green-500 origin-left z-0"
+                style="transform:scaleX(0);transition:transform 0.5s cubic-bezier(0.16,1,0.3,1);"
+                id="whatsapp-fill"></span>
+            </a>
+          </div>
+
         </div>
 
       </div>
@@ -981,24 +1264,31 @@
 
 
     <!-- ── SECTION 5: ABOUT US ──────────────────────────────────── -->
-    <section id="about" class="w-full min-h-screen flex flex-col justify-center px-6 sm:px-12 md:px-24 py-24 relative border-t border-black/5 bg-[#f5f5f5]/30">
+    <section id="about"
+      class="w-full min-h-screen flex flex-col justify-center px-6 sm:px-12 md:px-24 py-24 relative border-t border-black/5 bg-[#f5f5f5]/30">
 
-      <h2 class="gsap-reveal font-bold text-[10px] sm:text-xs text-brand-muted tracking-[0.3em] uppercase mb-16 opacity-60">
+      <h2
+        class="gsap-reveal font-bold text-[10px] sm:text-xs text-brand-muted tracking-[0.3em] uppercase mb-16 opacity-60">
         PHILOSOPHY
       </h2>
 
       <div class="max-w-6xl mx-auto w-full">
 
         <div class="gsap-reveal">
-          <p class="font-bold text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-brand-dark tracking-tight uppercase leading-[1.05]">
+          <p
+            class="font-bold text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-brand-dark tracking-tight uppercase leading-[1.05]">
             WE DESIGN STRATEGIES, SYSTEMS, AND STORIES THAT LAST.
           </p>
         </div>
 
         <div class="gsap-reveal mt-16 grid grid-cols-1 lg:grid-cols-2 gap-12">
           <div>
-            <p class="text-xl sm:text-2xl md:text-3xl text-brand-dark tracking-tight leading-tight">Founder‑Led. Craft‑Driven.</p>
-            <p class="mt-4 text-sm sm:text-base md:text-lg text-brand-muted leading-relaxed max-w-xl">Frameflow Studios began in January 2026 when founders <strong>Arpit Shahu</strong> and <strong>Dhiraj Ninawe</strong> set out, at the age of 19, to build meaningful creative systems for modern businesses. Today our Senior Board — <strong>Arpit Shahu</strong>, <strong>Dhiraj Ninawe</strong>, and <strong>Oom Shukla</strong> — guides work that balances craft with measurable commercial impact.</p>
+            <p class="text-xl sm:text-2xl md:text-3xl text-brand-dark tracking-tight leading-tight">Founder‑Led.
+              Craft‑Driven.</p>
+            <p class="mt-4 text-sm sm:text-base md:text-lg text-brand-muted leading-relaxed max-w-xl">Frameflow Studios
+              began in January 2026 when founders <strong>Arpit Shahu</strong> and <strong>Dhiraj Ninawe</strong> set
+              out, at the age of 19, to build meaningful creative systems for modern businesses. Today, the agency is
+              led by core team members who guide work that balances craft with measurable commercial impact.</p>
           </div>
           <div class="pt-2">
             <div class="text-sm text-brand-muted/80 uppercase tracking-widest font-bold">Founded</div>
@@ -1012,14 +1302,20 @@
         </div>
 
         <div class="gsap-reveal mt-16">
-          <p class="font-bold text-2xl sm:text-3xl md:text-4xl text-brand-dark tracking-tight leading-tight">A practice built around long‑term value.</p>
-          <p class="mt-4 text-sm sm:text-base md:text-lg text-brand-muted leading-relaxed max-w-3xl">We treat every engagement as a partnership: to deeply understand client problems, to build trust, and to deliver work that becomes part of the business infrastructure — not an expendable creative sprint. Our work is measured by the strength it adds to your organisation over years, not weeks.</p>
+          <p class="font-bold text-2xl sm:text-3xl md:text-4xl text-brand-dark tracking-tight leading-tight">A practice
+            built around long‑term value.</p>
+          <p class="mt-4 text-sm sm:text-base md:text-lg text-brand-muted leading-relaxed max-w-3xl">We treat every
+            engagement as a partnership: to deeply understand client problems, to build trust, and to deliver work that
+            becomes part of the business infrastructure — not an expendable creative sprint. Our work is measured by the
+            strength it adds to your organisation over years, not weeks.</p>
         </div>
 
         <div class="gsap-reveal mt-16 grid grid-cols-1 lg:grid-cols-2 gap-12">
           <div>
             <p class="font-bold text-lg text-brand-dark tracking-tight">Our Philosophy</p>
-            <p class="mt-4 text-sm sm:text-base text-brand-muted leading-relaxed max-w-xl">Understand the problem deeply. Build trust through clear collaboration. Deliver the best outcome that compounds value over time. That clarity of intent informs every choice we make — concept, craft, and code.</p>
+            <p class="mt-4 text-sm sm:text-base text-brand-muted leading-relaxed max-w-xl">Understand the problem
+              deeply. Build trust through clear collaboration. Deliver the best outcome that compounds value over time.
+              That clarity of intent informs every choice we make — concept, craft, and code.</p>
           </div>
           <div>
             <p class="font-bold text-lg text-brand-dark tracking-tight">Services</p>
@@ -1030,7 +1326,8 @@
               <li>• Web Development</li>
               <li>• Graphics Designing</li>
             </ul>
-            <p class="mt-6 text-sm sm:text-base text-brand-muted">Hiring Frameflow is not purchasing a deliverable — it is investing in a stronger foundation for your brand and business.</p>
+            <p class="mt-6 text-sm sm:text-base text-brand-muted">Hiring Frameflow is not purchasing a deliverable — it
+              is investing in a stronger foundation for your brand and business.</p>
           </div>
         </div>
 
@@ -1058,30 +1355,30 @@
       var lenis = null;
       if (typeof Lenis !== 'undefined') {
         lenis = new Lenis({
-          duration:         1.8,
-          easing:           function(t) { return Math.min(1, 1.001 - Math.pow(2, -10 * t)); },
-          direction:        'vertical',
+          duration: 1.8,
+          easing: function (t) { return Math.min(1, 1.001 - Math.pow(2, -10 * t)); },
+          direction: 'vertical',
           gestureDirection: 'vertical',
-          smooth:           true,
-          mouseMultiplier:  1.2,
-          smoothTouch:      false,
-          touchMultiplier:  2,
-          infinite:         false,
+          smooth: true,
+          mouseMultiplier: 1.2,
+          smoothTouch: false,
+          touchMultiplier: 2,
+          infinite: false,
         });
 
         if (typeof ScrollTrigger !== 'undefined') {
           lenis.on('scroll', ScrollTrigger.update);
         }
         if (typeof gsap !== 'undefined') {
-          gsap.ticker.add(function(time) { lenis.raf(time * 1000); });
+          gsap.ticker.add(function (time) { lenis.raf(time * 1000); });
           gsap.ticker.lagSmoothing(0);
         }
         window._lenis = lenis;
       }
 
       /* Smooth anchor scrolling with header offset */
-      document.querySelectorAll('a[href^="#"]').forEach(function(anchor) {
-        anchor.addEventListener('click', function(e) {
+      document.querySelectorAll('a[href^="#"]').forEach(function (anchor) {
+        anchor.addEventListener('click', function (e) {
           var href = this.getAttribute('href');
           if (!href || href === '#') return;
           var target = document.querySelector(href);
@@ -1104,9 +1401,9 @@
           VIDEO hover: 100px solid black #111111, NO mix-blend-mode, white bold text.
     ════════════════════════════════════════════════════════════════ */
     (function initCustomCursor() {
-      var dot      = document.querySelector('.cursor-dot');
+      var dot = document.querySelector('.cursor-dot');
       var follower = document.querySelector('.cursor-follower');
-      var label    = document.querySelector('.cursor-label');
+      var label = document.querySelector('.cursor-label');
       if (!dot || !follower) return;
 
       var mouseX = -200, mouseY = -200;
@@ -1114,15 +1411,15 @@
       /* 'default' | 'hover' | 'expanded' | 'video' */
       var cursorState = 'default';
 
-      window.addEventListener('mousemove', function(e) {
+      window.addEventListener('mousemove', function (e) {
         mouseX = e.clientX; mouseY = e.clientY;
         dot.style.transform = 'translate3d(calc(' + mouseX + 'px - 50%), calc(' + mouseY + 'px - 50%), 0)';
       });
 
       function getHalfSize() {
-        if (cursorState === 'video')    return 50;  /* 100px ÷ 2 */
+        if (cursorState === 'video') return 50;  /* 100px ÷ 2 */
         if (cursorState === 'expanded') return 40;
-        if (cursorState === 'hover')    return 23;
+        if (cursorState === 'hover') return 23;
         return 15;
       }
 
@@ -1137,8 +1434,8 @@
       tick();
 
       /* ── Store original follower styles to restore after video mode ── */
-      var origBg    = follower.style.backgroundColor || '';
-      var origBlend = follower.style.mixBlendMode    || '';
+      var origBg = follower.style.backgroundColor || '';
+      var origBlend = follower.style.mixBlendMode || '';
 
       function setCursorState(state, labelText) {
         cursorState = state;
@@ -1147,16 +1444,16 @@
         if (state === 'video') {
           /* Strict solid black, no mix-blend-mode, 100px */
           follower.classList.add('cursor-video-mode');
-          follower.style.mixBlendMode    = 'normal';
+          follower.style.mixBlendMode = 'normal';
           follower.style.backgroundColor = '#111111';
           if (label) {
             label.textContent = labelText || 'PLAY';
-            label.style.color   = '#ffffff';
+            label.style.color = '#ffffff';
             label.style.opacity = '1';
           }
         } else {
           /* Restore standard blend-mode cursor */
-          follower.style.mixBlendMode    = 'difference';
+          follower.style.mixBlendMode = 'difference';
           follower.style.backgroundColor = '#ffffff';
           if (state === 'hover') {
             follower.classList.add('cursor-hover');
@@ -1175,51 +1472,51 @@
 
       function bindCursor() {
         /* ── data-cursor-video containers → VIDEO cursor state ── */
-        document.querySelectorAll('[data-cursor-video]').forEach(function(el) {
+        document.querySelectorAll('[data-cursor-video]').forEach(function (el) {
           if (el.dataset.cursorBound) return;
           el.dataset.cursorBound = '1';
-          el.addEventListener('mouseenter', function() {
+          el.addEventListener('mouseenter', function () {
             /* Inline video autoplays silently — cursor signals click to expand + unmute */
             setCursorState('video', 'EXPAND');
           });
-          el.addEventListener('mouseleave', function() {
+          el.addEventListener('mouseleave', function () {
             setCursorState('default', '');
           });
           /* No mousemove label update needed — label is always 'EXPAND' on hover */
         });
 
         /* Expanded: category items → EXPLORE */
-        document.querySelectorAll('.category-item').forEach(function(el) {
+        document.querySelectorAll('.category-item').forEach(function (el) {
           if (el.dataset.cursorBound) return;
           el.dataset.cursorBound = '1';
-          el.addEventListener('mouseenter', function() { setCursorState('expanded', 'EXPLORE'); });
-          el.addEventListener('mouseleave', function() { setCursorState('default', ''); });
+          el.addEventListener('mouseenter', function () { setCursorState('expanded', 'EXPLORE'); });
+          el.addEventListener('mouseleave', function () { setCursorState('default', ''); });
         });
 
         /* Expanded: timeline items → VIEW */
-        document.querySelectorAll('.timeline-item').forEach(function(el) {
+        document.querySelectorAll('.timeline-item').forEach(function (el) {
           if (el.dataset.cursorBound) return;
           el.dataset.cursorBound = '1';
-          el.addEventListener('mouseenter', function() { setCursorState('expanded', 'VIEW'); });
-          el.addEventListener('mouseleave', function() { setCursorState('default', ''); });
+          el.addEventListener('mouseenter', function () { setCursorState('expanded', 'VIEW'); });
+          el.addEventListener('mouseleave', function () { setCursorState('default', ''); });
         });
 
         /* Expanded: hire-me wrap → VIEW */
         var hireWrap = document.getElementById('hire-me-wrap');
         if (hireWrap && !hireWrap.dataset.cursorBound) {
           hireWrap.dataset.cursorBound = '1';
-          hireWrap.addEventListener('mouseenter', function() { setCursorState('expanded', 'VIEW'); });
-          hireWrap.addEventListener('mouseleave', function() { setCursorState('default', ''); });
+          hireWrap.addEventListener('mouseenter', function () { setCursorState('expanded', 'VIEW'); });
+          hireWrap.addEventListener('mouseleave', function () { setCursorState('default', ''); });
         }
 
         /* Standard hover for everything else */
         var standardSel = 'a:not(.category-item),button,' +
-                          'input,textarea,.interactive:not(.category-item)';
-        document.querySelectorAll(standardSel).forEach(function(el) {
+          'input,textarea,.interactive:not(.category-item)';
+        document.querySelectorAll(standardSel).forEach(function (el) {
           if (el.dataset.cursorBound) return;
           el.dataset.cursorBound = '1';
-          el.addEventListener('mouseenter', function() { if (cursorState !== 'expanded' && cursorState !== 'video') setCursorState('hover', ''); });
-          el.addEventListener('mouseleave', function() { if (cursorState !== 'expanded' && cursorState !== 'video') setCursorState('default', ''); });
+          el.addEventListener('mouseenter', function () { if (cursorState !== 'expanded' && cursorState !== 'video') setCursorState('hover', ''); });
+          el.addEventListener('mouseleave', function () { if (cursorState !== 'expanded' && cursorState !== 'video') setCursorState('default', ''); });
         });
       }
       bindCursor();
@@ -1260,21 +1557,21 @@
       /* ── Generic magnetic binding helper ── */
       function bindMagnetic(el, opts) {
         opts = opts || {};
-        var strength   = opts.strength   || 0.28;
-        var snapEase   = opts.snapEase   || 'elastic.out(1,0.4)';
-        var snapDur    = opts.snapDur    || 0.9;
-        var moveDur    = opts.moveDur    || 0.35;
-        var moveEase   = opts.moveEase   || 'power3.out';
+        var strength = opts.strength || 0.28;
+        var snapEase = opts.snapEase || 'elastic.out(1,0.4)';
+        var snapDur = opts.snapDur || 0.9;
+        var moveDur = opts.moveDur || 0.35;
+        var moveEase = opts.moveEase || 'power3.out';
         /* Detection zone multiplier — element bounding box × zone.             *
          * 1 = exact bounds only; 1.6 = 60% larger detection zone.             */
         var zone = opts.zone || 1.5;
 
-        el.addEventListener('mousemove', function(e) {
-          var r   = el.getBoundingClientRect();
-          var cx  = r.left + r.width  * 0.5;
-          var cy  = r.top  + r.height * 0.5;
-          var dx  = e.clientX - cx;
-          var dy  = e.clientY - cy;
+        el.addEventListener('mousemove', function (e) {
+          var r = el.getBoundingClientRect();
+          var cx = r.left + r.width * 0.5;
+          var cy = r.top + r.height * 0.5;
+          var dx = e.clientX - cx;
+          var dy = e.clientY - cy;
           gsap.to(el, {
             x: dx * strength,
             y: dy * strength,
@@ -1284,7 +1581,7 @@
           });
         });
 
-        el.addEventListener('mouseleave', function() {
+        el.addEventListener('mouseleave', function () {
           gsap.to(el, {
             x: 0, y: 0,
             duration: snapDur,
@@ -1313,11 +1610,38 @@
       if (wrap) {
         bindMagnetic(wrap, { strength: 0.40, zone: 1.8, snapEase: 'elastic.out(1,0.35)', snapDur: 0.75 });
         /* Override mousemove to also expand the yellow fill */
-        wrap.addEventListener('mousemove', function() {
+        wrap.addEventListener('mousemove', function () {
           if (fill) fill.style.transform = 'scaleX(1)';
         });
-        wrap.addEventListener('mouseleave', function() {
+        wrap.addEventListener('mouseleave', function () {
           if (fill) fill.style.transform = 'scaleX(0)';
+        });
+      }
+
+      /* ── 5. WHATSAPP button: identical magnetic binding, green fill ── */
+      var waWrap = document.getElementById('whatsapp-btn-wrap');
+      var waFill = document.getElementById('whatsapp-fill');
+      if (waWrap) {
+        bindMagnetic(waWrap, { strength: 0.40, zone: 1.8, snapEase: 'elastic.out(1,0.35)', snapDur: 0.75 });
+        /* Override mousemove to also expand the green fill */
+        waWrap.addEventListener('mousemove', function () {
+          if (waFill) waFill.style.transform = 'scaleX(1)';
+        });
+        waWrap.addEventListener('mouseleave', function () {
+          if (waFill) waFill.style.transform = 'scaleX(0)';
+        });
+      }
+
+      /* ── 6. WATCH SHOWREEL button: magnetic on the wrapper, yellow fill ── */
+      var srWrap = document.getElementById('hero-showreel-wrap');
+      var srFill = document.getElementById('hero-showreel-fill');
+      if (srWrap) {
+        bindMagnetic(srWrap, { strength: 0.40, zone: 1.8, snapEase: 'elastic.out(1,0.35)', snapDur: 0.75 });
+        srWrap.addEventListener('mousemove', function () {
+          if (srFill) srFill.style.transform = 'scaleX(1)';
+        });
+        srWrap.addEventListener('mouseleave', function () {
+          if (srFill) srFill.style.transform = 'scaleX(0)';
         });
       }
     })();
@@ -1330,88 +1654,88 @@
 
       var PROJECTS = {
         'video-edit': {
-          title:'VIDEO EDIT ARCHIVE', badge:'[03 SELECTED PROJECTS]',
-          footer:'FRAMEFLOW STUDIOS — PORTFOLIO CORE · IN FLUX © 2026', type:'grid',
-          items:[
-            {img:'./assets/chronos.png',name:'LUMIX CINEMATIC',  meta:'BRAND STORY / 2026'},
-            {img:'./assets/lumen.png',  name:'NIKE REEL',        meta:'COMMERCIAL / 2025'},
-            {img:'./assets/aura.png',   name:'AETHER NARRATIVE', meta:'VISUAL SYNTHESIS / 2026'}
+          title: 'VIDEO EDIT ARCHIVE', badge: '[03 SELECTED PROJECTS]',
+          footer: 'FRAMEFLOW STUDIOS — PORTFOLIO CORE · IN FLUX © 2026', type: 'grid',
+          items: [
+            { img: './assets/chronos.png', name: 'LUMIX CINEMATIC', meta: 'BRAND STORY / 2026' },
+            { img: './assets/lumen.png', name: 'NIKE REEL', meta: 'COMMERCIAL / 2025' },
+            { img: './assets/aura.png', name: 'AETHER NARRATIVE', meta: 'VISUAL SYNTHESIS / 2026' }
           ]
         },
         'web-dev': {
-          title:'WEB DEVELOPMENT ARCHIVE', badge:'[03 SELECTED PROJECTS]',
-          footer:'FRAMEFLOW STUDIOS — WEB CORE · CODE INTENT © 2026', type:'grid',
-          items:[
-            {img:'./assets/lumen.png',  name:'ARCHITECT PORTFOLIO',meta:'SPATIAL GRID / 2026'},
-            {img:'./assets/aura.png',   name:'BOUTIQUE COUTURE',   meta:'E-COMMERCE / 2025'},
-            {img:'./assets/chronos.png',name:'KINETIC PORTAL',     meta:'EXPERIENTIAL / 2026'}
+          title: 'WEB DEVELOPMENT ARCHIVE', badge: '[03 SELECTED PROJECTS]',
+          footer: 'FRAMEFLOW STUDIOS — WEB CORE · CODE INTENT © 2026', type: 'grid',
+          items: [
+            { img: './assets/lumen.png', name: 'ARCHITECT PORTFOLIO', meta: 'SPATIAL GRID / 2026' },
+            { img: './assets/aura.png', name: 'BOUTIQUE COUTURE', meta: 'E-COMMERCE / 2025' },
+            { img: './assets/chronos.png', name: 'KINETIC PORTAL', meta: 'EXPERIENTIAL / 2026' }
           ]
         },
         'shoots': {
-          title:'SHOOTS ARCHIVE', badge:'[03 SELECTED PROJECTS]',
-          footer:'FRAMEFLOW STUDIOS — SHOOTS CORE · LIGHT FOCUS © 2026', type:'grid',
-          items:[
-            {img:'./assets/lumen.png',  name:'SPATIAL SHADOWS',  meta:'STUDIO EDITORIAL / 2026'},
-            {img:'./assets/aura.png',   name:'GOLDEN FLUID FORM',meta:'PRODUCT LIGHTING / 2026'},
-            {img:'./assets/chronos.png',name:'CHRONOS TIMELINE', meta:'CREATIVE DIRECTION / 2025'}
+          title: 'SHOOTS ARCHIVE', badge: '[03 SELECTED PROJECTS]',
+          footer: 'FRAMEFLOW STUDIOS — SHOOTS CORE · LIGHT FOCUS © 2026', type: 'grid',
+          items: [
+            { img: './assets/lumen.png', name: 'SPATIAL SHADOWS', meta: 'STUDIO EDITORIAL / 2026' },
+            { img: './assets/aura.png', name: 'GOLDEN FLUID FORM', meta: 'PRODUCT LIGHTING / 2026' },
+            { img: './assets/chronos.png', name: 'CHRONOS TIMELINE', meta: 'CREATIVE DIRECTION / 2025' }
           ]
         },
         'aura-sensory': {
-          title:'AURA SENSORY ENGINE', badge:'[EXPERIENCE INSIGHT]',
-          footer:'FRAMEFLOW STUDIOS — EXPERIENTIAL WIRE · IN FLUX © 2026', type:'detail',
-          img:'./assets/aura.png', imgAlt:'AURA Render',
-          label:'01 / BACKGROUND BRIEF', headline:'THE POETRY OF ORGANIC MOTION',
-          body:'We developed a tailored real-time sensory graphic engine for physical retail displays. The system reads kinetic changes and generates slow-flowing golden digital fluid simulations in response to customer motion, providing an engaging, high-contrast, atmospheric interaction in physical showrooms.',
-          month:'MAY 2026', role:'SENSORY SIMULATION'
+          title: 'AURA SENSORY ENGINE', badge: '[EXPERIENCE INSIGHT]',
+          footer: 'FRAMEFLOW STUDIOS — EXPERIENTIAL WIRE · IN FLUX © 2026', type: 'detail',
+          img: './assets/aura.png', imgAlt: 'AURA Render',
+          label: '01 / BACKGROUND BRIEF', headline: 'THE POETRY OF ORGANIC MOTION',
+          body: 'We developed a tailored real-time sensory graphic engine for physical retail displays. The system reads kinetic changes and generates slow-flowing golden digital fluid simulations in response to customer motion, providing an engaging, high-contrast, atmospheric interaction in physical showrooms.',
+          month: 'MAY 2026', role: 'SENSORY SIMULATION'
         },
         'lumen-architectural': {
-          title:'LUMEN ARCHITECTURAL SYSTEM', badge:'[EXPERIENCE INSIGHT]',
-          footer:'FRAMEFLOW STUDIOS — SPATIAL WEB · LIGHT FOCUS © 2026', type:'detail',
-          img:'./assets/lumen.png', imgAlt:'Lumen Render',
-          label:'02 / ARCHIVE CONCEPT', headline:'GRID BALANCING AND NEGATIVE SPACE',
-          body:'Constructed a high-concept web directory showcasing minimalist concrete scale architecture. The design utilizes deep grid structures and stark shadows to translate the raw geometric integrity of spatial concrete designs into an elegant editorial webpage.',
-          month:'FEBRUARY 2026', role:'ARCHITECTURAL ARCHIVE'
+          title: 'LUMEN ARCHITECTURAL SYSTEM', badge: '[EXPERIENCE INSIGHT]',
+          footer: 'FRAMEFLOW STUDIOS — SPATIAL WEB · LIGHT FOCUS © 2026', type: 'detail',
+          img: './assets/lumen.png', imgAlt: 'Lumen Render',
+          label: '02 / ARCHIVE CONCEPT', headline: 'GRID BALANCING AND NEGATIVE SPACE',
+          body: 'Constructed a high-concept web directory showcasing minimalist concrete scale architecture. The design utilizes deep grid structures and stark shadows to translate the raw geometric integrity of spatial concrete designs into an elegant editorial webpage.',
+          month: 'FEBRUARY 2026', role: 'ARCHITECTURAL ARCHIVE'
         },
         'nike-chronos': {
-          title:'NIKE CHRONOS REEL', badge:'[EXPERIENCE INSIGHT]',
-          footer:'FRAMEFLOW STUDIOS — FILM WORK · CODE INTENT © 2026', type:'detail',
-          img:'./assets/chronos.png', imgAlt:'Chronos Render',
-          label:'03 / FILM METRICS', headline:'TEMPORAL SHIFTING & CADENCE',
-          body:'Directed and composed a luxurious creative timeline campaign video for Nike. Combining conceptual time renders with rapid, high-contrast, rhythmic post-production edits to reflect structured kinetic motion.',
-          month:'NOVEMBER 2025', role:'CREATIVE FILM DIRECTION'
+          title: 'NIKE CHRONOS REEL', badge: '[EXPERIENCE INSIGHT]',
+          footer: 'FRAMEFLOW STUDIOS — FILM WORK · CODE INTENT © 2026', type: 'detail',
+          img: './assets/chronos.png', imgAlt: 'Chronos Render',
+          label: '03 / FILM METRICS', headline: 'TEMPORAL SHIFTING & CADENCE',
+          body: 'Directed and composed a luxurious creative timeline campaign video for Nike. Combining conceptual time renders with rapid, high-contrast, rhythmic post-production edits to reflect structured kinetic motion.',
+          month: 'NOVEMBER 2025', role: 'CREATIVE FILM DIRECTION'
         }
       };
 
       function buildHTML(p) {
         var closeBtn = '<button id="fs-close-btn" style="font-family:Poppins,sans-serif;font-weight:700;font-size:0.65rem;letter-spacing:0.18em;color:#888;background:none;border:none;border-bottom:1px solid transparent;padding-bottom:2px;cursor:pointer;transition:color 0.3s;" onmouseover="this.style.color=\'#FFD700\';this.style.borderBottomColor=\'#FFD700\';" onmouseout="this.style.color=\'#888\';this.style.borderBottomColor=\'transparent\';">&#8592; BACK TO DIRECTORY</button>';
-        var header  = '<div style="display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid rgba(0,0,0,0.08);padding-bottom:2rem;margin-bottom:3rem;"><div style="display:flex;align-items:baseline;gap:1.5rem;"><h2 style="font-family:Syne,Poppins,sans-serif;font-weight:700;font-size:clamp(1.1rem,2.5vw,1.75rem);letter-spacing:0.04em;color:#111;">'+p.title+'</h2><span style="font-family:Poppins,sans-serif;font-weight:700;font-size:0.65rem;letter-spacing:0.18em;color:#FFD700;">'+p.badge+'</span></div>'+closeBtn+'</div>';
-        var footer  = '<div style="border-top:1px solid rgba(0,0,0,0.05);margin-top:3rem;padding-top:1.5rem;"><span style="font-family:Poppins,sans-serif;font-size:0.6rem;letter-spacing:0.18em;color:rgba(85,85,85,0.6);text-transform:uppercase;">'+p.footer+'</span></div>';
+        var header = '<div style="display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid rgba(0,0,0,0.08);padding-bottom:2rem;margin-bottom:3rem;"><div style="display:flex;align-items:baseline;gap:1.5rem;"><h2 style="font-family:Syne,Poppins,sans-serif;font-weight:700;font-size:clamp(1.1rem,2.5vw,1.75rem);letter-spacing:0.04em;color:#111;">' + p.title + '</h2><span style="font-family:Poppins,sans-serif;font-weight:700;font-size:0.65rem;letter-spacing:0.18em;color:#FFD700;">' + p.badge + '</span></div>' + closeBtn + '</div>';
+        var footer = '<div style="border-top:1px solid rgba(0,0,0,0.05);margin-top:3rem;padding-top:1.5rem;"><span style="font-family:Poppins,sans-serif;font-size:0.6rem;letter-spacing:0.18em;color:rgba(85,85,85,0.6);text-transform:uppercase;">' + p.footer + '</span></div>';
 
         if (p.type === 'grid') {
-          var cards = p.items.map(function(it) {
-            return '<div><div style="width:100%;height:clamp(180px,40vw,260px);background:#f5f5f5;border-radius:8px;overflow:hidden;border:1px solid rgba(0,0,0,0.05);"><img src="'+it.img+'" alt="'+it.name+'" style="width:100%;height:100%;object-fit:cover;filter:grayscale(1);transition:filter 0.6s;" onmouseover="this.style.filter=\'grayscale(0)\';" onmouseout="this.style.filter=\'grayscale(1)\';" /></div><div style="display:flex;justify-content:space-between;align-items:baseline;margin-top:1rem;"><span style="font-family:Poppins,sans-serif;font-weight:700;font-size:0.9rem;color:#111;">'+it.name+'</span><span style="font-family:Poppins,sans-serif;font-size:0.65rem;color:#888;letter-spacing:0.1em;">'+it.meta+'</span></div></div>';
+          var cards = p.items.map(function (it) {
+            return '<div><div style="width:100%;height:clamp(180px,40vw,260px);background:#f5f5f5;border-radius:8px;overflow:hidden;border:1px solid rgba(0,0,0,0.05);"><img src="' + it.img + '" alt="' + it.name + '" style="width:100%;height:100%;object-fit:cover;filter:grayscale(1);transition:filter 0.6s;" onmouseover="this.style.filter=\'grayscale(0)\';" onmouseout="this.style.filter=\'grayscale(1)\';" /></div><div style="display:flex;justify-content:space-between;align-items:baseline;margin-top:1rem;"><span style="font-family:Poppins,sans-serif;font-weight:700;font-size:0.9rem;color:#111;">' + it.name + '</span><span style="font-family:Poppins,sans-serif;font-size:0.65rem;color:#888;letter-spacing:0.1em;">' + it.meta + '</span></div></div>';
           }).join('');
-          return '<div style="flex:1;">'+header+'<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,240px),1fr));gap:2.5rem;">'+cards+'</div></div>'+footer;
+          return '<div style="flex:1;">' + header + '<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,240px),1fr));gap:2.5rem;">' + cards + '</div></div>' + footer;
         } else {
-          return '<div style="flex:1;">'+header+'<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr));gap:3rem;align-items:start;"><div style="width:100%;height:clamp(240px,35vw,420px);background:#f5f5f5;border-radius:8px;overflow:hidden;border:1px solid rgba(0,0,0,0.05);"><img src="'+p.img+'" alt="'+p.imgAlt+'" style="width:100%;height:100%;object-fit:cover;" /></div><div style="display:flex;flex-direction:column;gap:1.5rem;"><div><span style="font-family:Poppins,sans-serif;font-weight:700;font-size:0.65rem;letter-spacing:0.18em;color:#FFD700;text-transform:uppercase;">'+p.label+'</span><h3 style="font-family:Syne,Poppins,sans-serif;font-weight:700;font-size:clamp(1.1rem,2vw,1.6rem);color:#111;margin-top:0.5rem;letter-spacing:0.02em;">'+p.headline+'</h3></div><p style="font-family:Poppins,sans-serif;color:#555;font-size:0.9rem;line-height:1.8;">'+p.body+'</p><div style="display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;border-top:1px solid rgba(0,0,0,0.05);padding-top:1.5rem;"><div><p style="font-family:Poppins,sans-serif;font-weight:700;font-size:0.6rem;color:rgba(17,17,17,0.4);letter-spacing:0.15em;text-transform:uppercase;">PROJECT MONTH</p><p style="font-family:Poppins,sans-serif;font-weight:700;font-size:0.75rem;color:#111;margin-top:0.35rem;">'+p.month+'</p></div><div><p style="font-family:Poppins,sans-serif;font-weight:700;font-size:0.6rem;color:rgba(17,17,17,0.4);letter-spacing:0.15em;text-transform:uppercase;">ROLE &amp; DELIVERABLE</p><p style="font-family:Poppins,sans-serif;font-weight:700;font-size:0.75rem;color:#111;margin-top:0.35rem;">'+p.role+'</p></div></div></div></div></div>'+footer;
+          return '<div style="flex:1;">' + header + '<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr));gap:3rem;align-items:start;"><div style="width:100%;height:clamp(240px,35vw,420px);background:#f5f5f5;border-radius:8px;overflow:hidden;border:1px solid rgba(0,0,0,0.05);"><img src="' + p.img + '" alt="' + p.imgAlt + '" style="width:100%;height:100%;object-fit:cover;" /></div><div style="display:flex;flex-direction:column;gap:1.5rem;"><div><span style="font-family:Poppins,sans-serif;font-weight:700;font-size:0.65rem;letter-spacing:0.18em;color:#FFD700;text-transform:uppercase;">' + p.label + '</span><h3 style="font-family:Syne,Poppins,sans-serif;font-weight:700;font-size:clamp(1.1rem,2vw,1.6rem);color:#111;margin-top:0.5rem;letter-spacing:0.02em;">' + p.headline + '</h3></div><p style="font-family:Poppins,sans-serif;color:#555;font-size:0.9rem;line-height:1.8;">' + p.body + '</p><div style="display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;border-top:1px solid rgba(0,0,0,0.05);padding-top:1.5rem;"><div><p style="font-family:Poppins,sans-serif;font-weight:700;font-size:0.6rem;color:rgba(17,17,17,0.4);letter-spacing:0.15em;text-transform:uppercase;">PROJECT MONTH</p><p style="font-family:Poppins,sans-serif;font-weight:700;font-size:0.75rem;color:#111;margin-top:0.35rem;">' + p.month + '</p></div><div><p style="font-family:Poppins,sans-serif;font-weight:700;font-size:0.6rem;color:rgba(17,17,17,0.4);letter-spacing:0.15em;text-transform:uppercase;">ROLE &amp; DELIVERABLE</p><p style="font-family:Poppins,sans-serif;font-weight:700;font-size:0.75rem;color:#111;margin-top:0.35rem;">' + p.role + '</p></div></div></div></div></div>' + footer;
         }
       }
 
       var overlay = document.createElement('div');
       overlay.id = 'fs-overlay';
       overlay.style.cssText = [
-        'position:fixed','top:0','right:0','bottom:0','left:0',
-        'z-index:99999','background:#fcfcfc','overflow-y:auto','overflow-x:hidden',
-        '-webkit-overflow-scrolling:touch','display:none','flex-direction:column',
-        'padding:4rem 1.5rem 3rem','box-sizing:border-box',
-        'opacity:0','transform:translateY(40px)',
+        'position:fixed', 'top:0', 'right:0', 'bottom:0', 'left:0',
+        'z-index:99999', 'background:#fcfcfc', 'overflow-y:auto', 'overflow-x:hidden',
+        '-webkit-overflow-scrolling:touch', 'display:none', 'flex-direction:column',
+        'padding:4rem 1.5rem 3rem', 'box-sizing:border-box',
+        'opacity:0', 'transform:translateY(40px)',
         'transition:opacity 0.55s cubic-bezier(0.16,1,0.3,1),transform 0.55s cubic-bezier(0.16,1,0.3,1)',
         'will-change:opacity,transform'
       ].join(';');
 
       function setOverlayPad() {
-        var w=window.innerWidth;
-        overlay.style.padding = w>=1024 ? '5rem 6rem 4rem' : w>=640 ? '4.5rem 3rem 3rem' : '4rem 1.25rem 3rem';
+        var w = window.innerWidth;
+        overlay.style.padding = w >= 1024 ? '5rem 6rem 4rem' : w >= 640 ? '4.5rem 3rem 3rem' : '4rem 1.25rem 3rem';
       }
       setOverlayPad();
       window.addEventListener('resize', setOverlayPad);
@@ -1421,35 +1745,37 @@
         var p = PROJECTS[key]; if (!p) return;
         overlay.innerHTML = buildHTML(p);
         overlay.style.cursor = 'none';
-        Array.prototype.slice.call(overlay.querySelectorAll('a,button,input,textarea,[role="button"]')).forEach(function(el){
-          try { el.style.cursor='none'; } catch(e){}
+        Array.prototype.slice.call(overlay.querySelectorAll('a,button,input,textarea,[role="button"]')).forEach(function (el) {
+          try { el.style.cursor = 'none'; } catch (e) { }
         });
-        overlay.style.display='flex'; overlay.style.opacity='0'; overlay.style.transform='translateY(40px)';
-        requestAnimationFrame(function() { requestAnimationFrame(function() {
-          overlay.style.opacity='1'; overlay.style.transform='translateY(0)';
-        }); });
-        document.body.style.overflow='hidden';
+        overlay.style.display = 'flex'; overlay.style.opacity = '0'; overlay.style.transform = 'translateY(40px)';
+        requestAnimationFrame(function () {
+          requestAnimationFrame(function () {
+            overlay.style.opacity = '1'; overlay.style.transform = 'translateY(0)';
+          });
+        });
+        document.body.style.overflow = 'hidden';
         if (window._lenis) window._lenis.stop();
-        var cb=document.getElementById('fs-close-btn');
+        var cb = document.getElementById('fs-close-btn');
         if (cb) cb.addEventListener('click', closeOverlay);
         if (window.refreshCursorBindings) window.refreshCursorBindings();
       }
 
       function closeOverlay() {
-        overlay.style.opacity='0'; overlay.style.transform='translateY(40px)';
-        setTimeout(function() { overlay.style.display='none'; overlay.innerHTML=''; }, 580);
-        document.body.style.overflow='';
+        overlay.style.opacity = '0'; overlay.style.transform = 'translateY(40px)';
+        setTimeout(function () { overlay.style.display = 'none'; overlay.innerHTML = ''; }, 580);
+        document.body.style.overflow = '';
         if (window._lenis) window._lenis.start();
       }
 
-      document.addEventListener('keydown', function(e) {
-        if (e.key==='Escape' && overlay.style.display==='flex') closeOverlay();
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape' && overlay.style.display === 'flex') closeOverlay();
       });
-      document.querySelectorAll('.category-item').forEach(function(el) {
-        el.addEventListener('click', function() { var k=el.getAttribute('data-category'); if(k) openOverlay(k); });
+      document.querySelectorAll('.category-item').forEach(function (el) {
+        el.addEventListener('click', function () { var k = el.getAttribute('data-category'); if (k) openOverlay(k); });
       });
-      document.querySelectorAll('.timeline-item').forEach(function(el) {
-        el.addEventListener('click', function() { var k=el.getAttribute('data-experience'); if(k) openOverlay(k); });
+      document.querySelectorAll('.timeline-item').forEach(function (el) {
+        el.addEventListener('click', function () { var k = el.getAttribute('data-experience'); if (k) openOverlay(k); });
       });
     })();
 
@@ -1464,48 +1790,56 @@
       /* ── Static section reveals (.gsap-reveal) ─────────────── */
       /* BUG FIX 4: 'play none none none' — elements reveal once and STAY visible.
          No aggressive reverse/fade-out when scrolling past them. */
-      gsap.utils.toArray('.gsap-reveal').forEach(function(el) {
+      gsap.utils.toArray('.gsap-reveal').forEach(function (el) {
         gsap.fromTo(el,
-          { opacity:0, y:36 },
-          { opacity:1, y:0, duration:1.2, ease:'power3.out',
-            scrollTrigger:{ trigger:el, start:'top 90%', toggleActions:'play none none none' } }
+          { opacity: 0, y: 36 },
+          {
+            opacity: 1, y: 0, duration: 1.2, ease: 'power3.out',
+            scrollTrigger: { trigger: el, start: 'top 90%', toggleActions: 'play none none none' }
+          }
         );
       });
 
       /* ── Category items: fade entrance — stays visible once revealed */
       var catItems = gsap.utils.toArray('.category-item');
-      catItems.forEach(function(el, i) {
+      catItems.forEach(function (el, i) {
         gsap.fromTo(el,
-          { opacity:0 },
-          { opacity:1, duration:1.0, delay:i*0.08, ease:'power3.out',
-            scrollTrigger:{ trigger:el, start:'top 92%', toggleActions:'play none none none' } }
+          { opacity: 0 },
+          {
+            opacity: 1, duration: 1.0, delay: i * 0.08, ease: 'power3.out',
+            scrollTrigger: { trigger: el, start: 'top 92%', toggleActions: 'play none none none' }
+          }
         );
       });
 
       /* ── Category items: subtle parallax y (scrub, staggered rates) ── */
-      catItems.forEach(function(el, i) {
+      catItems.forEach(function (el, i) {
         gsap.fromTo(el,
           { y: 8 + i * 5 },
-          { y: -(16 + i * 10), ease:'none',
-            scrollTrigger:{ trigger:'#project', start:'top bottom', end:'bottom top', scrub:2.0 } }
+          {
+            y: -(16 + i * 10), ease: 'none',
+            scrollTrigger: { trigger: '#project', start: 'top bottom', end: 'bottom top', scrub: 2.0 }
+          }
         );
       });
 
       /* ── Timeline items: slide from left — stays visible once revealed */
       var timeItems = gsap.utils.toArray('.timeline-item');
-      timeItems.forEach(function(el, i) {
+      timeItems.forEach(function (el, i) {
         gsap.fromTo(el,
-          { opacity:0, x:-28 },
-          { opacity:1, x:0, duration:1.1, delay:i*0.1, ease:'power3.out',
-            scrollTrigger:{ trigger:el, start:'top 90%', toggleActions:'play none none none' } }
+          { opacity: 0, x: -28 },
+          {
+            opacity: 1, x: 0, duration: 1.1, delay: i * 0.1, ease: 'power3.out',
+            scrollTrigger: { trigger: el, start: 'top 90%', toggleActions: 'play none none none' }
+          }
         );
       });
 
       /* ── Timeline items: parallax y */
-      timeItems.forEach(function(el, i) {
+      timeItems.forEach(function (el, i) {
         gsap.to(el, {
-          y: -(12 + i * 7), ease:'none',
-          scrollTrigger:{ trigger:'#experience', start:'top bottom', end:'bottom top', scrub:2.2 }
+          y: -(12 + i * 7), ease: 'none',
+          scrollTrigger: { trigger: '#experience', start: 'top bottom', end: 'bottom top', scrub: 2.2 }
         });
       });
 
@@ -1514,16 +1848,14 @@
 
     /* ════════════════════════════════════════════════════════════════
        6b. SHOWREEL FULLSCREEN MODAL
-           Inline video: autoplay muted loop (silent ambient).
-           Click → fullscreen overlay + unmute + play with sound.
-           CLOSE → mute, hide overlay, resume inline loop.
+           WATCH SHOWREEL button in hero → fullscreen overlay + sound.
+           CLOSE → pause, mute, hide overlay.
     ════════════════════════════════════════════════════════════════ */
     (function initShowreelModal() {
 
-      /* ── Grab inline elements ── */
-      var inlineWrap  = document.getElementById('showreel-video-wrap');
-      var inlineVideo = document.getElementById('showreel-video');
-      if (!inlineWrap || !inlineVideo) return;
+      /* ── Trigger: the hero WATCH SHOWREEL button ── */
+      var triggerBtn = document.getElementById('hero-showreel-btn');
+      if (!triggerBtn) return;
 
       /* ── Build the fullscreen modal DOM (once) ── */
       var modal = document.createElement('div');
@@ -1535,28 +1867,27 @@
       var inner = document.createElement('div');
       inner.id = 'showreel-modal-inner';
 
-      /* The actual <video> inside the modal — cloned settings, unmuted */
-      var modalVideo = document.createElement('video');
-      modalVideo.id         = 'showreel-modal-video';
-      modalVideo.loop       = true;
-      modalVideo.playsInline = true;
-      modalVideo.preload    = 'auto';
-      /* Start muted; we unmute the moment we open */
-      modalVideo.muted      = true;
-      var src = document.createElement('source');
-      src.src  = './assets/showreel.mp4';
-      src.type = 'video/mp4';
-      modalVideo.appendChild(src);
+      /* The modal video — Google Drive iframe embed */
+      var modalVideo = document.createElement('iframe');
+      modalVideo.id = 'showreel-modal-video';
+      modalVideo.src = 'https://drive.google.com/file/d/1zN-UjQXChtbAi9S_C3H7jP5bqwII64iK/preview';
+      modalVideo.setAttribute('allow', 'autoplay; fullscreen');
+      modalVideo.setAttribute('allowfullscreen', '');
+      modalVideo.setAttribute('frameborder', '0');
+      modalVideo.style.width = '100%';
+      modalVideo.style.height = '100%';
+      modalVideo.style.display = 'block';
+      modalVideo.style.border = 'none';
 
       /* Close button — top-right */
       var closeBtn = document.createElement('button');
-      closeBtn.id        = 'showreel-modal-close';
+      closeBtn.id = 'showreel-modal-close';
       closeBtn.textContent = '✕  CLOSE';
       closeBtn.setAttribute('aria-label', 'Close showreel');
 
       /* Sound badge — bottom-left */
       var badge = document.createElement('div');
-      badge.id          = 'showreel-modal-badge';
+      badge.id = 'showreel-modal-badge';
       badge.textContent = '♪  Sound On';
 
       inner.appendChild(modalVideo);
@@ -1565,71 +1896,42 @@
       modal.appendChild(inner);
       document.body.appendChild(modal);
 
-      /* ── Sync modal video to the same timestamp as inline ── */
-      function syncTime() {
-        try { modalVideo.currentTime = inlineVideo.currentTime; } catch(e) {}
-      }
-
       /* ── Open fullscreen modal ── */
       function openModal() {
-        /* Pause Lenis so page doesn't scroll behind modal */
         if (window._lenis) window._lenis.stop();
         document.body.style.overflow = 'hidden';
 
-        /* Sync position then unmute + play modal video */
-        syncTime();
-        modalVideo.muted = false;
-        modalVideo.play().catch(function() {
-          /* If unmuted autoplay blocked, play muted first then unmute */
-          modalVideo.muted = true;
-          modalVideo.play().then(function() {
-            modalVideo.muted = false;
-          }).catch(function() {});
-        });
+        /* Reload the iframe src to trigger playback from the beginning */
+        modalVideo.src = 'https://drive.google.com/file/d/1zN-UjQXChtbAi9S_C3H7jP5bqwII64iK/preview';
 
-        /* Reveal the modal */
         modal.classList.add('is-open');
-
-        /* Update cursor to indicate modal is open */
         if (window.setCursorState) window.setCursorState('default', '');
       }
 
       /* ── Close fullscreen modal ── */
       function closeModal() {
         modal.classList.remove('is-open');
-
-        /* Mute and pause modal video after transition out */
-        setTimeout(function() {
-          modalVideo.pause();
-          modalVideo.muted = true;
-          /* Sync inline video back to modal timestamp */
-          try { inlineVideo.currentTime = modalVideo.currentTime; } catch(e) {}
-        }, 520); /* matches CSS transition duration */
-
+        setTimeout(function () {
+          /* Stop iframe playback by blanking src then restoring */
+          modalVideo.src = '';
+        }, 520);
         document.body.style.overflow = '';
         if (window._lenis) window._lenis.start();
       }
 
       /* ── Event listeners ── */
-      inlineWrap.addEventListener('click', openModal);
-      closeBtn.addEventListener('click',  function(e) {
-        e.stopPropagation(); /* prevent re-opening */
+      triggerBtn.addEventListener('click', openModal);
+      closeBtn.addEventListener('click', function (e) {
+        e.stopPropagation();
         closeModal();
       });
-
-      /* Click on the dark backdrop (outside the inner box) closes modal */
-      modal.addEventListener('click', function(e) {
+      modal.addEventListener('click', function (e) {
         if (e.target === modal) closeModal();
       });
-
-      /* Escape key closes modal */
-      document.addEventListener('keydown', function(e) {
-        if (e.key === 'Escape' && modal.classList.contains('is-open')) {
-          closeModal();
-        }
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape' && modal.classList.contains('is-open')) closeModal();
       });
 
-      /* Re-bind cursor (modal video has no cursor bindings yet) */
       if (window.refreshCursorBindings) window.refreshCursorBindings();
 
     })();
@@ -1641,9 +1943,9 @@
           GSAP hasn't loaded yet. Smooth open/close via CSS transition.
     ════════════════════════════════════════════════════════════════ */
     (function initMobileNav() {
-      var menuBtn  = document.getElementById('mobile-menu-btn');
+      var menuBtn = document.getElementById('mobile-menu-btn');
       var closeBtn = document.getElementById('mob-overlay-close');
-      var overlay  = document.getElementById('mobile-nav-overlay');
+      var overlay = document.getElementById('mobile-nav-overlay');
       if (!menuBtn || !overlay) return;
 
       function openMenu() {
@@ -1668,21 +1970,21 @@
       if (closeBtn) closeBtn.addEventListener('click', closeMenu);
 
       /* Close on any overlay link tap — also triggers smooth scroll */
-      overlay.querySelectorAll('[data-mob-nav]').forEach(function(link) {
-        link.addEventListener('click', function() {
+      overlay.querySelectorAll('[data-mob-nav]').forEach(function (link) {
+        link.addEventListener('click', function () {
           closeMenu();
         });
       });
 
       /* Close on Escape key */
-      document.addEventListener('keydown', function(e) {
+      document.addEventListener('keydown', function (e) {
         if (e.key === 'Escape' && overlay.classList.contains('is-open')) {
           closeMenu();
         }
       });
 
       /* Collapse menu if user resizes to desktop width */
-      window.addEventListener('resize', function() {
+      window.addEventListener('resize', function () {
         if (window.innerWidth >= 768 && overlay.classList.contains('is-open')) {
           closeMenu();
         }
@@ -1702,15 +2004,15 @@
       var ctx = canvas.getContext('2d');
 
       /* ── Config ── */
-      var COUNT      = 55;       /* total particles */
-      var REPEL_R    = 120;      /* px — repulsion radius */
-      var REPEL_STR  = 2800;     /* repulsion force scalar */
-      var FRICTION   = 0.88;     /* velocity damping per frame */
+      var COUNT = 55;       /* total particles */
+      var REPEL_R = 120;      /* px — repulsion radius */
+      var REPEL_STR = 2800;     /* repulsion force scalar */
+      var FRICTION = 0.88;     /* velocity damping per frame */
       var RETURN_SPD = 0.032;    /* spring-back toward home */
       var BASE_ALPHA = 0.10;     /* shape stroke opacity */
-      var SPEED_MAX  = 0.45;     /* max drift speed */
-      var SIZE_MIN   = 5;        /* min shape radius/size */
-      var SIZE_MAX   = 18;       /* max shape radius/size */
+      var SPEED_MAX = 0.45;     /* max drift speed */
+      var SIZE_MIN = 5;        /* min shape radius/size */
+      var SIZE_MAX = 18;       /* max shape radius/size */
 
       /* ── State ── */
       var W = 0, H = 0;
@@ -1721,38 +2023,38 @@
       var SHAPES = ['circle', 'triangle', 'cross'];
 
       function resize() {
-        W = canvas.width  = window.innerWidth;
+        W = canvas.width = window.innerWidth;
         H = canvas.height = window.innerHeight;
       }
       resize();
       window.addEventListener('resize', resize);
 
       /* Track mouse */
-      window.addEventListener('mousemove', function(e) {
+      window.addEventListener('mousemove', function (e) {
         mouse.x = e.clientX; mouse.y = e.clientY;
       });
       /* Track touch */
-      window.addEventListener('touchmove', function(e) {
+      window.addEventListener('touchmove', function (e) {
         if (e.touches.length > 0) {
           mouse.x = e.touches[0].clientX;
           mouse.y = e.touches[0].clientY;
         }
       }, { passive: true });
-      window.addEventListener('touchend', function() {
+      window.addEventListener('touchend', function () {
         /* Gently fade mouse away so particles drift back */
-        setTimeout(function() { mouse.x = -9999; mouse.y = -9999; }, 400);
+        setTimeout(function () { mouse.x = -9999; mouse.y = -9999; }, 400);
       });
 
       /* ── Particle factory ── */
       function makeParticle() {
         var size = SIZE_MIN + Math.random() * (SIZE_MAX - SIZE_MIN);
-        var x    = size + Math.random() * (W - size * 2);
-        var y    = size + Math.random() * (H - size * 2);
+        var x = size + Math.random() * (W - size * 2);
+        var y = size + Math.random() * (H - size * 2);
         var angle = Math.random() * Math.PI * 2;
-        var spd   = 0.1 + Math.random() * SPEED_MAX;
+        var spd = 0.1 + Math.random() * SPEED_MAX;
         return {
           hx: x, hy: y,    /* home position */
-          x:  x, y:  y,    /* current position */
+          x: x, y: y,    /* current position */
           vx: Math.cos(angle) * spd,
           vy: Math.sin(angle) * spd,
           size: size,
@@ -1779,8 +2081,8 @@
         ctx.rotate(p.rot);
         ctx.beginPath();
         ctx.moveTo(0, -s);
-        ctx.lineTo( s * 0.866,  s * 0.5);
-        ctx.lineTo(-s * 0.866,  s * 0.5);
+        ctx.lineTo(s * 0.866, s * 0.5);
+        ctx.lineTo(-s * 0.866, s * 0.5);
         ctx.closePath();
         ctx.stroke();
         ctx.restore();
@@ -1793,7 +2095,7 @@
         ctx.rotate(p.rot);
         ctx.beginPath();
         ctx.moveTo(-arm, 0); ctx.lineTo(arm, 0);
-        ctx.moveTo(0, -arm); ctx.lineTo(0,  arm);
+        ctx.moveTo(0, -arm); ctx.lineTo(0, arm);
         ctx.stroke();
         ctx.restore();
       }
@@ -1803,14 +2105,14 @@
         ctx.clearRect(0, 0, W, H);
 
         for (var j = 0; j < particles.length; j++) {
-          var p  = particles[j];
+          var p = particles[j];
           var dx = p.x - mouse.x;
           var dy = p.y - mouse.y;
           var distSq = dx * dx + dy * dy;
 
           /* Repulsion force — inverse square, clamped to radius */
           if (distSq < REPEL_R * REPEL_R && distSq > 0.01) {
-            var dist  = Math.sqrt(distSq);
+            var dist = Math.sqrt(distSq);
             var force = REPEL_STR / (dist * dist);
             p.vx += (dx / dist) * force * 0.016;  /* ~60fps timestep */
             p.vy += (dy / dist) * force * 0.016;
@@ -1825,8 +2127,8 @@
           p.vy *= FRICTION;
 
           /* Integrate */
-          p.x  += p.vx;
-          p.y  += p.vy;
+          p.x += p.vx;
+          p.y += p.vy;
           p.rot += p.rotSpd;
 
           /* Soft boundary wrap for home position on resize */
@@ -1835,10 +2137,10 @@
 
           /* Draw */
           ctx.strokeStyle = 'rgba(0,0,0,' + p.alpha + ')';
-          ctx.lineWidth   = 1;
-          if      (p.shape === 'circle')   drawCircle(p);
+          ctx.lineWidth = 1;
+          if (p.shape === 'circle') drawCircle(p);
           else if (p.shape === 'triangle') drawTriangle(p);
-          else                             drawCross(p);
+          else drawCross(p);
         }
 
         requestAnimationFrame(tick);
@@ -1847,5 +2149,8 @@
     })();
 
   </script>
+
+
 </body>
+
 </html>
