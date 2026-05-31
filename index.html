@@ -273,6 +273,23 @@
       }
     }
 
+    /* ── Mobile nav: guaranteed touch-interactivity ── */
+    #mobile-menu-btn,
+    #mob-overlay-close,
+    #mobile-nav-overlay .mob-nav-link {
+      pointer-events: auto !important;
+      touch-action: manipulation;
+      -webkit-tap-highlight-color: transparent;
+      cursor: pointer !important;
+      user-select: none;
+      -webkit-user-select: none;
+    }
+
+    /* Ensure overlay itself receives pointer events when open */
+    #mobile-nav-overlay.is-open {
+      pointer-events: auto !important;
+    }
+
     /* ── Brand Logo — Poppins 800, premium agency scale ── */
     .header-brand {
       pointer-events: auto !important;
@@ -932,7 +949,9 @@
 
         <!-- Brand: TOP-LEFT —————————————————————————————————————————— -->
         <a href="#home" class="header-brand magnetic" id="header-brand-link" aria-label="Frameflow Studios"
-          style="pointer-events:auto;position:relative;z-index:10000;">Frameflow</a>
+          style="pointer-events:auto;position:relative;z-index:10000;display:inline-flex;align-items:center;">
+          <img src="https://i.ibb.co/23FG39PL/frameflow-logo-black.png" alt="Frameflow Studios" style="height:36px;width:auto;display:block;object-fit:contain;" />
+        </a>
 
         <!-- Desktop Nav: TOP-RIGHT — hidden on mobile, flex on md+ ——— -->
         <nav class="header-nav" aria-label="Main Navigation"
@@ -1004,9 +1023,9 @@
         <button id="mob-overlay-close" aria-label="Close mobile navigation">✕&nbsp; CLOSE</button>
 
         <!-- Brand mark inside overlay -->
-        <div
-          style="font-family:'Poppins',sans-serif;font-weight:800;font-size:0.75rem;letter-spacing:0.1em;color:rgba(17,17,17,0.25);margin-bottom:2.5rem;text-transform:uppercase;">
-          Frameflow Studios</div>
+        <div style="margin-bottom:2.5rem;">
+          <img src="https://i.ibb.co/23FG39PL/frameflow-logo-black.png" alt="Frameflow Studios" style="height:32px;width:auto;display:block;object-fit:contain;opacity:0.45;" />
+        </div>
 
         <!-- Stacked navigation links -->
         <a href="#home" class="mob-nav-link" data-mob-nav>HOME</a>
